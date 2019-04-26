@@ -1,5 +1,5 @@
 #include <stdio.h>
 
-int scanArray (FILE *in, int array[], int limit);
+int arrayScan (FILE* in, int array[], int limit);
 void arrayReverse (int array[], int size);
-void printArray(FILE *out, int array[], int size);
+void arrayPrint (FILE* out, int array[], int size);

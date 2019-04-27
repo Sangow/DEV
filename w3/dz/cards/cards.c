@@ -1,5 +1,4 @@
 typedef enum {
-    ace,
     two,
     three,
     four,
@@ -11,7 +10,8 @@ typedef enum {
     ten,
     jack,
     queen,
-    king
+    king,
+    ace
 } Rank;
 
 typedef enum {
@@ -20,8 +20,6 @@ typedef enum {
     hearts,
     spades
 } Suit;
-
-
 
 typedef struct {
     Rank rank;

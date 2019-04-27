@@ -1,34 +1,49 @@
 #include <stdio.h>
 
 typedef struct {
-    int x;
-    int y;
-} Point;
-
-typedef struct {
     char model[10];
     int fuel;
-    Point location;
+    int position;
 } Car;
 
-void move (Car *car, Point location) {
-    Car->location.x = location.x;
-    Car->location.y = location.y;
-}
-
-void refill (Car *car, int howManyFuel) {
-    Car->fuel = howManyFuel;
+void refillCar (Car *car, int howManyFuel) {
+    car->fuel = howManyFuel;
 }
 
 void showCar (Car *car) {
-    printf("Car model = %s;\n
-            fuel quantity = %d;\n
-            location = (%d, %d)", Car->model, Car->fuel, Car->location.x, Car->location.y);
+    printf("Car model = %s;\nfuel quantity = %d;\nposition = %d\n", car->model, car->fuel, car->position);
 }
 
-void initCar (Car *car)
+void initCar (Car *car) {
+    scanf("%9s %d %d", car->model, &(car->fuel), &(car->position));
+}
+
+int isDTP(Car car1, Car car2){
+    return car1.position == car2.position;
+}
+
+void moveCar (Car *car, int newPosition) {
+    if ( car->fuel <= 0 ) {
+        refillCar(*(&car), 100);
+    }
+    car->position = newPosition;
+    car->fuel -= newPosition * 2;
+}
+
 void main() {
+    Car bmw;
+    Car mers;
 
+    initCar(&bmw);
+    showCar(&bmw);
 
-    return 0;
+    initCar(&mers);
+    showCar(&mers);
+
+    moveCar(&bmw, 10);
+    moveCar(&mers, 15);
+
+    showCar(&bmw);
+    showCar(&mers);
+
 }

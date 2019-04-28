@@ -7,8 +7,8 @@ int arraySearch(int array[], int size, int needle) {
         }
     }
     return -1;
-}   
-    
+}
+
 int main() {
     int size = 5;
     int array[] = {1, 2, 3, 4, 5};

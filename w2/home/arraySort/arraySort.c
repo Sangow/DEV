@@ -2,12 +2,12 @@
 
 void arraySort(int array[], int size) {
     for ( int i = 0; i < size; i++ ) {
-        for ( int j = 1; j < size; j++ ) {
-            if ( array[j] < array[j-1] ) {
-                int tmp = array[j];
+        for ( int j = i + 1; j < size; j++ ) {
+            if ( array[j] < array[i] ) {
+                int temp = array[i];
                 
-                array[j] = array[j-1];
-                array[j-1] = tmp;
+                array[i] = array[j];
+                array[j] = temp;
             }
         }
     }

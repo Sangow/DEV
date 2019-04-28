@@ -24,8 +24,8 @@ typedef enum {
 } Suit;
 
 typedef enum {
-    yup,
-    nope
+    nope,
+    yup
 } Trump;
 
 typedef struct {

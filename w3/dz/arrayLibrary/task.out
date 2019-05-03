@@ -1,0 +1,12 @@
+arrayPrint()
+7 1 -100 3 70 -4 0 -2 5
+
+arrayIncrement()
+9 3 -98 5 72 -2 2 0 7
+
+arrayAbs()
+9 3 98 5 72 2 2 0 7
+
+arrayShift()
+2 0 7 9 3 98 5 72 2
+

@@ -1,0 +1,36 @@
+arrayPrint()
+7 1 -100 3 70 -4 0 -2 5 50
+
+arrayIncrement()
+9 3 -98 5 72 -2 2 0 7 52
+
+arrayAbs()
+9 3 98 5 72 2 2 0 7 52
+
+arrayShift()
+0 7 52 9 3 98 5 72 2 2
+
+arraySum()
+Sum = 250
+
+arrayMax()
+Max = 98
+
+arrayMin()
+Min = 0
+
+arraySearch()
+Index of needle number = 5
+
+arrayReverse()
+2 2 72 5 98 3 9 52 7 0
+
+arrayExchange()
+2 2 5 72 3 98 52 9 0 7
+
+selectSort()
+0 2 2 3 5 7 9 52 72 98
+
+arrayUnique()
+0 2 3 5 7 9 52 72 98
+

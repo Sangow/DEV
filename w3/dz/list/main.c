@@ -12,11 +12,15 @@ int main() {
     }
     trace(&list);
     printf("\n");
+    printListInfo(&list);
+    
     
     // indexAddValue(&list, 100, 8);
     // addValue(&list, 999);
 
-    printListInfo(&list);
+    // printListInfo(&list);
+    addValue(&list, 99);
+    trace(&list);
     copyArrayToList(&list, array, 3);
     printListInfo(&list);
     trace(&list);

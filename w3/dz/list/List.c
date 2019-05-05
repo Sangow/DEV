@@ -28,6 +28,7 @@ int _increaseCapacity(List* list, int size) {
         list->capacity = newCapacity;
         return 1;
     }
+    return 1;
 }
 
 
@@ -110,6 +111,15 @@ void popValues(List* list, int countValues) {
     }
 }
 
+// * "обрезание" списка до заданной длины //
+void clipList(List* list, int clipCapacity) {
+    if ( _reduceCapacity(list, clipCapacity) ) {
+        if ( list->size > clipCapacity ) {
+            list->size = clipCapacity;
+        }
+    }
+}
+
 void printListInfo(List* list) {
     if ( list->size == 0 ) {
         printf("List is empty!\n");
@@ -125,21 +135,6 @@ void printListInfo(List* list) {
     printf("%d\n", list->array[last]);
 }
 
-// * "обрезание" списка до заданной длины //
-void clipList(List* list, int clipCapacity) {
-    if ( _reduceCapacity(list, clipCapacity) ) {
-        if ( list->size > clipCapacity ) {
-            list->size = clipCapacity;
-        }
-    }
-}
-
 void trace(List* list) {
     printf("List: %p, %d/%d\n", list->array, list->size, list->capacity);
-}
-
-void release(List* list) {
-    free(list->array);
-    list->size = 0;
-    list->capacity = 0;
 }

@@ -12,30 +12,10 @@ void init(List* list, int capacity) {
     list->capacity = capacity;
 }
 
-int _increaseCapacity(List* list, int size) {
-    if ( size == list->capacity + 1 ) {
-        int* newArray = list->array;
-        int newCapacity = list->capacity + list->capacity / 5;
-
-        newArray = (int*)realloc(list->array, sizeof(int)*newCapacity);
-
-        if ( newArray == NULL ) {
-            printf("Memory reallocation error!\n");
-            return 0;
-        }
-        printf("Memory reallocated!\n");
-        list->array = newArray;
-        list->capacity = newCapacity;
-        return 1;
-    }
-    return 1;
-}
-
-
-int _reduceCapacity(List* list, int newCapacity) {
+int _resize(List* list, int newCapacity) {
     int* newArray = list->array;
 
-    newArray = (int*)realloc(list->array, sizeof(int)*newCapacity);
+    newArray = (int*)realloc(list->array, sizeof(int) * newCapacity);
 
     if ( newArray == NULL ) {
         printf("Memory reallocation error!\n");
@@ -51,23 +31,29 @@ int _reduceCapacity(List* list, int newCapacity) {
 void addValue(List* list, int value) {
     int size = list->size + 1;
 
-    if ( _increaseCapacity(list, size) ) {
-        list->array[list->size] = value;
-        list->size = size;
+    if ( size == list->capacity + 1 ) {
+        int newCapacity = list->capacity + list->capacity / 5;
+
+        _resize(list, newCapacity);
     }
+    list->array[list->size] = value;
+    list->size = size;
 }
 
 // * добавление одного элемента по произвольном индексу (список при этом также расширяется) //
 void indexAddValue(List* list, int value, int index) {
     int size = list->size + 1;
 
-    if ( _increaseCapacity(list, size) ) {
-        for ( int i = list->size; i > index; i-- ) {
+    if ( size == list->capacity + 1 ) {
+        int newCapacity = list->capacity + list->capacity / 5;
+
+        _resize(list, newCapacity);
+    }
+    for ( int i = list->size; i > index; i-- ) {
             list->array[i] = list->array[i-1];
         }
         list->array[index] = value;
         list->size = size;
-    }
 }
 
 // * добавление (копирование) заданного количества элементов из массива в конец списка //
@@ -88,7 +74,7 @@ void pop(List* list) {
     int newCapacity = list->capacity - list->capacity / 5;
 
     if ( newCapacity >= list->size ) {
-        _reduceCapacity(list, newCapacity);
+        _resize(list, newCapacity);
     }
 }
 
@@ -107,13 +93,13 @@ void popValues(List* list, int countValues) {
     int newCapacity = list->capacity - list->capacity / 5;
 
     if ( newCapacity >= list->size ) {
-        _reduceCapacity(list, newCapacity);
+        _resize(list, newCapacity);
     }
 }
 
 // * "обрезание" списка до заданной длины //
 void clipList(List* list, int clipCapacity) {
-    if ( _reduceCapacity(list, clipCapacity) ) {
+    if ( _resize(list, clipCapacity) ) {
         if ( list->size > clipCapacity ) {
             list->size = clipCapacity;
         }
@@ -137,4 +123,10 @@ void printListInfo(List* list) {
 
 void trace(List* list) {
     printf("List: %p, %d/%d\n", list->array, list->size, list->capacity);
+}
+
+void release(List* list) {
+    free(list->array);
+    list->size = 0;
+    list->capacity = 0;
 }

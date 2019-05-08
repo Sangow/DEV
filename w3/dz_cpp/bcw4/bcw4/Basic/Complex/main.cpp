@@ -3,6 +3,6 @@
 
 int main() {
     Complex *c1 = new Complex();
-    std::cout << c1 << std::endl;
+    std::cout << *c1 << std::endl;
     return 0;
 }

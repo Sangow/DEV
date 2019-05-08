@@ -4,6 +4,7 @@
 void init(List* list, int capacity) {
     list->size = 0;
     list->array = (int*)malloc(sizeof(int) * capacity);
+    
     if ( list->array == NULL ) {
         printf("Memory allocation error!\n");
         list->capacity = 0;

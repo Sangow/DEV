@@ -30,6 +30,7 @@ void List::erase(int index) {
     for ( int i = index; i < last; i++ ) {
         this->array[i] = this->array[i+1];
     }
+    this->current -= 1;
 }
 
 void List::insert(int value, int index) {
@@ -42,8 +43,15 @@ void List::insert(int value, int index) {
         if ( newArray == NULL ) {
             throw OutOfMemoryException();
         }
-        
+        this->array = newArray;
+        this->capacity = newCapacity;
     }
+
+    for ( int i = this->current; i > index; i-- ) {
+        this->array[i] = this->array[i-1];
+    }
+    this->array[index] = value;
+    this->current = newCurrent;
 }
 
 int List::find(int value) const {
@@ -102,7 +110,16 @@ int List::operator[](int index) const {
 }
 
 bool List::operator==(const List& other) const {
-    return this->current == other.current && this->capacity == other.capacity;
+    if ( this->current == other.current ) {
+        for ( int i = 0; i < this->current; i++ ){
+            if ( this->array[i] != other.array[i] ) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+    return 0;
+    // return this->current == other.current && this->capacity == other.capacity;
 }
 
 bool List::operator!=(const List& other) const {
@@ -110,11 +127,14 @@ bool List::operator!=(const List& other) const {
 }
 
 std::ostream& operator<<(std::ostream& out, const List& list) {
+    if ( list.size() == 0 ) {
+        throw ZeroLenException();
+    }
     int last = list.size() - 1;
 
     for ( int i = 0; i < last; i++ ) {
         out << list[i] << ' ';
     }
-    out << list[last];
+    out << list[last] << std::endl;
     return out;
 }

@@ -7,12 +7,11 @@ void Unit::ensureIsAlive() {
     }
 }
 
-Unit::Unit(const std::sting& name, int hp, int dmg) {
-    this->ensureIsAlive();
+Unit::Unit(const std::string& name, int hp, int dmg) {
     this->damage = dmg;
     this->hitPoints = hp;
     this->hitPointsLimit = hp;
-    this>name = name;
+    this->name = name;
 }
 
 Unit::~Unit() {}
@@ -29,13 +28,14 @@ int Unit::getHitPointsLimit() const {
     return this->hitPointsLimit;
 }
 
-const std::sting& Unit::getName() const {
+const std::string& Unit::getName() const {
     return this->name;
 }
 
 void Unit::addHitPoints(int hp) {
     this->ensureIsAlive();
-
+    std::cout << this->name << " restored health!" << "\n" << std::endl;
+    
     if( hp > this->hitPointsLimit - this->hitPoints ) {
         this->hitPoints = this->hitPointsLimit;
         return;
@@ -54,12 +54,25 @@ void Unit::takeDamage(int dmg) {
 }
 
 void Unit::attack(Unit& enemy) {
-    // enemy.ensureIsAlive(); ??
     enemy.takeDamage(this->damage);
+    std::cout << this->name << " attacked " << enemy.name << "\n" << std::endl;
+
     enemy.ensureIsAlive();
 
     enemy.counterAttack(*this);
 }
- void Unit::counterAttack(Unit& enemy) {
 
+void Unit::counterAttack(Unit& enemy) {
+   enemy.takeDamage(this->damage / 2);
+   std::cout << this->name << " counterattacked " << enemy.name << "\n" << std::endl;
+}
+
+ std::ostream& operator<<(std::ostream& out, const Unit& unit) {
+    if ( unit.getHitPoints() == 0 ) {
+        return out << "Unit '" << unit.getName() << "' is dead!"; 
+    }
+    out << "Unit: " << unit.getName() << "\n";
+    out << "Health: " << unit.getHitPoints() << "/" << unit.getHitPointsLimit() << "HP" << "\n";
+    out << "Damage: " << unit.getDamage() << "dmg" << "\n";
+    return out;
  }

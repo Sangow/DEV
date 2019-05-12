@@ -22,39 +22,39 @@ public class Complex {
         return this.imaginary;
     }
 
-    boolean equal(Complex other) {
+    public boolean equal(Complex other) {
         return this.real == other.real && this.imaginary == other.imaginary;
     }
 
-    boolean notEqual(Complex other) {
+    public boolean notEqual(Complex other) {
         return !this.equal(other);
     }
 
-    void addition(Complex other) {
+    public void addition(Complex other) {
         this.real += other.real;
         this.imaginary += other.imaginary;
     }
 
-    void substraction(Complex other) {
+    public void substraction(Complex other) {
         this.real -= other.real;
         this.imaginary -= other.imaginary;
     }
 
-    Complex sum(Complex other) {
+    public Complex sum(Complex other) {
         Complex result = this;
 
         result.addition(other);
         return result;
     }
 
-    Complex diff(Complex other) {
+    public Complex diff(Complex other) {
         Complex result = this;
 
         result.substraction(other);
         return result;
     }
 
-    Complex multiple(Complex other) {
+    public Complex multiple(Complex other) {
         Complex result = this;
 
         result.real = this.real * other.real;

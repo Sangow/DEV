@@ -15,11 +15,11 @@ public class Complex {
     }
 
     public double getReal() {
-        return this.real;
+        return real;
     }
 
     public double getImaginary() {
-        return this.imaginary;
+        return imaginary;
     }
 
     public boolean equal(Complex other) {

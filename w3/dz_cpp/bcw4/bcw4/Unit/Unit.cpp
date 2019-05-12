@@ -72,7 +72,7 @@ void Unit::counterAttack(Unit& enemy) {
         return out << "Unit '" << unit.getName() << "' is dead!"; 
     }
     out << "Unit: " << unit.getName() << "\n";
-    out << "Health: " << unit.getHitPoints() << "/" << unit.getHitPointsLimit() << "HP" << "\n";
-    out << "Damage: " << unit.getDamage() << "dmg" << "\n";
+    out << "Health: " << unit.getHitPoints() << "/" << unit.getHitPointsLimit() << "HP\n";
+    out << "Damage: " << unit.getDamage() << "dmg\n";
     return out;
  }

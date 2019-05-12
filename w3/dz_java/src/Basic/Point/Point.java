@@ -17,11 +17,11 @@ public class Point {
     }
 
     public double getX() {
-        return this.x;
+        return x;
     }
 
     public double getY() {
-        return this.y;
+        return y;
     }
 
     public void setX(double x) {

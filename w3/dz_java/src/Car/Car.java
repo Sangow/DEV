@@ -24,23 +24,23 @@ public class Car {
     }
 
     public double getFuelAmount() {
-        return this.fuelAmount;
+        return fuelAmount;
     }
 
     public double getFuelCapacity() {
-        return this.fuelCapacity;
+        return fuelCapacity;
     }
 
     public double getFuelConsumption() {
-        return this.fuelConsumption;
+        return fuelConsumption;
     }
 
     public Point getLocaction() {
-        return this.locaction;
+        return locaction;
     }
 
     public String getModel() {
-        return this.model;
+        return model;
     }
 
     public void drive(Point destination) throws OutOfFuel {

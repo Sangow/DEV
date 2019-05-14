@@ -1,5 +1,3 @@
-package PenPaper;
-
 public class Pen {
     private int inkAmount;
     private int inkCapacity;

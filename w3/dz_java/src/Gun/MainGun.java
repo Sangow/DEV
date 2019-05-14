@@ -1,5 +1,3 @@
-package Gun;
-
 public class MainGun {
     public static void main(String[] args) {
         Gun gun = new Gun();

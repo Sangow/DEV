@@ -1,5 +1,3 @@
-package Car;
-
 public class Car {
     private double fuelAmount;
     private double fuelCapacity;
@@ -69,7 +67,7 @@ public class Car {
     public String toString() {
         return String.format("Model: " + this.getModel() + "\n"
                             + "Consumption: " + this.getFuelConsumption() +"\n"
-                            + "Fuel: " + this.getFuelAmount() + "/" + this.getFuelCapacity() + "\n"
+                            + "Fuel: " + (int)this.getFuelAmount() + "/" + this.getFuelCapacity() + "\n"
                             + "Location: " + this.getLocaction());
     }
 }

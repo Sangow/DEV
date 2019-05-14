@@ -21,13 +21,7 @@ typedef enum {
     spades
 } Suit;
 
-typedef enum {
-    nope,
-    yup
-} Trump;
-
 typedef struct {
     Rank rank;
     Suit suit;
-    Trump trump;
 } Card;

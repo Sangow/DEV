@@ -1,5 +1,3 @@
-package Basic.Complex;
-
 public class Complex {
     private double real;
     private double imaginary;

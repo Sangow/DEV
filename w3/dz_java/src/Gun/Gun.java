@@ -1,5 +1,3 @@
-package Gun;
-
 public class Gun {
     private int amount;
     private int capacity;

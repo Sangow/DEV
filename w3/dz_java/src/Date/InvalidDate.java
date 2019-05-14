@@ -1,5 +1,3 @@
-package Date;
-
 public class InvalidDate extends Exception {
     public String text;
 

@@ -1,5 +1,3 @@
-package Unit;
-
 public class Unit {
     private int damage;
     private int hitPoints;

@@ -1,7 +1,3 @@
-package PenPaper;
-
-import Gun.OutOfRounds;
-
 public class Paper {
     private int maxSymbols;
     private int symbols;

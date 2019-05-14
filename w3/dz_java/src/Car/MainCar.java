@@ -1,5 +1,3 @@
-package Car;
-
 public class MainCar {
     public static void main(String[] args) throws OutOfFuel, ToMuchFuel {
         Car car = new Car();
@@ -17,7 +15,5 @@ public class MainCar {
         car.drive(10, 20);
 
         System.out.println(car);
-
-//        car.refill(50);
     }
 }

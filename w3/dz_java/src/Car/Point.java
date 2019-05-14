@@ -1,5 +1,3 @@
-package Car;
-
 import static java.lang.Math.hypot;
 
 public class Point {

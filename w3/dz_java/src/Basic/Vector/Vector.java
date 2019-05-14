@@ -1,5 +1,3 @@
-package Basic.Vector;
-
 import static java.lang.Math.hypot;
 
 public class Vector {

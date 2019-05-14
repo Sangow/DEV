@@ -1,5 +1,3 @@
-package Basic.Point;
-
 import static java.lang.Math.hypot;
 
 public class Point {

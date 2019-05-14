@@ -1,5 +1,3 @@
-package PenPaper;
-
 public class PPMain {
     public static void main(String[] args) {
         Pen pen = new Pen(20);

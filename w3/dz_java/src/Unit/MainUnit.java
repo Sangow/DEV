@@ -1,5 +1,3 @@
-package Unit;
-
 public class MainUnit {
     public static void main(String[] args) {
         Unit barbarian = new Unit("Barbarian", 200, 181);

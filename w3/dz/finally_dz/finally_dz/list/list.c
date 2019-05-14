@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct {
-    int size;
-    int capacity;
-    int* array;
-} List;
+#include "list.h"
 
 void init(List* list, int capacity) {
     list->size = 0;
@@ -140,43 +133,4 @@ void release(List* list) {
     free(list->array);
     list->size = 0;
     list->capacity = 0;
-}
-
-int main() {
-    List list;
-    int array[] = {1, 2, 3};
-
-    init(&list, 10000);
-    for ( int i = 1; i <= 10000; i++ ) {
-        addValue(&list, i);
-    }
-    trace(&list);
-    printf("\n");
-
-    addValue(&list, 455);
-    trace(&list);
-    printf("\n");
-
-    clipList(&list, 10);
-    printListInfo(&list);
-
-    indexAddValue(&list, 100, 10);
-    printListInfo(&list);
-
-    indexAddValue(&list, 1000, 100);
-    printListInfo(&list);
-
-    pop(&list);
-    printListInfo(&list);
-
-    popValues(&list, 3);
-    printListInfo(&list);
-
-    copyArrayToList(&list, array, 3);
-    printListInfo(&list);
-
-    release(&list);
-    printListInfo(&list);
-
-    return 0;
 }

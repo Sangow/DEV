@@ -1,20 +1,20 @@
 <?php
     $value = trim(fgets(STDIN));
-    $flag = 1;
+    $isZulu = true;
 
     if ( $value % 2 == 0 ) {
-        $flag = 0;
+        $isZulu = false;
         echo "alpha" . PHP_EOL;
     }
     if ( $value % 3 == 0 ) {
-        $flag = 0;
+        $isZulu = false;
         echo "bravo" . PHP_EOL;
     }
     if ( $value % 5 == 0 ) {
-        $flag = 0;
+        $isZulu = false;
         echo "charie" . PHP_EOL;
     }
-    if ( $flag ) {
+    if ( $isZulu ) {
         echo "zulu" . PHP_EOL;
     }
 ?>

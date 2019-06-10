@@ -1,24 +1,24 @@
 #include <stdio.h>
 
 int main() {
-    int number;
-    int sign = 1;
+    int value;
+    int isZulu = 1;
     
-    scanf("%d", &number);
+    scanf("%d", &value);
     
-    if ( number % 2 == 0 ) {
+    if ( value % 2 == 0 ) {
         printf("alpha\n");
-        sign = 0;
+        isZulu = 0;
     }
-    if ( number % 3 == 0 ) {
+    if ( value % 3 == 0 ) {
         printf("bravo\n");
-        sign = 0;
+        isZulu = 0;
     }
-    if ( number % 5 == 0 ) {
+    if ( value % 5 == 0 ) {
         printf("charlie\n");
-        sign = 0;
+        isZulu = 0;
     }
-    if ( sign ) {
+    if ( isZulu ) {
         printf("zulu\n");
     }
     

@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int factorial(int n) {
-    if ( n < 2 ) {
+    if ( n <= 1 ) {
         if ( n < 0 ) {
             return -1;
         }

@@ -1,0 +1,24 @@
+Выполнить следующие задачи из Бендера:
+hello
+max2, max3, max4, max5
+abcz1, abcz2, abcz3, abcz4
+natural
+even, odd
+multiple3, multiple5, multipleN
+nextMultiple, prevMultiple
+square1, square2, square2rev
+factorial(), fibonacci(), lcm
+arrayPrint(), arrayScan(), arrayZeroFill()
+arrayCopy(), arrayMax(), arrayMin(), arraySearch()
+arrayExchange(), arrayReverse()
+arrayShiftLeft(), arrayShiftRight()
+strLen()
+strRot13()
+strUpperCase()
+strLowerCase()
+3. Реализовать следующие классы:
+Point, Vector, Complex
+Car, Gun
+Countable, Identifiable, Mohican
+Pen&Paper, Passport
+Unit

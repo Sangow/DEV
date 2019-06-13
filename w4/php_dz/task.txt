@@ -11,7 +11,7 @@ _square1, _square2, _square2rev
 _factorial(), _fibonacci(), _lcm
 _arrayPrint(), arrayScan(), _arrayZeroFill()
 _arrayCopy(), _arrayMax(), _arrayMin(), _arraySearch()
-arrayExchange(), arrayReverse()
+_arrayExchange(), arrayReverse()
 arrayShiftLeft(), arrayShiftRight()
 strLen()
 strRot13()

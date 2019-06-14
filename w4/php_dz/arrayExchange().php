@@ -16,7 +16,7 @@
                     '5' => 9,
                     '6' => 55);
 
-    arrayExchange($array, 6) . PHP_EOL;
+    arrayExchange($array, 6);
 
     var_dump($array);
 ?>

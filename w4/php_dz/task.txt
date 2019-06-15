@@ -9,18 +9,18 @@ _multiple3, _multiple5, _multipleN
 _nextMultiple, _prevMultiple
 _square1, _square2, _square2rev
 _factorial(), _fibonacci(), _lcm
-_arrayPrint(), arrayScan(), _arrayZeroFill()
+_arrayPrint(), <<arrayScan()>>, _arrayZeroFill()
 _arrayCopy(), _arrayMax(), _arrayMin(), _arraySearch()
 _arrayExchange(), _arrayReverse()
-arrayShiftLeft(), arrayShiftRight()
-strLen()
-strRot13()
-strUpperCase()
-strLowerCase()
+_arrayShiftLeft(), _arrayShiftRight()
+_strLen()
+<<strRot13()>>
+<<strUpperCase()>>
+<<strLowerCase()>>
 
 3. Realise classes below:
 
-Point, Vector, Complex
+_Point, Vector, Complex
 Car, Gun
 Countable, Identifiable, Mohican
 Pen&Paper, Passport

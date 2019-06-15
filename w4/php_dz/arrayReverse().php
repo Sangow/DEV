@@ -1,6 +1,6 @@
 <?php
     function arrayReverse(&$array, $size) {
-        // array_reverse($array);
+        // $array = array_reverse($array);
         for ( $lo = 0, $hi = $size - 1; $lo < $hi; $lo++, $hi-- ) {
             $buffer = $array[$lo];
 

@@ -20,7 +20,7 @@ _strLen()
 
 3. Realise classes below:
 
-_Point, Vector, Complex
+_Point, _Vector, _Complex
 Car, Gun
 Countable, Identifiable, Mohican
 Pen&Paper, Passport

@@ -60,7 +60,7 @@ std::ostream& operator<<(std::ostream& out, const Complex& complex) {
     if (complex.getImaginary() < 0) {
         return out << complex.getReal() << complex.getImaginary() << "i";
     } else {
-        return out << complex.getReal() << "+" << complex.getImaginary();
+        return out << complex.getReal() << "+" << complex.getImaginary() + "i";
     }
 }
 

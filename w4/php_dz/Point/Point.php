@@ -37,19 +37,19 @@
             return sprintf("(%d, %d)", $this->x, $this->y);
         }
 
-        public function compare(Point &$o2) {
-            if ( $this == $o2 ) {
+        public function compare(Point $other) {
+            if ( $this == $other ) {
                 echo $this . " is equal to " . $o2 .PHP_EOL;
             } else {
                 echo $this . " is not equal to " . $o2 .PHP_EOL;
             }
         }
 
-        public function isSameInstance(Point &$o2) {
-            if ( $this === $o2 ) {
-                echo $this . " and  " . $o2 . " are references to the same instance" . PHP_EOL;
+        public function isSameInstance(Point &$other) {
+            if ( $this == $other ) {
+                echo $this . " and  " . $other . " are references to the same instance" . PHP_EOL;
             } else {
-                echo $this . " and  " . $o2 . " is different instances" . PHP_EOL;
+                echo $this . " and  " . $other . " is different instances" . PHP_EOL;
             }
         }
     }

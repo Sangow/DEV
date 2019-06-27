@@ -1,14 +1,14 @@
 DO:
 
-_hello
-_max2, _max3, _max4, _max5
-_abcz1, _abcz2, _abcz3, _abcz4
-_natural
-_even, _odd
-_multiple3, _multiple5, _multipleN
-_nextMultiple, _prevMultiple
-_square1, _square2, _square2rev
-_factorial(), _fibonacci(), _lcm
+__hello
+__max2, __max3, __max4, __max5
+__abcz1, __abcz2, __abcz3, __abcz4
+__natural
+__even, __odd
+__multiple3, __multiple5, __multipleN
+__nextMultiple, __prevMultiple
+__square1, __square2, __square2rev
+__factorial(), __fibonacci(), _lcm
 _arrayPrint(), <<arrayScan()>>, _arrayZeroFill()
 _arrayCopy(), _arrayMax(), _arrayMin(), _arraySearch()
 _arrayExchange(), _arrayReverse()

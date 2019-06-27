@@ -9,5 +9,5 @@
         return factorial($n-1) * $n;
     }
 
-    echo factorial(4);
+    echo factorial(5);
 ?>

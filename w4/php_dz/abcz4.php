@@ -1,6 +1,6 @@
 <?php
-    $a = trim(fgets(STDIN));
-    $b = trim(fgets(STDIN));
+    $a = rtrim(fgets(STDIN));
+    $b = rtrim(fgets(STDIN));
 
     if ( $a > $b && $b > 0 ) {
         echo "alpha" . PHP_EOL;

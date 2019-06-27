@@ -1,5 +1,5 @@
 <?php
-    $value = trim(fgets(STDIN));
+    $value = rtrim(fgets(STDIN));
     $isZulu = true;
 
     if ( $value % 2 == 0 ) {

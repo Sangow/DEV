@@ -1,10 +1,10 @@
 <?php
-    $a = fgets(STDIN);
-    $b = fgets(STDIN);
+    $a = rtrim(fgets(STDIN));
+    $b = rtrim(fgets(STDIN));
 
     if ($a > $b) {
-        echo $a;
+        echo $a . PHP_EOL;
     } else {
-        echo $b;
+        echo $b . PHP_EOL;
     }
 ?>

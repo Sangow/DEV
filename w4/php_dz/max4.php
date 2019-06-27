@@ -1,8 +1,8 @@
 <?php
-    $a = trim(fgets(STDIN));
-    $b = trim(fgets(STDIN));
-    $c = trim(fgets(STDIN));
-    $d = trim(fgets(STDIN));
+    $a = rtrim(fgets(STDIN));
+    $b = rtrim(fgets(STDIN));
+    $c = rtrim(fgets(STDIN));
+    $d = rtrim(fgets(STDIN));
 
     $max = $a;
 

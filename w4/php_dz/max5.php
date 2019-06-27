@@ -1,9 +1,9 @@
 <?php 
-    $a = trim(fgets(STDIN));
-    $b = trim(fgets(STDIN));
-    $c = trim(fgets(STDIN));
-    $d = trim(fgets(STDIN));
-    $e = trim(fgets(STDIN));
+    $b = rtrim(fgets(STDIN));
+    $c = rtrim(fgets(STDIN));
+    $d = rtrim(fgets(STDIN));
+    $a = rtrim(fgets(STDIN));
+    $e = rtrim(fgets(STDIN));
 
     $max = $a;
 

@@ -1,15 +1,5 @@
 <?php
-    $a = rtrim(fgets(STDIN));
-    $b = rtrim(fgets(STDIN));
-    $c = rtrim(fgets(STDIN));
-    $max = $a;
+    list($a, $b, $c) = explode(' ', trim(fgets(STDIN)));
 
-    if ( $max < $b ) {
-        $max = $b;
-    } 
-    if ( $max < $c ) {
-        $max = $c;
-    }
-
-    echo $max . PHP_EOL;
+    echo max($a, $b, $c) . PHP_EOL;
 ?>

@@ -1,7 +1,5 @@
 <?php
-    $a = rtrim(fgets(STDIN));
-    $b = rtrim(fgets(STDIN));
-    $c = rtrim(fgets(STDIN));
+    list($a, $b, $c) = explode(' ', trim(fgets(STDIN)));
 
     if ( $a + $b > $c ) {
         echo "alpha" .PHP_EOL;

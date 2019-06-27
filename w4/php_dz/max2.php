@@ -1,10 +1,5 @@
 <?php
-    $a = rtrim(fgets(STDIN));
-    $b = rtrim(fgets(STDIN));
+    list($a, $b) = explode(' ', trim(fgets(STDIN)));
 
-    if ($a > $b) {
-        echo $a . PHP_EOL;
-    } else {
-        echo $b . PHP_EOL;
-    }
+    echo max($a, $b) . PHP_EOL;
 ?>

@@ -1,20 +1,5 @@
 <?php
-    $a = rtrim(fgets(STDIN));
-    $b = rtrim(fgets(STDIN));
-    $c = rtrim(fgets(STDIN));
-    $d = rtrim(fgets(STDIN));
+    list($a, $b, $c, $d) = explode(' ', trim(fgets(STDIN)));
 
-    $max = $a;
-
-    if ( $max < $b ) {
-        $max = $b;
-    }
-    if ( $max < $c ) {
-        $max = $c;
-    }
-    if ( $max < $d ) {
-        $max = $d;
-    }
-    
-    echo $max . PHP_EOL;
+    echo max($a, $b, $c, $d) . PHP_EOL;
 ?>

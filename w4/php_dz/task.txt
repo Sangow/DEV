@@ -8,7 +8,7 @@ __even, __odd
 __multiple3, __multiple5, __multipleN
 __nextMultiple, __prevMultiple
 __square1, __square2, __square2rev
-__factorial(), __fibonacci(), _lcm
+__factorial(), __fibonacci(), __lcm
 _arrayPrint(), <<arrayScan()>>, _arrayZeroFill()
 _arrayCopy(), _arrayMax(), _arrayMin(), _arraySearch()
 _arrayExchange(), _arrayReverse()

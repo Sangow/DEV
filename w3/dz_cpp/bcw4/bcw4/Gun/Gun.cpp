@@ -32,8 +32,8 @@ int Gun::getTotalShots() const {
 }
 
 void Gun::prepare() {
-    if ( !this->isReady)
-    this->isReady = true;
+    if ( !this->isReady )
+        this->isReady = true;
 }
 
 void Gun::reload() {

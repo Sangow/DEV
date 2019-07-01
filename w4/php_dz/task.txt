@@ -9,19 +9,19 @@ __multiple3, __multiple5, __multipleN
 __nextMultiple, __prevMultiple
 __square1, __square2, __square2rev
 __factorial(), __fibonacci(), __lcm
-_arrayPrint(), <<arrayScan()>>, _arrayZeroFill()
-_arrayCopy(), _arrayMax(), _arrayMin(), _arraySearch()
-_arrayExchange(), _arrayReverse()
-_arrayShiftLeft(), _arrayShiftRight()
-_strLen()
-<<strRot13()>>
-<<strUpperCase()>>
-<<strLowerCase()>>
+__arrayPrint(), <<arrayScan()>>, __arrayZeroFill()
+__arrayCopy(), __arrayMax(), __arrayMin(), <<_arraySearch()(no sense[func array_search()]>>
+__arrayExchange(), <<_arrayReverse()(no sense[func array_reverse()])>>
+__arrayShiftLeft(), __arrayShiftRight()
+<<_strLen()(no sense[func strlen()])>>
+<<strRot13()(no sense[func str_rot13()])>>
+<<strUpperCase()(no sense[func strtoupper()])>>
+<<strLowerCase()(no sense[func strtolower()])>>
 
 3. Realise classes below:
 
-_Point, _Vector, _Complex
-Car, Gun
+__Point, __Vector, __Complex
+__Car, __Gun
 Countable, Identifiable, Mohican
-Pen&Paper, Passport
-Unit
+__Pen&Paper, Passport
+__Unit

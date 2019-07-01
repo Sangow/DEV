@@ -72,9 +72,4 @@
             return sprintf("(%d, %d)", $this->x, $this->y);
         }
     }
-
-    $v1 = new Vector(1, 1);
-    $v2 = new Vector(10, 10);
-
-    echo $v1 . PHP_EOL;
 ?>

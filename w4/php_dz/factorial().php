@@ -8,6 +8,4 @@
         }
         return factorial($n-1) * $n;
     }
-
-    echo factorial(5);
 ?>

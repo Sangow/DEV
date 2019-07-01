@@ -1,21 +1,14 @@
 <?php
-    // function arrayScan() {
+    function arrayScan(&$in, &$array, $limit) {
+        $array = explode(' ', fread($in, $limit * 2));
+    }
 
-    // }
-    // $result = array();
-    // $in = fopen("task.in", "r");
-    // $arr = array();
-    
-    // $out = fgets($in);
+    $in = fopen("task.in", "r");
 
-    // var_dump($out);
+    $array = array();
+    arrayScan($in, $array, 7);
 
-    // $arr = explode(" ", $out);
+    var_dump($array);
 
-    // foreach ($arr as $each_number) {
-    //     $result[] = (int) $each_number;
-    // }
-
-    // var_dump($result);
-
+    fclose($in);
 ?>

@@ -46,7 +46,7 @@ void Unit::addHitPoints(int hp) {
 void Unit::takeDamage(int dmg) {
     this->ensureIsAlive();
 
-    if ( dmg > this->hitPoints ) {
+    if ( dmg >= this->hitPoints ) {
         this->hitPoints = 0;
         return;
     }
@@ -56,8 +56,6 @@ void Unit::takeDamage(int dmg) {
 void Unit::attack(Unit& enemy) {
     enemy.takeDamage(this->damage);
     std::cout << this->name << " attacked " << enemy.name << "\n" << std::endl;
-
-    enemy.ensureIsAlive();
 
     enemy.counterAttack(*this);
 }

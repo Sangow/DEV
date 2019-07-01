@@ -6,7 +6,7 @@
             if ( is_numeric($value) ) {
                 return $value;
             }
-            throw new Exception("Exception");
+            throw new Exception("Invalid param");
         }
 
         public function __construct($real = 0, $imaginary = 0) {
@@ -18,7 +18,7 @@
             if ( property_exists($this, $name) ) {
                 return $this->$name;
             }
-            throw new Exception("Exception");
+            throw new Exception("Attribute error: attribute $name not found");
         }
 
         public function compare(Complex &$other) {
@@ -55,7 +55,7 @@
             return $result;
         }
 
-        public function mult(Complex &$other) {
+        public function multiply(Complex &$other) {
             $result = clone $this;
 
             $result->real *= $other->real;
@@ -72,20 +72,4 @@
             }
         }
     }
-
-    $c1 = new Complex(10, 10);
-    $c2 = new Complex(100, 100);
-
-    echo $c1 . PHP_EOL;
-
-    $c3 = $c1->plus($c2);
-
-    echo $c3 . PHP_EOL;
-
-    $c4 = $c3->mult($c1);
-
-    echo $c4 . PHP_EOL;
-
-    $c4->compare($c3);
-
 ?>

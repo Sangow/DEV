@@ -65,7 +65,7 @@ void Unit::counterAttack(Unit& enemy) {
    std::cout << this->name << " counterattacked " << enemy.name << "\n" << std::endl;
 }
 
- std::ostream& operator<<(std::ostream& out, const Unit& unit) {
+std::ostream& operator<<(std::ostream& out, const Unit& unit) {
     if ( unit.getHitPoints() == 0 ) {
         return out << "Unit '" << unit.getName() << "' is dead!"; 
     }
@@ -73,4 +73,4 @@ void Unit::counterAttack(Unit& enemy) {
     out << "Health: " << unit.getHitPoints() << "/" << unit.getHitPointsLimit() << "HP\n";
     out << "Damage: " << unit.getDamage() << "dmg\n";
     return out;
- }
+}

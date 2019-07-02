@@ -10,13 +10,14 @@ class Passport {
         static char lastSerial[2];
         static int lastNumber;
 
-        
-
         std::string name;
         std::string surname;
         int dayOfBirth;
         int monthOfBirth;
         int yearOfBirth;
+
+        void setPassportNumber();
+        void setPassportSerial(char serial[]);
     public:
         Passport(const std::string& name = "Unknown", const std::string& surname = "Unknown", int dayOfBirth = 1, int monthOfBirth = 1, int yearOfBirth = 1970 );
         void setSerial(char serial[]);

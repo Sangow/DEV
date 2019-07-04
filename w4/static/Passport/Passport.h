@@ -2,13 +2,21 @@
 #define PASSPORT_H
 
 #include <iostream>
+#include <cstdio>
+#include "Date.h"
+
+class PassportException {
+    public:
+        std::string text;
+        PassportException(const std::string& text) : text(text) {}
+};
 
 class Passport {
     private:
-        char serial[2];
         int number;
-        static char lastSerial[2];
+        std::string serial;
         static int lastNumber;
+        static std::string lastSerial;
 
         std::string name;
         std::string surname;
@@ -16,13 +24,20 @@ class Passport {
         int monthOfBirth;
         int yearOfBirth;
 
-        void setPassportNumber();
-        void setPassportSerial(char serial[]);
+        Date date;
+
+        void validNextSN();
+        static bool isUpperCaseSymbol(char symbol);
     public:
-        Passport(const std::string& name = "Unknown", const std::string& surname = "Unknown", int dayOfBirth = 1, int monthOfBirth = 1, int yearOfBirth = 1970 );
-        void setSerial(char serial[]);
-        void setNumber(int number);
-}
+        Passport(const std::string& name = "Kon", const std::string& surname = "Cheniy", const Date& date = Date());
+        ~Passport();
+        static void setSN(const std::string& serial = "AA", int number = 1);
+        const std::string getSerial() const;
+        const std::string getNumber() const;
+        const std::string& getName() const;
+        const std::string& getSurname() const;
+        const Date& getDate() const;
+};
 
 std::ostream& operator<<(std::ostream& out, const Passport& passport);
 

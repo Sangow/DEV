@@ -34,11 +34,3 @@ std::ostream& operator<<(std::ostream& out, Mohican& mohican) {
 
 int Mohican::sID = 1;
 Mohican* Mohican::lastMohican = NULL;
-
-int main() {
-    Mohican* m1 = new Mohican("Gogi");
-    Mohican* m2 = new Mohican("Grisha");
-    Mohican* m3 = new Mohican("misha");
-
-    std::cout << *Mohican::getLastMohican() << std::endl;
-}

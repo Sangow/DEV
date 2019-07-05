@@ -23,5 +23,5 @@ __arrayShiftLeft(), __arrayShiftRight()
 __Point, __Vector, __Complex
 __Car, __Gun
 <<Countable(no sense[interface Countable])>>, __Identifiable, __Mohican
-__Pen&Paper, Passport
+__Pen&Paper, __Passport
 __Unit

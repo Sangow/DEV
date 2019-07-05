@@ -28,7 +28,7 @@ class Passport {
     public:
         Passport(const std::string& name = "Kon", const std::string& surname = "Cheniy", const Date& date = Date());
         ~Passport();
-        static void setSN(const std::string& serial = "ZZ", int number = 42);
+        static void setSN(const std::string& serial, int number = 1);
         const std::string getSerial() const;
         const std::string getNumber() const;
         const std::string& getName() const;

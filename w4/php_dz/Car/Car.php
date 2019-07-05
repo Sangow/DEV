@@ -14,7 +14,7 @@
         }
 
         private function validStr($model) {
-            if ( is_string($model) ) {
+            if ( ctype_alpha($model) ) {
                 return $model;
             }
             throw new Exception("Invalid param");

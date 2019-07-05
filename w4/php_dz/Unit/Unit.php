@@ -18,7 +18,7 @@
         }
 
         private function validStr($value) {
-            if ( is_string($value) ) {
+            if ( ctype_alpha($value) ) {
                 return $value;
             }
             throw new Exception("Invalid input string value!");

@@ -1,28 +1,34 @@
 #include <iostream>
-#include "List.cpp"
+#include <map>
 
 int main() {
-    List<std::string>* list = new List<std::string>();
+    std::map<size_t, std::string>* list = new std::map<size_t, std::string>();
+    std::map<size_t, std::string>::iterator it;
 
-    list->append("alpha");
-    list->append("bravo");
-    list->append("charlie");
-    list->append("delta");
+    list->insert(std::pair<size_t, std::string>(4, "delta"));
+    list->insert(std::pair<size_t, std::string>(3, "charlie"));
+    list->insert(std::pair<size_t, std::string>(1, "alpha"));
+    list->insert(std::pair<size_t, std::string>(2, "bravo"));
+    list->insert(std::pair<size_t, std::string>(100, "sto"));
+    list->insert(std::pair<size_t, std::string>(101, "sto"));
 
-    Iterator<std::string> it = Iterator<std::string>(list->last);
+    it = list->begin();
 
-    it.begin();
-    // std::cout << &it << std::endl;
-
-    // it++;
-    // std::cout << &it << std::endl;
-
-    for ( ; !it.isOver(); it++ ) {
-        std::cout << &it << std::endl;
+    for ( ; it != list->end(); it++ ) {
+        std::cout << it->first << ", " << it->second << list->size() << std::endl;
     }
-    std::cout << &it << std::endl;
 
-    delete list;
+    std::cout << "-------------" << std::endl;
+
+    for ( it = list->begin(); it != list->end(); it++ ) {
+        if (it->second == "sto") {
+            list->erase(it);
+        }
+    }
+
+    for ( it = list->begin(); it != list->end(); it++ ) {
+        std::cout << it->first << ", " << it->second << std::endl;
+    }
 
     return 0;
 }

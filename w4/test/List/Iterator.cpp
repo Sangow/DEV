@@ -17,9 +17,11 @@ class Iterator {
                 current = current->next;
             }
         }
+
         void operator++() {
             this->next();
         }
+
         void operator++(int) {
             this->next();
         }
@@ -29,9 +31,11 @@ class Iterator {
                 current = current->prev;
             }
         }
+
         void operator--() {
             this->prev();
         }
+
         void operator--(int) {
             this->prev();
         }
@@ -39,6 +43,7 @@ class Iterator {
         void begin() {
             for ( ; current->prev != NULL; current = current->prev );
         }
+    
         void end() {
             for ( ; current->next != NULL; current = current->next );
         }

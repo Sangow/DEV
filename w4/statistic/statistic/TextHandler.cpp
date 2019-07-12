@@ -69,8 +69,7 @@ void TextHandler::insert(std::string& word, std::set<std::string>* lst) {
 }
 
 void TextHandler::insert(std::string& word, std::map<std::string, int>* lst) {
-    std::map<std::string, int>::iterator it = 
-    if ( lst->find() == lst->end() ) {
+    if ( lst->find(word) == lst->end() ) {
         lst->insert(std::pair<std::string, int>(word, 0));
     }
     lst->at(word) += 1;
@@ -93,39 +92,51 @@ bool TextHandler::isSpecial(char symbol) {
     }
     return special;
 }
+bool TextHandler::isDelimiter(char symbol) {
+    return symbol == ' ' || symbol == '.';
+}
+bool TextHandler::isSpecialWordInSymbol(char symbol) {
+    return symbol == '-';
+}
 
 void TextHandler::parseText() {
     std::ifstream file(filename);
     int diff = 'a' - 'A';
-    char symbol;
-    std::string word;
+    char prevSymbol;
+    char currSymbol;
+    std::string* word = new std::string();
 
-    for ( ; file.get(symbol) ; ) {
-        if ( isLetter(symbol) ) {
-            if ( symbol < 'a' ) {
-                symbol += diff;
+    for ( ; file.get(currSymbol) ; ) {
+        if ( isLetter(currSymbol) ) {
+            if ( currSymbol < 'a' ) {
+                currSymbol += diff;
             }
-            insert(symbol, characters);
-            insert(symbol, charactersStatistics);
-            word += symbol;
+            insert(currSymbol, characters);
+            insert(currSymbol, charactersStatistics);
+            word->push_back(currSymbol);
             quantity += 1;
         }
-        if ( isNumber(symbol) ) {
-            insert(symbol, numbers);
-            insert(symbol, numbersStatistics);
+        if ( isNumber(currSymbol) ) {
+            insert(currSymbol, numbers);
+            insert(currSymbol, numbersStatistics);
             quantity += 1;
-            insert(word, words);
-            insert(word, wordsStatistics);
-            word = "";
         }
-        if ( isSpecial(symbol) ) {
-            insert(symbol, specialSymbols);
-            insert(symbol, specialSymbolsStatistics);
+        if ( isSpecial(currSymbol) ) {
+            insert(currSymbol, specialSymbols);
+            insert(currSymbol, specialSymbolsStatistics);
             quantity += 1;
-            insert(word, words);
-            insert(word, wordsStatistics);
-            word = "";
         }
+        if ( isLetter(prevSymbol) & isSpecialWordInSymbol(currSymbol) ) {
+            word->push_back(currSymbol);
+        }
+        if ( isDelimiter(currSymbol) ) {
+            if ( !word->empty() ) {
+                insert(*word, words);
+                insert(*word, wordsStatistics);
+                word->clear();
+            }
+        }
+        prevSymbol = currSymbol;
     }
     file.close();
 }

@@ -31,6 +31,8 @@ class TextHandler {
         bool isLetter(char symbol);
         bool isNumber(char symbol);
         bool isSpecial(char symbol);
+        bool isSpecialWordInSymbol(char symbol);
+        bool isDelimiter(char symbol);
     public:
         TextHandler(const char* filename);
         ~TextHandler();

@@ -1,4 +1,4 @@
-all: TextHandler.o templates.o run.exe start
+all: clean TextHandler.o templates.o run.exe start
 
 TextHandler.o:
 	g++ TextHandler.cpp -c

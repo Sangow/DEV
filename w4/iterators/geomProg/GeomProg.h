@@ -8,7 +8,8 @@ class GeomProg {
         int first;
         int last;
         int step;
-        int curr;
+        int current;
+        int currIndex
     public:
         GeomProg(int min = 4, int max = 42, int step = 2);
 

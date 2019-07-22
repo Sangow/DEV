@@ -1,6 +1,7 @@
 #include "Range.h"
 
-Range::Range(int min, int max, int step) {
+template <class Type>
+Range<Type>::Range(Type min, Type max, Type step) {
     this->currIndex = 0;
     this->first = min;
     this->current = min;
@@ -8,11 +9,13 @@ Range::Range(int min, int max, int step) {
     this->last = max - (max - min) % step;
 };
 
-void Range::rewind() {
+template <class Type>
+void Range<Type>::rewind() {
     this->current = this->first;
 }
 
-void Range::next() {
+template <class Type>
+void Range<Type>::next() {
     if ( this->over() ) {
         return;
     }
@@ -20,7 +23,8 @@ void Range::next() {
     this->currIndex += 1;
 };
 
-void Range::prev() {
+template <class Type>
+void Range<Type>::prev() {
     if ( this->over() ) {
         return;
     }
@@ -28,27 +32,33 @@ void Range::prev() {
     this->currIndex -= 1;
 };
 
-void Range::operator++(int) {
+template <class Type>
+void Range<Type>::operator++(int) {
     this->next();
 };
 
-void Range::operator--(int) {
+template <class Type>
+void Range<Type>::operator--(int) {
     this->prev();
 }
 
-int Range::value() {
+template <class Type>
+Type Range<Type>::value() {
     return this->current;
 };
 
-int Range::begin() {
+template <class Type>
+Type Range<Type>::begin() {
     return this->first;
 };
 
-int Range::end() {
+template <class Type>
+Type Range<Type>::end() {
     return this->last;
 };
 
-bool Range::over() {
+template <class Type>
+bool Range<Type>::over() {
     if ( this->current > this->last ) {
         this->current = this->last;
         this->currIndex -= 1;
@@ -61,25 +71,30 @@ bool Range::over() {
     return false;
 };
 
-int Range::operator*() {
+template <class Type>
+Type Range<Type>::operator*() {
     return this->value();
 };
 
-int Range::operator[](int indexNeeded) {
+template <class Type>
+Type Range<Type>::operator[](int indexNeeded) {
     if ( indexNeeded < this->currIndex ) { 
         return this->current - (this->currIndex - indexNeeded) * step;
     }
     return this->current + (indexNeeded - this->currIndex) * step;
 };
 
-void Range::changeIndex(int indexNeeded) {
+template <class Type>
+void Range<Type>::changeIndex(int indexNeeded) {
     if ( indexNeeded > this->currIndex ) {
         this->current = this->current + (indexNeeded - this->currIndex) * this->step;
         this->currIndex = indexNeeded;
     } else {
         this->current = this->current - (this->currIndex - indexNeeded) * this->step;
         this->currIndex = indexNeeded;
-
-        
     }
 };
+
+template class Range<int>;
+template class Range<float>;
+template class Range<double>;

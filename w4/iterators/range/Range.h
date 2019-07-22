@@ -3,16 +3,17 @@
 
 #include <iostream>
 
+template<class Type>
 class Range {
     private:
-        int first;
-        int last;
-        int current;
-        int step;
+        Type first;
+        Type last;
+        Type current;
+        Type step;
         int currIndex;
 
     public:
-        Range(int min = 4, int max = 42, int step = 2);
+        Range(Type min = 4, Type max = 42, Type step = 2);
         
         void rewind();
         void next();
@@ -21,14 +22,14 @@ class Range {
         void operator++(int);
         void operator--(int);
 
-        int value();
-        int begin();
-        int end();
+        Type value();
+        Type begin();
+        Type end();
 
         bool over();
 
-        int operator*();
-        int operator[](int indexNeeded);
+        Type operator*();
+        Type operator[](int indexNeeded);
 
         void changeIndex(int indexNeeded);
 

@@ -8,7 +8,7 @@ int main() {
     // }
     // std::cout << *range << std::endl;
 
-    Range ari(-10, 21, 4);
+    Range<int> ari(-10, 21, 4);
 
     for ( ; !ari.over(); ari++ ) {
         std::cout << *ari << std::endl;

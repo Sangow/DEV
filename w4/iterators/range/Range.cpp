@@ -79,5 +79,7 @@ void Range::changeIndex(int indexNeeded) {
     } else {
         this->current = this->current - (this->currIndex - indexNeeded) * this->step;
         this->currIndex = indexNeeded;
+
+        
     }
 };

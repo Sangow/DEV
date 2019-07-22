@@ -26,7 +26,7 @@ int main() {
 
     std::cout << *ari << std::endl;
 
-    ari.changeIndex(0);
+    ari.changeIndex(1);
 
     std::cout << *ari << std::endl;
 

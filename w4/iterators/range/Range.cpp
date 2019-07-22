@@ -96,5 +96,5 @@ void Range<Type>::changeIndex(int indexNeeded) {
 };
 
 template class Range<int>;
-template class Range<float>;
-template class Range<double>;
+// template class Range<float>;
+// template class Range<double>;

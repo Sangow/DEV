@@ -2,26 +2,36 @@
 #define GEOM_PROG_H
 
 #include <iostream>
+#include <cmath>
 
+class OutOfRangeException {};
+
+template <class Type>
 class GeomProg {
     private:
-        int first;
-        int last;
+        Type first;
+        Type last;
         int step;
-        int current;
-        int currIndex
+        Type current;
+        int currIndex;
+        int maxIndex;
     public:
-        GeomProg(int min = 4, int max = 42, int step = 2);
+        GeomProg(Type min = 4, int length = 15, Type step = 2);
+
+        void rewind();
 
         void next();
-        void prev();
-
         void operator++(int);
-        void operator--(int);
 
-        int value();
-        int begin();
-        int end();
+        Type value() const;
+        Type begin() const;
+        Type end() const;
+
+        Type operator*() const;
+        Type operator[](int index) const;
+        void changeIndex(int index);
+
+        bool over();
 };
 
 #endif // GEOM_PROG_H

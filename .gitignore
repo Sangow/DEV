@@ -1,6 +1,6 @@
 # Lines starting with '#' are considered comments.
 # Ignore (generated) *.o files
-*.o
+*.[oa]
 # Ignore (generated) *.exe files
 *.exe
 # Ignore (generated) *.out files

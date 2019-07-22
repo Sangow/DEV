@@ -21,8 +21,6 @@ class GeomProg {
         int value();
         int begin();
         int end();
-
-        koko
 };
 
-#endif // GEOM_PEOG_H
+#endif // GEOM_PROG_H

@@ -8,12 +8,27 @@ int main() {
     // }
     // std::cout << *range << std::endl;
 
-    Range* ari = new Range(-10, 10, 3);
+    Range ari(-10, 21, 4);
 
-    for ( ; *ari < ari->end(); (*ari)++ ) {
-        std::cout << **ari << std::endl;
+    for ( ; !ari.over(); ari++ ) {
+        std::cout << *ari << std::endl;
     }
-    std::cout << **ari << std::endl;
+
+    std::cout << "------------------------" << std::endl;
+
+
+    // for ( ; !ari.over(); ari-- ) {
+    //     std::cout << *ari << std::endl;
+    // }
+
+
+    ari.changeIndex(4);
+
+    std::cout << *ari << std::endl;
+
+    ari.changeIndex(0);
+
+    std::cout << *ari << std::endl;
 
     return 0;
 }

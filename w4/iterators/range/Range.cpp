@@ -1,7 +1,7 @@
 #include "Range.h"
 
 template <class Type>
-Range<Type>::Range(Type min, Type max, Type step) {
+Range<Type>::Range(Type min, Type max, int step) {
     this->currIndex = 0;
     this->first = min;
     this->current = min;

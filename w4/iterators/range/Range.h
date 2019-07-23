@@ -9,11 +9,11 @@ class Range {
         Type first;
         Type last;
         Type current;
-        Type step;
+        int step;
         int currIndex;
 
     public:
-        Range(Type min = 4, Type max = 42, Type step = 2);
+        Range(Type min = 4, Type max = 42, int step = 2);
         
         void rewind();
         void next();

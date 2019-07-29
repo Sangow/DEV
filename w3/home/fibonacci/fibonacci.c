@@ -14,24 +14,29 @@
 //     }
 // }
 
+#include <stdio.h>
+
 int main() {
-    int num, result;
-    int x = 1, y = 1;
+    int num;
+    int x = 1;
+    int y = 1;
     
     scanf("%d", &num);
-
-    if ( num < 0 ) {
-        num *= -1;
-    }
     
     if ( num == 0 ) {
         printf("0\n");
-    } else if ( num == -1 || num == 1) {
+    } else if ( num == -1 || num == 1 ) {
         printf("1\n");
-    } else {
+    } else if ( num > 1 ) {
         for ( int i = 2; i < num; i++ ) {
             y = x + y;
             x = y - x;
+        }
+        printf("%d\n", y);
+    } else {
+        for ( int i = num; i <= 0; i++ ) {
+            y = x - y;
+            x = x - y;
         }
         printf("%d\n", y);
     }

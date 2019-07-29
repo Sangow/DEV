@@ -17,7 +17,7 @@ int fibonacci(int n) {
 int main() {
     int a;
     scanf("%d", &a);
-    printf("%d",fibonacci(a));
+    printf("%d\n",fibonacci(a));
 
     return 0;
 }

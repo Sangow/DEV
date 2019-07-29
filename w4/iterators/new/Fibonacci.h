@@ -9,15 +9,13 @@ class OutOfMaxLimit {};
 class Fibonacci {
     private:
         bool over;
+        bool negative;
         int index;
         int number;
         long long current;
         long long first;
         long long second;
-
-        long long countLimit(int number);
     public:
-        long long limit;
         Fibonacci(int seqNumber = 42);
 
         void next();

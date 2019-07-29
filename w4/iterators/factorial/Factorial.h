@@ -19,7 +19,6 @@ class Factorial{
 
         void next();
         void operator++(int);
-        // void prev();
 
         long long value();
         long long operator*();

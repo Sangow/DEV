@@ -1,9 +1,24 @@
 #include "Fibonacci.h"
 
 int main() {
-    Fibonacci f(-8);
+    Fibonacci f(10);
 
-    std::cout << f.limit << std::endl;
+    for ( ; !f.isOver(); f++ ) {
+        std::cout << *f << std::endl;
+    }
+
+    // std::cout << "-----------------" << std::endl;
+
+    // f--;
+    // for ( ; !f.isOver(); f-- ) {
+
+    // }
+    // std::cout << *f << std::endl;
+
+    // f++;
+    // f++;
+    // std::cout << *f << std::endl;
+    
 
     return 0;
 }

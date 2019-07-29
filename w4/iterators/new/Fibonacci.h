@@ -8,7 +8,7 @@ class OutOfMaxLimit {};
 
 class Fibonacci {
     private:
-        bool over;
+        // bool over;
         bool negative;
         int index;
         int number;

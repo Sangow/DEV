@@ -2,29 +2,34 @@
 #define FIBONACCI_H
 
 #include <iostream>
+#define MAX_LIMIT 92
+
+class OutOfMaxLimit {};
 
 class Fibonacci {
     private:
-        int current;
-        int number;
-        int first;
-        int second;
-        int* cache;
         bool over;
         int index;
+        int number;
+        long long current;
+        long long first;
+        long long second;
+
+        long long countLimit(int number);
     public:
+        long long limit;
         Fibonacci(int seqNumber = 42);
 
         void next();
-        void operator++();
+        void operator++(int);
 
         void prev();
-        void operator--();
+        void operator--(int);
 
-        long long value();
         long long operator*();
 
         bool isOver();
+
 };
 
 #endif // FIBONACCI_H

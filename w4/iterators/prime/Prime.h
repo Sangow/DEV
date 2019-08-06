@@ -4,16 +4,21 @@
 #include <iostream>
 #include <cmath>
 
+class InvalidValueException {};
+
 class Prime {
     private:
         int* cache;
-        int cachedValuesQuantity;
+        int cacheIndex;
+        int maxCacheIndex;
 
-        int number;
+
+        int maxIndex;
         int current;
         int index;
 
-
+        bool validRequiredValue(int value);
+        void fillCache();
 
     public:
         Prime(int number = 42);

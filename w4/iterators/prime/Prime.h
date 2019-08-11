@@ -9,8 +9,13 @@ class InvalidValueException {};
 class Prime {
     private:
         bool over;
+
+        int* cache;
         int partCapacity;
+        int currCapacity;
+        int maxCapacity;
         
+        int index;
         int current;
 
         bool validRequiredValue(int value);
@@ -19,12 +24,8 @@ class Prime {
         void resizeCache(int newCapacity);
 
     public:
-        int* cache;
-        int maxCapacity;
-        int currCapacity;
-        int index;
-        Prime(int number = 42);
-        // ~Prime();
+        Prime(int number);
+        ~Prime();
 
         void next();
         void operator++(int);
@@ -34,6 +35,9 @@ class Prime {
 
         int value();
         int operator*();
+
+        // Kostil`
+        void resetOver();
 
         bool isOver();
 };

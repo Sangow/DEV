@@ -45,6 +45,7 @@ Prime::Prime(int number) {
         throw InvalidValueException();
     }
 
+    this->over = false;
     this->index = 0;
     this->current = 2;
     this->maxCapacity = number;
@@ -55,7 +56,10 @@ Prime::Prime(int number) {
 
     this->fillCache(this->partCapacity);
 
-    this->over = false;
+};
+
+Prime::~Prime() {
+    delete[] cache;
 };
 
 void Prime::next() {
@@ -78,7 +82,8 @@ void Prime::next() {
 
         this->index = newIndex;
         this->current = this->cache[this->index];
-    } else {
+    } 
+    else {
         this->over = true;
     }
 };
@@ -90,9 +95,11 @@ void Prime::operator++(int) {
 void Prime::prev() {
     int newIndex = this->index - 1;
 
-    if ( newIndex >= 0 ) {
+    if ( newIndex > -1 ) {
         this->index = newIndex;
         this->current = this->cache[this->index];
+    } else {
+        this->over = true;
     }
 };
 
@@ -106,6 +113,10 @@ int Prime::value() {
 
 int Prime::operator*() {
     this->value();
+};
+
+void Prime::resetOver() {
+    this->over = false;
 };
 
 bool Prime::isOver() {

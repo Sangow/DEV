@@ -8,26 +8,29 @@ class InvalidValueException {};
 
 class Prime {
     private:
-        int* cache;
-        int cacheIndex;
-        int maxCacheIndex;
-
-
-        int maxIndex;
+        bool over;
+        int partCapacity;
+        
         int current;
-        int index;
 
         bool validRequiredValue(int value);
-        void fillCache();
+        bool isPrime(int number);
+        void fillCache(int quantity);
+        void resizeCache(int newCapacity);
 
     public:
+        int* cache;
+        int maxCapacity;
+        int currCapacity;
+        int index;
         Prime(int number = 42);
+        // ~Prime();
 
         void next();
-        void operator++();
+        void operator++(int);
 
         void prev();
-        void operator--();
+        void operator--(int);
 
         int value();
         int operator*();

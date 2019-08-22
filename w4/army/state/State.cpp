@@ -49,10 +49,10 @@ void State::increaseHP(float hp) {
     this->hp = totalHP;
 };
 
-std::ostream& operator<<(std::ostream& out, const State* state) {
-    out << state->getTitle() << " [";
-    out << "hp: (" << state->getHP() << "/" << state->getHPLimit() << "), ";
-    out << "dmg: " << state->getDMG() << "]";
+std::ostream& operator<<(std::ostream& out, const State& state) {
+    out << state.getTitle() << " [";
+    out << "hp: (" << state.getHP() << "/" << state.getHPLimit() << "), ";
+    out << "dmg: " << state.getDMG() << "]";
 
     return out;
 };

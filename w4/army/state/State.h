@@ -26,6 +26,6 @@ class State {
         virtual void increaseHP(float hp);
 };
 
-std::ostream& operator<<(std::ostream& out, const State* state);
+std::ostream& operator<<(std::ostream& out, const State& state);
 
 #endif // STATE_H

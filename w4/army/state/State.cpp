@@ -6,8 +6,7 @@ void State::ensureIsAlive() {
     }
 };
 
-State::State(float hp, float dmg, const char* title) : hp(hp), hpLimit(hp), 
-                                                        dmg(dmg), title(title) {};
+State::State(float hp, float dmg) : hp(hp), hpLimit(hp), dmg(dmg) {};
 
 State::~State() {};
 
@@ -23,11 +22,7 @@ float State::getDMG() const {
     return this->dmg;
 };
 
-const char* State::getTitle() const {
-    return this->title;
-};
-
-void State::takeDamage(float dmg) {
+void State::takePhysDamage(float physDmg) {
     this->ensureIsAlive();
 
     if ( this->hp < dmg ) {
@@ -35,6 +30,10 @@ void State::takeDamage(float dmg) {
         return;
     }
     this->hp -= dmg;
+};
+
+void State::takeMagicDamage(float magicDmg) {
+    this->takePhysDamage();
 };
 
 void State::increaseHP(float hp) {
@@ -50,7 +49,7 @@ void State::increaseHP(float hp) {
 };
 
 std::ostream& operator<<(std::ostream& out, const State& state) {
-    out << state.getTitle() << " [";
+    out << " [";
     out << "hp: (" << state.getHP() << "/" << state.getHPLimit() << "), ";
     out << "dmg: " << state.getDMG() << "]";
 

@@ -3,14 +3,14 @@
 
 #include "../state/State.h"
 #include "../exceptions/Exceptions.h"
-#include "../attack/Attack.h"
+#include "../attack/Weapon.h"
 
 class Attack;
 
 class Unit {
     protected:
         State* state;
-        Attack* _attack;
+        Weapon* weapon;
 
     public:
         Unit(float hp, float dmg, const char* title);
@@ -22,7 +22,8 @@ class Unit {
         const char* getTitle() const;
         State& getState() const;
 
-        virtual void takeDamage(float dmg);
+        virtual void takePhysDamage(float dmg);
+        virtual void takeMagicDamage(float dmg);
         virtual void increaseHP(float hp);
 
         virtual void attack(Unit* enemy);

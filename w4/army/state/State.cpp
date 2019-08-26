@@ -6,7 +6,9 @@ void State::ensureIsAlive() {
     }
 };
 
-State::State(float hp, float dmg) : hp(hp), hpLimit(hp), dmg(dmg) {};
+State::State(float hp) : hp(hp), hpLimit(hp) {};
+
+State::State(float hp, float hpLimit) : hp(hp), hpLimit(hpLimit) {};
 
 State::~State() {};
 
@@ -18,22 +20,22 @@ float State::getHPLimit() const {
     return this->hpLimit;
 };
 
-float State::getDMG() const {
-    return this->dmg;
+bool State::readyToBeInfected() {
+    return !this->isVampire && !this->isWerewolf;
 };
 
 void State::takePhysDamage(float physDmg) {
     this->ensureIsAlive();
 
-    if ( this->hp < dmg ) {
+    if ( this->hp < physDmg ) {
         this->hp = 0;
         return;
     }
-    this->hp -= dmg;
+    this->hp -= physDmg;
 };
 
 void State::takeMagicDamage(float magicDmg) {
-    this->takePhysDamage();
+    this->takePhysDamage(magicDmg);
 };
 
 void State::increaseHP(float hp) {
@@ -50,8 +52,8 @@ void State::increaseHP(float hp) {
 
 std::ostream& operator<<(std::ostream& out, const State& state) {
     out << " [";
-    out << "hp: (" << state.getHP() << "/" << state.getHPLimit() << "), ";
-    out << "dmg: " << state.getDMG() << "]";
+    out << "hp: " << state.getHP() << "/" << state.getHPLimit();
+    out << "]" << std::endl;
 
     return out;
 };

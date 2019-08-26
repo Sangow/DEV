@@ -3,23 +3,32 @@
 
 #include <iostream>
 #include "../exceptions/Exceptions.h"
+#include "../unit/Unit.h"
 
 class State {
     protected:
         float hp;
         float hpLimit;
 
+    public:
+        bool isVampire;
+        bool isWerewolf;
+        bool isWolf;
+
         void ensureIsAlive();
 
-    public:
-        State(float hp, float dmg);
+        State(float hp);
+        State(float hp, float hpLimit);
         virtual ~State();
 
         float getHP() const;
         float getHPLimit() const;
 
+        bool readyToBeInfected();
+
         virtual void takePhysDamage(float physDmg);
-        virtual void takePhysDamage(float Magicdmg);
+        virtual void takeMagicDamage(float magicDmg);
+
         virtual void increaseHP(float extraHP);
 };
 

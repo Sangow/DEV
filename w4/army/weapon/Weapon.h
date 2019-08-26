@@ -3,22 +3,26 @@
 
 #include <iostream>
 #include "../unit/Unit.h"
+#include "../exceptions/Exceptions.h"
 
 class Unit;
 
 class Weapon {
     protected:
+        Unit* owner;
         const char* weaponName;
         float dmg;
-        Unit* owner;
 
     public:
-        Weapon(Unit* owner, float dmg, const char* weaponName);
+        Weapon(const char* weaponName, float dmg, Unit* owner);
         virtual ~Weapon();
 
-        virtual void action(Unit* enemy);
-        // virtual void attack(Unit* enemy);
-        // virtual void counterAttack(Unit* enemy);
+        const char* getWeaponName() const;
+        float getDMG() const;
+
+        virtual void action(Unit* enemy, float dmg);
 };
+
+std::ostream& operator<<(std::ostream& out, const Weapon& weapon);
 
 #endif // ATACK_H

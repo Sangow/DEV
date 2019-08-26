@@ -1,21 +1,30 @@
-#include "Attack.h"
+#include "Weapon.h"
 
-Weapon::Weapon(Unit* owner, float dmg, const char* weaponName) 
-    : owner(owner), dmg(dmg), weaponName(weaponName) {};
+Weapon::Weapon(const char* weaponName, float dmg, Unit* owner) 
+    : dmg(dmg), weaponName(weaponName), owner(owner) {};
 
 Weapon::~Weapon() {
-    delete owner
     delete weaponName;
+    delete owner;
 };
 
-void Weapon::action(Unit* enemy) {
-    enemy->takeDamage
+const char* Weapon::getWeaponName() const {
+    return this->weaponName;
 };
-// void Attack::attack(Unit* enemy) {
-//     enemy->takeDamage(this->instance->getDMG());
-//     enemy->counterAttack(this->instance);
-// };
 
-// void Attack::counterAttack(Unit* enemy) {
-//     enemy->takeDamage(this->instance->getDMG() / 2);
-// };
+float Weapon::getDMG() const {
+    return this->dmg;
+};
+
+void Weapon::action(Unit* enemy, float dmg) {
+        enemy->takePhysDamage(dmg);
+        // std::cout << enemy->getCharName() << " is DEAD!" << std::endl;
+};
+
+std::ostream& operator<<(std::ostream& out, const Weapon& weapon) {
+    out << "Weapon: " << weapon.getWeaponName();
+    out << " [dmg: " << weapon.getDMG();
+    out << "]";
+
+    return out;
+};

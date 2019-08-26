@@ -3,21 +3,22 @@
 
 #include <iostream>
 #include "../exceptions/Exceptions.h"
+#include "UnitState.h"
 
-class MagicState {
+class MagicState : public UnitState {
     protected:
         float mana;
         float manaLimit;
 
     public:
-        MagicState(float mana);
+        MagicState(float hp, float mana);
         virtual ~MagicState();
 
         float getMana() const;
         float getManaLimit() const;
 
         virtual void spendMana(float cost);
-        virtual void increaseMana(float mana);
+        virtual void increaseMana(float extraMana);
 };
 
 std::ostream& operator<<(std::ostream& out, const MagicState* magicState);

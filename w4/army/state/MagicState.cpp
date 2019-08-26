@@ -1,6 +1,6 @@
 #include "MagicState.h"
 
-MagicState::MagicState(float mana) : mana(mana), manaLimit(mana) {};
+MagicState::MagicState(float hp, float mana) : UnitState(hp), mana(mana), manaLimit(mana) {};
 
 MagicState::~MagicState() {};
 

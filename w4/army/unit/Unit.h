@@ -1,30 +1,40 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-#include "../state/State.h"
 #include "../exceptions/Exceptions.h"
-#include "../attack/Weapon.h"
+#include "../state/State.h"
+#include "../weapon/Weapon.h"
 
-class Attack;
+class State;
+class Weapon;
 
 class Unit {
     protected:
         State* state;
         Weapon* weapon;
+        const char* charName;
+        const char* charClass;
 
     public:
-        Unit(float hp, float dmg, const char* title);
+        Unit(const char* charName, const char* charClass);
         ~Unit();
         
         float getHP() const;
         float getHPLimit() const;
         float getDMG() const;
-        const char* getTitle() const;
+        const char* getCharClass() const;
+        const char* getCharName() const;
         State& getState() const;
+        Weapon& getWeapon() const;
 
-        virtual void takePhysDamage(float dmg);
-        virtual void takeMagicDamage(float dmg);
-        virtual void increaseHP(float hp);
+        void takePhysDamage(float physDmg);
+        virtual void takeMagicDamage(float magicDmg);
+        void increaseHP(float extraHP);
+
+        void changeState(State* newState);
+        void changeWeapon(Weapon* newWeapon);
+
+        bool readyToBeInfected();
 
         virtual void attack(Unit* enemy);
         virtual void counterAttack(Unit* enemy);

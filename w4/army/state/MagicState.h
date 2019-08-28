@@ -13,7 +13,7 @@ class MagicState : public UnitState {
         float faith;
 
     public:
-        MagicState(float hp, float mana, float intellect, float faith);
+        MagicState(float mana, float intellect, float faith);
         virtual ~MagicState();
 
         float getMana() const;

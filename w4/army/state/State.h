@@ -9,13 +9,14 @@ class State {
     protected:
         float hp;
         float hpLimit;
+        float strength;
+        float agility;
 
     public:
         bool isVampire;
         bool isUndead;
         bool isWerewolf;
         bool isWolf;
-        float strength;
 
         void ensureIsAlive();
 
@@ -25,6 +26,8 @@ class State {
 
         float getHP() const;
         float getHPLimit() const;
+        float getStrength() const;
+        float getAgility() const;
 
         bool readyToBeInfected();
 

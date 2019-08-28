@@ -21,4 +21,6 @@ class Spell {
         virtual void action(Unit* enemy, float points) = 0;
 };
 
+std::ostream& operator<<(std::ostream& out, const Spell& spell);
+
 #endif // SPELL_H

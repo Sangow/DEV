@@ -1,6 +1,6 @@
 #include "MagicState.h"
 
-MagicState::MagicState(float hp, float mana) : UnitState(hp), mana(mana), manaLimit(mana) {};
+MagicState::MagicState(float hp, float mana, float intellect, float faith) : UnitState(hp), mana(mana), manaLimit(mana), intellect(intellect), faith(faith) {};
 
 MagicState::~MagicState() {};
 
@@ -11,6 +11,14 @@ float MagicState::getMana() const {
 float MagicState::getManaLimit() const {
     return this->manaLimit;
 };
+
+    float MagicState::getIntellect() const {
+        return this->intellect;
+    };
+
+    float MagicState::getFaith() const {
+        return this->faith;
+    };
 
 void MagicState::spendMana(float cost) {
     if ( this->mana < cost ) {

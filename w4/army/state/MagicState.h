@@ -9,13 +9,17 @@ class MagicState : public UnitState {
     protected:
         float mana;
         float manaLimit;
+        float intellect;
+        float faith;
 
     public:
-        MagicState(float hp, float mana);
+        MagicState(float hp, float mana, float intellect, float faith);
         virtual ~MagicState();
 
         float getMana() const;
         float getManaLimit() const;
+        float getIntellect() const;
+        float getFaith() const;
 
         virtual void spendMana(float cost);
         virtual void increaseMana(float extraMana);

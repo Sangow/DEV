@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "State.h"
-// #include "../weapon/Sword.h"
 
 class WerewolfState : public State {
     public:

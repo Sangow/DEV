@@ -10,5 +10,7 @@ void Claws::action(Unit* enemy, float dmg) {
 
     if ( this->infectionChance % 2 == 0 && enemy->readyToBeInfected() ) {
         enemy->changeState(new VampireState(enemy->getHP(), enemy->getHPLimit()));
+        enemy->changeWeapon(new Claws(enemy));
+        std:: cout << enemy->getCharName() << " becomes Vampire!" << std::endl;
     }
 };

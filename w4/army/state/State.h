@@ -12,8 +12,10 @@ class State {
 
     public:
         bool isVampire;
+        bool isUndead;
         bool isWerewolf;
         bool isWolf;
+        float strength;
 
         void ensureIsAlive();
 

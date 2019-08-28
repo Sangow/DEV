@@ -18,7 +18,6 @@ float Weapon::getDMG() const {
 
 void Weapon::action(Unit* enemy, float dmg) {
         enemy->takePhysDamage(dmg);
-        // std::cout << enemy->getCharName() << " is DEAD!" << std::endl;
 };
 
 std::ostream& operator<<(std::ostream& out, const Weapon& weapon) {

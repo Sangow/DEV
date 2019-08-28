@@ -11,7 +11,8 @@ void Fangs::action(Unit* enemy, float dmg) {
 
     if ( this->infectionChance % 2 == 0 && enemy->readyToBeInfected() ) {
         enemy->changeState(new WolfState(enemy->getHP()*2, enemy->getHPLimit()*2));
-        std::cout << "INFECTED!!!" << std::endl;
+        enemy->changeWeapon(new Fangs(enemy));
+        std::cout << enemy->getCharName() << " becomes Wolf" << std::endl;
     }
 
     infectionChance += 1;

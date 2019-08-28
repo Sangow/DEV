@@ -9,10 +9,10 @@
 
 class SpellCaster : public Unit {
     protected:
+        MagicState *ms;
+
         std::map<char*, Spell*> spellBook;
-
         // bool spellBoolContains(const char* spellName);
-
     public:
         SpellCaster(const char* charName, const char* charClass);
         virtual ~SpellCaster();
@@ -22,7 +22,6 @@ class SpellCaster : public Unit {
         const std::map<char*, Spell*>& getSpellBook() const;
 
         virtual void cast(Unit* enemy, const char* spellName);
-
 }
 
 #endif // SPELLCASTER_H

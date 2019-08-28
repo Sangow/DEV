@@ -21,6 +21,9 @@ class Weapon {
         float getDMG() const;
 
         virtual void action(Unit* enemy, float dmg);
+
+        virtual void attack(Unit* enemy, float dmg);
+        virtual void counterAttack(Unit* enemy, float dmg);
 };
 
 std::ostream& operator<<(std::ostream& out, const Weapon& weapon);

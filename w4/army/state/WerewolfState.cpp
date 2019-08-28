@@ -2,6 +2,7 @@
 
 WerewolfState::WerewolfState(float hp) : State(hp) {
     this->isVampire = false;
+    this->isUndead = false;
     this->isWerewolf = true;
     this->isWolf = false;
 };

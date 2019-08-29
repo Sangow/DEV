@@ -2,14 +2,14 @@
 #define BERSERKER_STATE_H
 
 #include <iostream>
-#include "UnitState.h"
+#include "HumanState.h"
 
-class BerserkerState : public UnitState {
+class BerserkerState : public HumanState {
     public:
         BerserkerState(float hp);
-        ~BerserkerState();
+        virtual ~BerserkerState();
 
         virtual void takeMagicDamage(float magicDmg);
 };
 
-#endif // BERSERKER_H
+#endif // BERSERKER_STATE_H

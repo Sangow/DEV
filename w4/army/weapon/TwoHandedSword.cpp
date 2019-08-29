@@ -1,5 +1,7 @@
 #include "TwoHandedSword.h"
 
-TwoHandedSword::TwoHandedSword(Unit* owner) : Weapon("TwoHandedSword", 30, owner) {};
+TwoHandedSword::TwoHandedSword(Unit* owner) : Weapon("TwoHandedSword", owner) {
+    this->dmg = this->owner->getStrength() * 35;
+};
 
 TwoHandedSword::~TwoHandedSword() {};

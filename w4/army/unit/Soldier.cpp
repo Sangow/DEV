@@ -1,7 +1,7 @@
 #include "Soldier.h"
 
-Soldier::Soldier(char* charName) : Unit(charName, "Soldier") {
-    this->state = new UnitState(200);
+Soldier::Soldier(const char* charName) : Unit(charName, "Soldier") {
+    this->state = new HumanState(120, 1, 1);
     this->weapon = new Sword(this);
 };
 

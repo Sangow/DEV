@@ -3,12 +3,12 @@
 
 #include <iostream>
 #include "Unit.h"
-#include "../state/UnitState.h"
+#include "../state/HumanState.h"
 #include "../weapon/Sword.h"
 
 class Soldier : public Unit {
     public:
-        Soldier(char* charName);
+        Soldier(const char* charName);
         ~Soldier();
 };
 

@@ -3,9 +3,8 @@
 
 #include <iostream>
 #include "../exceptions/Exceptions.h"
-#include "UnitState.h"
 
-class MagicState : public UnitState {
+class MagicState {
     protected:
         float mana;
         float manaLimit;
@@ -13,7 +12,7 @@ class MagicState : public UnitState {
         float faith;
 
     public:
-        MagicState(float hp, float mana, float intellect, float faith);
+        MagicState(float mana, float intellect, float faith);
         virtual ~MagicState();
 
         float getMana() const;

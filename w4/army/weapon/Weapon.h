@@ -14,7 +14,7 @@ class Weapon {
         float dmg;
 
     public:
-        Weapon(const char* weaponName, float dmg, Unit* owner);
+        Weapon(const char* weaponName, Unit* owner);
         virtual ~Weapon();
 
         const char* getWeaponName() const;

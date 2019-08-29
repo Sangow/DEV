@@ -1,15 +1,11 @@
 #include "VampireState.h"
 
-VampireState::VampireState(float hp) : State(hp) {
+VampireState::VampireState() : UndeadState(90) {
     this->isVampire = true;
-    this->isUndead = true;
     this->isWerewolf = false;
+
+    this->strength = 0.5;
+    this->agility = 1.2;
 };
 
-VampireState::VampireState(float hp, float hpLimit) : State(hp, hpLimit) {
-    this->isVampire = true;
-    this->isWerewolf = false;
-}
-
 VampireState::~VampireState() {};
-

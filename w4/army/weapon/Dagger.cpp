@@ -1,6 +1,8 @@
 #include "Dagger.h"
 
-Dagger::Dagger(Unit* owner) : Weapon("Dagger", 12, owner) {};
+Dagger::Dagger(Unit* owner) : Weapon("Dagger", owner) {
+    this->dmg = this->owner->getAgility() * 15;
+};
 
 Dagger::~Dagger() {};
 

@@ -1,12 +1,17 @@
 #include "Claws.h"
 
-Claws::Claws(Unit* owner) : Weapon("Claws", 10, owner), infectionChance(1) {};
+Claws::Claws(Unit* owner) : Weapon("Claws", owner), infectionChance(1) {
+    this->dmg = this->owner->getAgility() * 10;
+};
 
 Claws::~Claws() {};
 
 void Claws::infect(Unit* enemy) {
     if ( this->infectionChance % 2 == 0 && enemy->readyToBeInfected() ) {
-        enemy->changeState(new VampireState(enemy->getHP(), enemy->getHPLimit()));
+        float enemyHP = enemy->getHP();
+
+        enemy->changeState(new VampireState());
+        enemy->takePhysDamage(this->owner->getHPLimit() - (enemyHP * this->owner->getHPLimit()) / 100);
         enemy->changeWeapon(new Claws(enemy));
         std:: cout << enemy->getCharName() << " becomes Vampire!" << std::endl;
     }
@@ -15,7 +20,9 @@ void Claws::infect(Unit* enemy) {
 
 void Claws::attack(Unit* enemy) {
     enemy->takePhysDamage(this->dmg);
-    owner->increaseHP(this->dmg / 10);
+    owner->increaseHP((enemy->getHP() + this->dmg) / 10);
+
+    enemy->counterAttack(owner);
 
     this->infect(enemy);
 };

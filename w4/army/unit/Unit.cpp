@@ -27,6 +27,14 @@ float Unit::getDMG() const {
     return this->weapon->getDMG();
 };
 
+float Unit::getMana() const {
+    return 0;
+};
+
+float Unit::getManaLimit() const {
+    return 0;
+};
+
 const char* Unit::getCharClass() const {
     return this->charClass;
 };
@@ -56,10 +64,12 @@ void Unit::increaseHP(float extraHP) {
 };
 
 void Unit::changeState(State* newState) {
+    // delete this->state;
     this->state = newState;
 };
 
 void Unit::changeWeapon(Weapon* newWeapon) {
+    // delete this->weapon;
     this->weapon = newWeapon;
 };
 
@@ -70,7 +80,6 @@ bool Unit::readyToBeInfected() {
 void Unit::attack(Unit* enemy) {
     try {
         this->weapon->attack(enemy);
-        enemy->counterAttack(this);
     } catch (OutOfHPException) {
         std::cout << "Unit \"" << enemy->getCharName() << "\" is DEAD!!!" << std::endl; 
     }

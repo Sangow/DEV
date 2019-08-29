@@ -6,8 +6,7 @@
 
 class WerewolfState : public State {
     public:
-        WerewolfState(float hp);
-        WerewolfState(float hp, float hpLimit);
+        WerewolfState(float hp = 100);
         virtual ~WerewolfState();
 };
 

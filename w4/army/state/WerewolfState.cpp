@@ -5,10 +5,9 @@ WerewolfState::WerewolfState(float hp) : State(hp) {
     this->isUndead = false;
     this->isWerewolf = true;
     this->isWolf = false;
-};
 
-WerewolfState::WerewolfState(float hp, float hpLimit) : State(hp, hpLimit) {
-    this->isWolf = false;
+    this->strength = 1.25;
+    this->agility = 0.75;
 };
 
 WerewolfState::~WerewolfState() {};

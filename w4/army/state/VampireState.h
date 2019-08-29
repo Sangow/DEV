@@ -2,13 +2,11 @@
 #define VAMPIRE_STATE_H
 
 #include <iostream>
-#include "UnitState.h"
-#include "../weapon/Claws.h"
+#include "UndeadState.h"
 
-class VampireState : public State {
+class VampireState : public UndeadState {
     public:
-        VampireState(float hp);
-        VampireState(float hp, float hpLimit);
+        VampireState();
         virtual ~VampireState();
 };
 

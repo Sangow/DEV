@@ -5,12 +5,12 @@
 #include "Unit.h"
 #include "../state/WerewolfState.h"
 #include "../state/WolfState.h"
-#include "../weapon/Sword.h"
+#include "../weapon/Mace.h"
 #include "../weapon/Fangs.h"
 
 class Werewolf : public Unit {
     public:
-        Werewolf(char* charName);
+        Werewolf(const char* charName);
         ~Werewolf();
 
         void transform();

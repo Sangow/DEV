@@ -16,3 +16,15 @@ float SpellCaster::getMana() const {
 float SpellCaster::getManaLimit() const {
     return this->state->getManaLimit();
 };
+
+float SpellCaster::getIntellect() const {
+    return this->mState->getIntellect();
+};
+
+float SpellCaster::getFaith() const {
+    return this->mState->getFaith();
+};
+
+const std::map<char*, Spell*> getSpellBook() const {
+    return this->spellBook;
+};

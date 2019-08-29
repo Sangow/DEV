@@ -21,7 +21,6 @@ class State {
         void ensureIsAlive();
 
         State(float hp);
-        // State(float hp, float hpLimit);
         virtual ~State();
 
         float getHP() const;

@@ -19,9 +19,11 @@ class SpellCaster : public Unit {
 
         float getMana() const;
         float getManaLimit() const;
+        float getIntellect() const;
+        float getFaith() const;
         const std::map<char*, Spell*>& getSpellBook() const;
 
-        // virtual void cast(Unit* enemy, const char* spellName);
+        virtual void cast(Unit* enemy, const char* spellName) = 0;
 };
 
 #endif // SPELLCASTER_H

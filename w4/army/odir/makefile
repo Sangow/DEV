@@ -8,12 +8,12 @@ spells:
 	g++ ../spell/Heal.cpp -c
 
 spellcasters:
-	g++ ../spellcaster/SpellCaster.cpp -c
+# 	g++ ../spellcaster/SpellCaster.cpp -c
 
 states:
 	g++ ../state/State.cpp -c
 	g++ ../state/MagicState.cpp -c
-	g++ ../state/UnitState.cpp -c
+	g++ ../state/HumanState.cpp -c
 	g++ ../state/VampireState.cpp -c
 	g++ ../state/WerewolfState.cpp -c
 	g++ ../state/WolfState.cpp -c

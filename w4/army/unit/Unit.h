@@ -3,14 +3,17 @@
 
 #include "../exceptions/Exceptions.h"
 #include "../state/State.h"
+#include "../state/MagicState.h"
 #include "../weapon/Weapon.h"
 
 class State;
+class MagicState;
 class Weapon;
 
 class Unit {
     protected:
         State* state;
+        MagicState* mState;
         Weapon* weapon;
         const char* charName;
         const char* charClass;
@@ -30,6 +33,8 @@ class Unit {
 
         virtual float getMana() const;
         virtual float getManaLimit() const;
+        virtual float getIntellect() const;
+        virtual float getFaith() const;
         
         const char* getCharClass() const;
         const char* getCharName() const;
@@ -40,6 +45,7 @@ class Unit {
 
         void changeState(State* newState);
         void changeWeapon(Weapon* newWeapon);
+        void cleanMState(Unit* enemy);
 
         bool readyToBeInfected();
 

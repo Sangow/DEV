@@ -8,8 +8,6 @@ void State::ensureIsAlive() {
 
 State::State(float hp) : hp(hp), hpLimit(hp) {};
 
-// State::State(float hp, float hpLimit) : hp(hp), hpLimit(hpLimit) {};
-
 State::~State() {};
 
 float State::getHP() const {

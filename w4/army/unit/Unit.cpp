@@ -64,13 +64,23 @@ void Unit::increaseHP(float extraHP) {
 };
 
 void Unit::changeState(State* newState) {
-    // delete this->state;
+    State* tmpState = this->state;
+    delete (tmpState);
     this->state = newState;
 };
 
 void Unit::changeWeapon(Weapon* newWeapon) {
-    // delete this->weapon;
+    Weapon* tmpWeapon = this->weapon;
+    delete (tmpWeapon);
     this->weapon = newWeapon;
+};
+
+void Unit::cleanMState(Unit* enemy) {
+    if ( enemy->mState != NULL ) {
+        MagicState* tmpMState = enemy->mState;
+        mState = NULL;
+        delete (tmpMState);
+    }
 };
 
 bool Unit::readyToBeInfected() {

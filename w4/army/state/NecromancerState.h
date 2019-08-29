@@ -4,9 +4,9 @@
 #include <iostream>
 #include "MagicState.h"
 
-class NecromancerState : public MagicState {
+class NecromancerState : public UndeadState {
     public:
-        NecromancerState(float hp, float mana, float intellect, float faith);
+        NecromancerState();
         ~NecromancerState();
 };
 

@@ -1,7 +1,11 @@
 #include "NecromancerState.h"
 
-NecromancerState::NecromancerState(float hp, float mana, float intellect, float faith) : MagicState(hp, mana, intellect, faith) {
-    this->isUndead = true;
+NecromancerState::NecromancerState() : UndeadState(80) {
+    this->isVampire = false;
+    this->isWerewolf = false;
+
+    this->strength = 0.5;
+    this->agility = 1;
 };
 
 NecromancerState::~NecromancerState() {};

@@ -1,9 +1,9 @@
 #include "UnitState.h"
 
 UnitState::UnitState(float hp) : State(hp) {
-    isVampire = false;
-    isUndead = false;
-    isWerewolf = false;
+    this->isVampire = false;
+    this->isUndead = false;
+    this->isWerewolf = false;
 };
 
 UnitState::~UnitState() {};

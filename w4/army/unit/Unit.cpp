@@ -15,6 +15,14 @@ float Unit::getHPLimit() const {
     return this->state->getHPLimit();
 };
 
+float Unit::getStrength() const {
+    return this->state->getStrength();
+};
+
+float Unit::getAgility() const {
+    return this->state->getAgility();
+};
+
 float Unit::getDMG() const {
     return this->weapon->getDMG();
 };
@@ -61,7 +69,7 @@ bool Unit::readyToBeInfected() {
 
 void Unit::attack(Unit* enemy) {
     try {
-        this->weapon->action(enemy, this->getDMG());
+        this->weapon->attack(enemy);
         enemy->counterAttack(this);
     } catch (OutOfHPException) {
         std::cout << "Unit \"" << enemy->getCharName() << "\" is DEAD!!!" << std::endl; 
@@ -69,7 +77,7 @@ void Unit::attack(Unit* enemy) {
 };
 
 void Unit::counterAttack(Unit* enemy) {
-    this->weapon->action(enemy, this->getDMG() / 2);
+    this->weapon->counterAttack(enemy);
 };
 
 std::ostream& operator<<(std::ostream& out, const Unit& unit) {

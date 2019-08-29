@@ -1,6 +1,8 @@
 #ifndef FANGS_H
 #define FANGS_H
 
+// Wolf weapon
+
 #include <iostream>
 #include "Weapon.h"
 #include "Sword.h"
@@ -12,13 +14,12 @@ class Fangs : public Weapon {
         int infectionChance;
 
     public:
-        // bool infect(Unit* enemy);
         Fangs(Unit* owner);
         ~Fangs();
 
-        virtual void action(Unit* enemy, float dmg);
+        void infect(Unit* enemy);
 
-
+        virtual void attack(Unit* enemy);
 };
 
 #endif // FANGS_H

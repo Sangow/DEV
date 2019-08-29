@@ -3,15 +3,13 @@
 
 #include <iostream>
 #include "Unit.h"
-#include "../state/UnitState.h"
-#include "../weapon/Sword.h"
+#include "../state/BerserkerState.h"
+#include "../weapon/TwoHandedSword.h"
 
 class Berserker : public Unit {
     public:
         Berserker(char* charName);
         ~Berserker();
-
-        virtual void takeMagicDamage(float magicDmg);
 };
 
 #endif // BERSERKER_H

@@ -1,6 +1,6 @@
 #include "Spell.h"
 
-Spell::Spell(char* spellName, float cost, float points) : spellName(spellName), cost(cost), points(points) {};
+Spell::Spell(const char* spellName, float cost, float points) : spellName(spellName), cost(cost), points(points) {};
 
 Spell::~Spell() {};
 

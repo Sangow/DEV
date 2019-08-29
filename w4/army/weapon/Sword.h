@@ -1,6 +1,8 @@
 #ifndef SWORD_H
 #define SWORD_H
 
+// Soldier&Demon weapon
+
 #include <iostream>
 #include "Weapon.h"
 

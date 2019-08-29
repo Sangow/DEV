@@ -1,7 +1,7 @@
 #ifndef UNIT_STATE_H
 #define UNIT_STATE_H
 
-#include <istream>
+#include <iostream>
 #include "State.h"
 
 class UnitState : public State {

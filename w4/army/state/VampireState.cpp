@@ -9,7 +9,6 @@ VampireState::VampireState(float hp) : State(hp) {
 VampireState::VampireState(float hp, float hpLimit) : State(hp, hpLimit) {
     this->isVampire = true;
     this->isWerewolf = false;
-    // unit->changeWeapon(new Claws(unit));
 }
 
 VampireState::~VampireState() {};

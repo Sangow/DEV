@@ -6,11 +6,11 @@
 #include "../unit/Unit.h"
 #include "../state/MagicState.h"
 #include "../spell/Spell.h"
+#include "../spell/Fireball.h"
+#include "../spell/Heal.h"
 
 class SpellCaster : public Unit {
     protected:
-        MagicState *ms;
-
         std::map<char*, Spell*> spellBook;
         // bool spellBoolContains(const char* spellName);
     public:
@@ -22,6 +22,6 @@ class SpellCaster : public Unit {
         const std::map<char*, Spell*>& getSpellBook() const;
 
         virtual void cast(Unit* enemy, const char* spellName);
-}
+};
 
 #endif // SPELLCASTER_H

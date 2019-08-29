@@ -3,8 +3,12 @@ obj: exceptions spells spellcasters states units weapons
 exceptions:
 
 spells:
+	g++ ../spell/Spell.cpp -c
+	g++ ../spell/Fireball.cpp -c
+	g++ ../spell/Heal.cpp -c
 
 spellcasters:
+	g++ ../spellcaster/SpellCaster.cpp -c
 
 states:
 	g++ ../state/State.cpp -c
@@ -13,6 +17,8 @@ states:
 	g++ ../state/VampireState.cpp -c
 	g++ ../state/WerewolfState.cpp -c
 	g++ ../state/WolfState.cpp -c
+	g++ ../state/NecromancerState.cpp -c
+	g++ ../state/BerserkerState.cpp -c
 # 	g++ ../state/*.cpp -c
 
 units:
@@ -30,6 +36,9 @@ weapons:
 	g++ ../weapon/Sword.cpp -c
 	g++ ../weapon/Fangs.cpp -c
 	g++ ../weapon/Claws.cpp -c
+	g++ ../weapon/TwoHandedSword.cpp -c
+	g++ ../weapon/Mace.cpp -c
+	g++ ../weapon/Staff.cpp -c
 # 	g++ ../weapon/*.cpp -c
 
 clean:

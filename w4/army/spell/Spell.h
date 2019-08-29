@@ -11,14 +11,14 @@ class Spell {
         float points;
 
     public:
-        Spell(char* spellName, float cost, float points);
+        Spell(const char* spellName, float cost, float points);
         virtual ~Spell();
 
         const char* getSpellName() const;
         float getCost() const;
         float getPoints() const;
 
-        virtual void action(Unit* enemy, float points) = 0;
+        virtual void action(Unit* enemy) = 0;
 };
 
 std::ostream& operator<<(std::ostream& out, const Spell& spell);

@@ -21,14 +21,17 @@ class Unit {
         
         float getHP() const;
         float getHPLimit() const;
+        float getStrength() const;
+        float getAgility() const;
         float getDMG() const;
+        
         const char* getCharClass() const;
         const char* getCharName() const;
         State& getState() const;
         Weapon& getWeapon() const;
 
         void takePhysDamage(float physDmg);
-        virtual void takeMagicDamage(float magicDmg);
+        void takeMagicDamage(float magicDmg);
         void increaseHP(float extraHP);
 
         void changeState(State* newState);

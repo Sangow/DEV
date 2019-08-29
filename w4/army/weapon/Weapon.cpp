@@ -16,9 +16,14 @@ float Weapon::getDMG() const {
     return this->dmg;
 };
 
-void Weapon::action(Unit* enemy, float dmg) {
-        enemy->takePhysDamage(dmg);
-};
+void Weapon::attack(Unit* enemy) {
+    enemy->takePhysDamage(this->dmg);
+    enemy->counterAttack(this->owner);
+}
+
+void Weapon::counterAttack(Unit* enemy) {
+    enemy->takePhysDamage(this->dmg / 2);
+}
 
 std::ostream& operator<<(std::ostream& out, const Weapon& weapon) {
     out << "Weapon: " << weapon.getWeaponName();

@@ -10,8 +10,6 @@ class Rogue : public Unit {
     public:
         Rogue(char* charName);
         ~Rogue();
-
-        virtual void attack(Unit* enemy);
 };
 
 #endif // ROGUE_H

@@ -20,6 +20,14 @@ float State::getHPLimit() const {
     return this->hpLimit;
 };
 
+float State::getStrength() const {
+    return this->strength;
+};
+
+float State::getAgility() const {
+    return this->agility;
+};
+
 bool State::readyToBeInfected() {
     return !this->isVampire && !this->isWerewolf;
 };

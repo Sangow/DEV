@@ -6,7 +6,3 @@ Rogue::Rogue(char* charName) : Unit(charName, "Rogue") {
 };
 
 Rogue::~Rogue() {};
-
-void Rogue::attack(Unit* enemy) {
-    this->weapon->action(enemy, this->getDMG());
-};

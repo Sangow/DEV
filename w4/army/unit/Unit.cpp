@@ -101,7 +101,7 @@ void Unit::changeAbility(ClassAbility* newAbility) {
 };
 
 bool Unit::readyToBeInfected() {
-    this->state->readyToBeInfected();
+    return this->state->readyToBeInfected();
 };
 
 void Unit::attack(Unit* enemy) {

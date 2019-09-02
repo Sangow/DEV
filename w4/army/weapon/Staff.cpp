@@ -1,11 +1,7 @@
 #include "Staff.h"
 
-Staff::Staff(Unit* owner, State* ownerState) : Weapon("Staff", owner) {
-    this->dmg = this->owner->get
+Staff::Staff(Unit* owner) : Weapon("Staff", owner) {
+    this->dmg = this->owner->getStrength() * this->owner->getAgility() * 30;
 };
 
 Staff::~Staff() {};
-
-void Staff::cast(const char* spellName, Unit* enemy) {
-
-};

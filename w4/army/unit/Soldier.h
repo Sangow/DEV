@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "Unit.h"
-#include "../state/HumanState.h"
+#include "../state/SoldierState.h"
 #include "../weapon/Sword.h"
 
 class Soldier : public Unit {

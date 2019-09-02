@@ -1,14 +1,13 @@
 #include "Weapon.h"
 
-Weapon::Weapon(const char* weaponName, Unit* owner) 
+Weapon::Weapon(const std::string& weaponName, Unit* owner) 
     : weaponName(weaponName), owner(owner) {};
 
 Weapon::~Weapon() {
-    delete weaponName;
-    delete owner;
+    // delete this->owner;
 };
 
-const char* Weapon::getWeaponName() const {
+const std::string& Weapon::getWeaponName() const {
     return this->weaponName;
 };
 
@@ -20,12 +19,12 @@ void Weapon::attack(Unit* enemy) {
     std::cout << owner->getCharName() << " attacks " << enemy->getCharName() << std::endl;
     enemy->takePhysDamage(this->dmg);
     enemy->counterAttack(this->owner);
-}
+};
 
 void Weapon::counterAttack(Unit* enemy) {
     std::cout << owner->getCharName() << " counterAttacks " << enemy->getCharName() << std::endl;
     enemy->takePhysDamage(this->dmg / 2);
-}
+};
 
 std::ostream& operator<<(std::ostream& out, const Weapon& weapon) {
     out << "Weapon: " << weapon.getWeaponName();

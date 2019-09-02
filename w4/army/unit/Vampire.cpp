@@ -1,8 +1,9 @@
 #include "Vampire.h"
 
-Vampire::Vampire(char* charName) : Unit(charName, "Vampire") {
-    this->state = new VampireState(90);
+Vampire::Vampire(const char* charName) : Unit(charName, "Vampire") {
+    this->state = new VampireState();
     this->weapon = new Claws(this);
+    this->ability = new VampireAbility(this);
 };
 
 Vampire::~Vampire() {};

@@ -2,7 +2,9 @@
 
 MagicState::MagicState(float mana, float intellect, float faith) : mana(mana), manaLimit(mana), intellect(intellect), faith(faith) {};
 
-MagicState::~MagicState() {};
+MagicState::~MagicState() {
+    delete this->spellBook;
+};
 
 float MagicState::getMana() const {
     return this->mana;
@@ -18,6 +20,10 @@ float MagicState::getIntellect() const {
 
 float MagicState::getFaith() const {
     return this->faith;
+};
+
+SpellBook& MagicState::getSpellBook() const {
+    return *(this->spellBook);
 };
 
 void MagicState::spendMana(float cost) {
@@ -37,8 +43,10 @@ void MagicState::increaseMana(float mana) {
     this->mana = totalMana;
 };
 
-std::ostream& operator<<(std::ostream& out, const MagicState* magicState) {
-    out << "[mana: " << magicState->getMana() << "/" << magicState->getManaLimit() << "]";
+std::ostream& operator<<(std::ostream& out, const MagicState& magicState) {
+    out << "Spell: " << magicState.getSpellBook().getCurrentSpell().getSpellName();
+    out << " [mana: " << magicState.getMana() << "/" << magicState.getManaLimit();
+    out << "]";
 
     return out;
 };

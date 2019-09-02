@@ -6,7 +6,7 @@
 
 class Fireball : public Spell {
     public:
-        Fireball();
+        Fireball(MagicState* mState);
         ~Fireball();
 
         virtual void action(Unit* enemy);

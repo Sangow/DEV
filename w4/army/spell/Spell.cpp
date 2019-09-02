@@ -1,10 +1,10 @@
 #include "Spell.h"
 
-Spell::Spell(const char* spellName, float cost, float points) : spellName(spellName), cost(cost), points(points) {};
+Spell::Spell(MagicState* mState, const std::string& spellName, float cost, float points) : mState(mState), spellName(spellName), cost(cost), points(points) {};
 
 Spell::~Spell() {};
 
-const char* Spell::getSpellName() const {
+const std::string& Spell::getSpellName() const {
     return this->spellName;
 };
 

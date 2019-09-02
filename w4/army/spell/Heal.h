@@ -6,7 +6,7 @@
 
 class Heal : public Spell {
     public:
-        Heal();
+        Heal(MagicState* mState);
         ~Heal();
 
         virtual void action(Unit* enemy);

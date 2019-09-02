@@ -1,7 +1,6 @@
+// Rogue weapon
 #ifndef DAGGER_H
 #define DAGGER_H
-
-// Rogue weapon
 
 #include <iostream>
 #include "Weapon.h"

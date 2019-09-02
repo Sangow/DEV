@@ -16,7 +16,7 @@ class State {
         bool isVampire;
         bool isUndead;
         bool isWerewolf;
-        bool isWolf;
+        // bool isWolf;
 
         void ensureIsAlive();
 

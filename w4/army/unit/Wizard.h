@@ -3,6 +3,14 @@
 
 #include <iostream>
 #include "SpellCaster.h"
-#include "../state/Wizard.h"
+#include "../state/WizardState.h"
+#include "../state/WizardMState.h"
+#include "../weapon/Staff.h"
+
+class Wizard : public SpellCaster {
+    public:
+        Wizard(const char* charName);
+        ~Wizard();
+};
 
 #endif // WIZARD_H

@@ -4,17 +4,21 @@
 #include <iostream>
 #include "../unit/Unit.h"
 
+class Unit;
+class MagicState;
+
 class Spell {
     protected:
-        const char* spellName;
+        MagicState* mState;
+        const std::string spellName;
         float cost;
         float points;
 
     public:
-        Spell(const char* spellName, float cost, float points);
+        Spell(MagicState* mState, const std::string& spellName, float cost, float points);
         virtual ~Spell();
 
-        const char* getSpellName() const;
+        const std::string& getSpellName() const;
         float getCost() const;
         float getPoints() const;
 

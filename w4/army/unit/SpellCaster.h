@@ -2,28 +2,33 @@
 #define SPELLCASTER_H
 
 #include <iostream>
-#include <map>
 #include "../unit/Unit.h"
 #include "../state/MagicState.h"
-#include "../spell/Spell.h"
-#include "../spell/Fireball.h"
-#include "../spell/Heal.h"
 
 class SpellCaster : public Unit {
-    protected:
-        std::map<char*, Spell*> spellBook;
-        // bool spellBoolContains(const char* spellName);
     public:
-        SpellCaster(const char* charName, const char* charClass);
-        virtual ~SpellCaster();
+    SpellCaster(const char* charName, const char* charClass);
+    virtual ~SpellCaster();
 
-        float getMana() const;
-        float getManaLimit() const;
-        float getIntellect() const;
-        float getFaith() const;
-        const std::map<char*, Spell*>& getSpellBook() const;
+    virtual float getMana() const;
+    virtual float getManaLimit() const;
+    float getIntellect() const;
+    float getFaith() const;
+    MagicState& getMagicState() const;
 
-        virtual void cast(Unit* enemy, const char* spellName) = 0;
+    // const std::map<std::string, Spell*>& getSpellBook() const;
+
+    // void spendMana(float cost);
+    // void increaseMana(float extraMana);
+
+    virtual void changeState(State* newState, const char* newCharClass);
+    void cleanMState();
+
+    void changeSpell(const char* spellName);
+
+    virtual void cast(Unit* enemy);
 };
+
+std::ostream& operator<<(std::ostream& out, const SpellCaster& spellcaster);
 
 #endif // SPELLCASTER_H

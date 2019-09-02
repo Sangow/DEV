@@ -6,8 +6,8 @@
 
 class BerserkerState : public HumanState {
     public:
-        BerserkerState(float hp);
-        virtual ~BerserkerState();
+        BerserkerState();
+        ~BerserkerState();
 
         virtual void takeMagicDamage(float magicDmg);
 };

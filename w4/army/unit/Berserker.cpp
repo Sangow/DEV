@@ -1,7 +1,7 @@
 #include "Berserker.h"
 
-Berserker::Berserker(char* charName) : Unit(charName, "Berserker") {
-    this->state = new BerserkerState(150);
+Berserker::Berserker(const char* charName) : Unit(charName, "Berserker") {
+    this->state = new BerserkerState();
     this->weapon = new TwoHandedSword(this);
 };
 

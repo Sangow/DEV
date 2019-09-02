@@ -1,9 +1,10 @@
 #include "Heal.h"
 
-Heal::Heal() : Spell("Heal", 20, 20) {};
+Heal::Heal(MagicState* mState) : Spell(mState, "Heal", 20, 20) {};
 
 Heal::~Heal() {};
 
 void Heal::action(Unit* enemy) {
-    enemy->increaseHP(this->points);
+    enemy->increaseHP(this->points * this->mState->getFaith());
+    mState->spendMana(this->cost);
 };

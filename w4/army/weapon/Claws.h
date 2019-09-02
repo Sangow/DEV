@@ -1,7 +1,6 @@
+// Vampire weapon
 #ifndef CLAWS_H
 #define CLAWS_H
-
-// Vampire weapon
 
 #include <iostream>
 #include "Weapon.h"
@@ -15,9 +14,8 @@ class Claws : public Weapon {
         Claws(Unit* owner);
         ~Claws();
 
-        void infect(Unit* enemy);
-
         virtual void attack(Unit* enemy);
+        virtual void counterAttack(Unit* enemy);
 
 };
 

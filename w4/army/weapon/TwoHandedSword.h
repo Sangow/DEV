@@ -1,7 +1,6 @@
+// Berserker weapon
 #ifndef TWO_HANDED_SWORD_H
 #define TWO_HANDED_SWORD_H
-
-// Berserkers weapon
 
 #include <iostream>
 #include "Weapon.h"

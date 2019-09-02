@@ -1,23 +1,9 @@
 #include "Werewolf.h"
 
 Werewolf::Werewolf(const char* charName) : Unit(charName, "Werewolf") {
-    this->state = new WerewolfState(100);
+    this->state = new WerewolfState();
     this->weapon = new Mace(this);
+    this->ability = new WerewolfAbility(this);
 };
 
 Werewolf::~Werewolf() {};
-
-void Werewolf::transform() {
-    float oldHP = this->getHP();
-
-    if ( this->state->isWolf ) {
-        this->changeState(new WerewolfState());
-        std::cout << this->getHPLimit() << std::endl;
-        this->takePhysDamage(this->getHPLimit() - (oldHP / 2));
-        this->changeWeapon(new Mace(this));
-    } else {
-        this->changeState(new WolfState());
-        this->takePhysDamage(this->getHPLimit() - (oldHP * this->getHPLimit()) / 100);
-        this->changeWeapon(new Fangs(this));
-    }
-};

@@ -1,8 +1,7 @@
 #include "WolfState.h"
 
 WolfState::WolfState() : WerewolfState(200) {
-    this->isWolf = true;
-
+    // this->isWolf = true;
     this->strength = 2.5;
     this->agility = 1.5;
 };

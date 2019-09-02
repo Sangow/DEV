@@ -2,7 +2,7 @@
 #define NECROMANCER_STATE_H
 
 #include <iostream>
-#include "MagicState.h"
+#include "UndeadState.h"
 
 class NecromancerState : public UndeadState {
     public:

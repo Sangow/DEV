@@ -1,3 +1,4 @@
+// Werewolf weapon
 #ifndef MACE_H
 #define MACE_H
 

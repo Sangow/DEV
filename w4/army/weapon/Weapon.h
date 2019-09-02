@@ -10,14 +10,14 @@ class Unit;
 class Weapon {
     protected:
         Unit* owner;
-        const char* weaponName;
+        const std::string weaponName;
         float dmg;
 
     public:
-        Weapon(const char* weaponName, Unit* owner);
+        Weapon(const std::string& weaponName, Unit* owner);
         virtual ~Weapon();
 
-        const char* getWeaponName() const;
+        const std::string& getWeaponName() const;
         float getDMG() const;
 
         virtual void attack(Unit* enemy);

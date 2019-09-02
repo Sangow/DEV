@@ -3,9 +3,16 @@
 
 #include <iostream>
 #include "../exceptions/Exceptions.h"
+#include "../spellbook/SpellBook.h"
+#include "../unit/Unit.h"
+
+class SpellBook;
+class Unit;
 
 class MagicState {
     protected:
+        SpellBook* spellBook;
+
         float mana;
         float manaLimit;
         float intellect;
@@ -20,10 +27,12 @@ class MagicState {
         float getIntellect() const;
         float getFaith() const;
 
-        virtual void spendMana(float cost);
-        virtual void increaseMana(float extraMana);
+        SpellBook& getSpellBook() const;
+
+        void spendMana(float cost);
+        void increaseMana(float extraMana);
 };
 
-std::ostream& operator<<(std::ostream& out, const MagicState* magicState);
+std::ostream& operator<<(std::ostream& out, const MagicState& magicState);
 
 #endif // MAGIC_STATE_H

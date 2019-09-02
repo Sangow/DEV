@@ -4,7 +4,7 @@
 #include <iostream>
 #include "HumanState.h"
 
-class HealerState() : public HumanState {
+class HealerState : public HumanState {
     public:
         HealerState();
         ~HealerState();

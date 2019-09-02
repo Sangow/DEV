@@ -4,15 +4,17 @@
 #include <iostream>
 #include "../unit/Unit.h"
 
+class Unit;
+
 class ClassAbility {
     protected:
         Unit* owner;
     public:
         ClassAbility(Unit* owner);
-        ~ClassAbility();
+        virtual ~ClassAbility();
 
-        void useAbility();
-        void useAbility(Unit* enemy);
+        virtual void useAbility() = 0;
+        virtual void useAbility(Unit* enemy) = 0;
 };
 
 #endif // CLASS_ABILITY_H

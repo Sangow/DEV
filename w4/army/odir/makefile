@@ -1,6 +1,8 @@
-obj: exceptions spells spellbooks states units weapons classAbilities
+obj: exceptions spells spellbooks states units weapons classAbilities interface
 
 exceptions:
+
+interface:
 
 classAbilities:
 	g++ ../classAbility/ClassAbility.cpp -c
@@ -21,7 +23,6 @@ spells:
 	g++ ../spell/Spell.cpp -c
 	g++ ../spell/Fireball.cpp -c
 	g++ ../spell/Heal.cpp -c
-# 	g++ ../spell/*.cpp -c
 
 states:
 	g++ ../state/State.cpp -c
@@ -49,8 +50,6 @@ states:
 	g++ ../state/WarlockMState.cpp -c
 	g++ ../state/NecromancerMState.cpp -c
 
-# 	g++ ../state/*.cpp -c
-
 units:
 	g++ ../unit/Unit.cpp -c
 	g++ ../unit/SpellCaster.cpp -c
@@ -77,7 +76,6 @@ weapons:
 	g++ ../weapon/HolyChimes.cpp -c
 	g++ ../weapon/Chaplet.cpp -c
 	g++ ../weapon/Sickle.cpp -c
-# 	g++ ../weapon/*.cpp -c
 
 clean:
-	rm -rf *.o
+	rm -rf *.o a.out a.exe

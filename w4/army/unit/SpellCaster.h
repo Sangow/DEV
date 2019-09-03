@@ -7,7 +7,7 @@
 
 class SpellCaster : public Unit {
     public:
-    SpellCaster(const char* charName, const char* charClass);
+    SpellCaster(const std::string& charName, const std::string& charClass);
     virtual ~SpellCaster();
 
     virtual float getMana() const;
@@ -21,10 +21,10 @@ class SpellCaster : public Unit {
     // void spendMana(float cost);
     // void increaseMana(float extraMana);
 
-    virtual void changeState(State* newState, const char* newCharClass);
+    virtual void changeState(State* newState, const std::string& newCharClass);
     void cleanMState();
 
-    void changeSpell(const char* spellName);
+    void changeSpell(const std::string& spellName);
 
     virtual void cast(Unit* enemy);
 };

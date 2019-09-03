@@ -2,6 +2,7 @@
 #define UNIT_H
 
 #include <iostream>
+#include "../interface/Soul.h"
 #include "../exceptions/Exceptions.h"
 #include "../state/State.h"
 #include "../state/MagicState.h"
@@ -13,20 +14,20 @@ class MagicState;
 class Weapon;
 class ClassAbility;
 
-class Unit {
+class Unit : public Soul {
     protected:
         State* state;
         MagicState* mState;
         Weapon* weapon;
         ClassAbility* ability;
-        const char* charName;
-        const char* charClass;
+        std::string charName;
+        std::string charClass;
 
-        void changeCharClass(const char* newCharClass);
+        void changeCharClass(const std::string& newCharClass);
 
     public:
-        Unit(const char* charName, const char* charClass);
-        ~Unit();
+        Unit(const std::string& charName, const std::string& charClass);
+        virtual ~Unit();
 
         bool unitIsMage() const;
         
@@ -39,8 +40,8 @@ class Unit {
         float getDMG() const;
         Weapon& getWeapon() const;
         
-        const char* getCharClass() const;
-        const char* getCharName() const;
+        const std::string& getCharClass() const;
+        const std::string& getCharName() const;
 
         void takePhysDamage(float physDmg);
         void takeMagicDamage(float magicDmg);
@@ -54,7 +55,7 @@ class Unit {
 
         void changeWeapon(Weapon* newWeapon);
         void changeAbility(ClassAbility* newAbility);
-        virtual void changeState(State* newState, const char* newCharClass);
+        virtual void changeState(State* newState, const std::string& newCharClass);
 
         bool readyToBeInfected();
 
@@ -63,6 +64,8 @@ class Unit {
 
         void useAbility();
         void useAbility(Unit* enemy);
+
+        virtual void notifySoulHunters();
 };
 
 std::ostream& operator<<(std::ostream& out, const Unit& unit);

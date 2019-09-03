@@ -8,7 +8,7 @@
 
 class Rogue : public Unit {
     public:
-        Rogue(const char* charName);
+        Rogue(const std::string& charName);
         ~Rogue();
 };
 

@@ -3,9 +3,7 @@
 Weapon::Weapon(const std::string& weaponName, Unit* owner) 
     : weaponName(weaponName), owner(owner) {};
 
-Weapon::~Weapon() {
-    // delete this->owner;
-};
+Weapon::~Weapon() {};
 
 const std::string& Weapon::getWeaponName() const {
     return this->weaponName;

@@ -11,7 +11,7 @@
 
 class Werewolf : public Unit {
     public:
-        Werewolf(const char* charName);
+        Werewolf(const std::string& charName);
         ~Werewolf();
 };
 

@@ -8,7 +8,7 @@
 
 class Soldier : public Unit {
     public:
-        Soldier(const char* charName);
+        Soldier(const std::string& charName);
         ~Soldier();
 };
 

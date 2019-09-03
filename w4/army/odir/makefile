@@ -3,6 +3,8 @@ obj: exceptions spells spellbooks states units weapons classAbilities interface
 exceptions:
 
 interface:
+	g++ ../interface/Soul.cpp -c
+	g++ ../interface/SoulHunter.cpp -c
 
 classAbilities:
 	g++ ../classAbility/ClassAbility.cpp -c
@@ -61,6 +63,9 @@ units:
 	g++ ../unit/Wizard.cpp -c
 	g++ ../unit/Warlock.cpp -c
 	g++ ../unit/Demon.cpp -c
+	g++ ../unit/Healer.cpp -c
+	g++ ../unit/Priest.cpp -c
+	g++ ../unit/Necromancer.cpp -c
 # 	g++ ../unit/*.cpp -c
 
 weapons:

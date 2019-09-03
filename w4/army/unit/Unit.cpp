@@ -1,6 +1,6 @@
 #include "Unit.h"
 
-void Unit::changeCharClass(const char* newCharClass) {
+void Unit::changeCharClass(const std::string& newCharClass) {
     this->charClass = newCharClass;
 };
 
@@ -8,13 +8,13 @@ bool Unit::unitIsMage() const {
     return this->mState != NULL;
 };
 
-Unit::Unit(const char* charName, const char* charClass) : charClass(charClass), charName(charName) {};
+Unit::Unit(const std::string& charName, const std::string& charClass) : charClass(charClass), charName(charName) {};
 
 Unit::~Unit() {
     delete this->state;
-    delete this->weapon;
-    delete this->weapon;
+    delete this->mState;
     delete this->ability;
+    delete this->weapon;
 };
 
 float Unit::getHP() const {
@@ -59,11 +59,11 @@ MagicState& Unit::getMagicState() const {
     }
 };
 
-const char* Unit::getCharClass() const {
+const std::string& Unit::getCharClass() const {
     return this->charClass;
 };
 
-const char* Unit::getCharName() const {
+const std::string& Unit::getCharName() const {
     return this->charName;
 };
 
@@ -79,7 +79,7 @@ void Unit::increaseHP(float extraHP) {
     this->state->increaseHP(extraHP);
 };
 
-void Unit::changeState(State* newState, const char* newCharClass) {
+void Unit::changeState(State* newState, const std::string& newCharClass) {
     State* tmpState = this->state;
     delete (tmpState);
     this->state = newState;
@@ -130,6 +130,15 @@ void Unit::useAbility(Unit* enemy) {
         return;
     }
     this->ability->useAbility(enemy);
+};
+
+void Unit::notifySoulHunters() {
+    std::set<SoulHunter*>::iterator it = this->getSoulHunters().begin();
+    
+    for ( ; it != soulHunters.end(); it++ ) {
+        ((Unit*)(*it))->increaseHP(getHPLimit() / 10);
+        (*it)->removeSoul(this);
+    }
 };
 
 std::ostream& operator<<(std::ostream& out, const Unit& unit) {

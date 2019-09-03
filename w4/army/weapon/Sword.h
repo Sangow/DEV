@@ -8,7 +8,7 @@
 class Sword : public Weapon {
     public:
         Sword(Unit* owner);
-        ~Sword();
+        virtual ~Sword();
 };
 
 #endif // SWORD_H

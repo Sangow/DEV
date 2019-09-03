@@ -10,7 +10,7 @@
 
 class Warlock : public SpellCaster {
     public:
-        Warlock(const char* charName);
+        Warlock(const std::string& charName);
         ~Warlock();
 };
 

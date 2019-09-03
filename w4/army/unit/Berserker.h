@@ -8,7 +8,7 @@
 
 class Berserker : public Unit {
     public:
-        Berserker(const char* charName);
+        Berserker(const std::string& charName);
         ~Berserker();
 };
 

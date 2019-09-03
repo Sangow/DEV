@@ -19,7 +19,7 @@ class SpellBook {
         bool spellbookContains(const std::string& spellName);
     public:
         SpellBook(MagicState* mState);
-        ~SpellBook();
+        virtual ~SpellBook();
 
         Spell& getCurrentSpell() const;
 

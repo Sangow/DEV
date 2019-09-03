@@ -2,6 +2,4 @@
 
 ClassAbility::ClassAbility(Unit* owner) : owner(owner) {};
 
-ClassAbility::~ClassAbility() {
-    // delete owner;
-};
+ClassAbility::~ClassAbility() {};

@@ -10,7 +10,7 @@
 
 class Vampire : public Unit {
     public:
-        Vampire(const char* charName);
+        Vampire(const std::string& charName);
         ~Vampire();
 };
 

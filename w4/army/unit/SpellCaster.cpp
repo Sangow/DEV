@@ -1,6 +1,6 @@
 #include "SpellCaster.h"
 
-SpellCaster::SpellCaster(const char* charName, const char* charClass) 
+SpellCaster::SpellCaster(const std::string& charName, const std::string& charClass) 
     : Unit(charName, charClass) {};
 
 SpellCaster::~SpellCaster() {};
@@ -53,7 +53,7 @@ MagicState& SpellCaster::getMagicState() const {
 //     std::cout << this->getCharName() << " no longer a mage." << std::endl;
 // };
 
-void SpellCaster::changeState(State* newState, const char* newCharClass) {
+void SpellCaster::changeState(State* newState, const std::string& newCharClass) {
     if ( this->unitIsMage() ) {
         this->cleanMState();
     }
@@ -69,7 +69,7 @@ void SpellCaster::cleanMState() {
     delete (tmpMState);
 };
 
-void SpellCaster::changeSpell(const char* spellName) {
+void SpellCaster::changeSpell(const std::string& spellName) {
     if ( this->unitIsMage() ) {
         this->mState->getSpellBook().changeSpell(spellName);
     } else {

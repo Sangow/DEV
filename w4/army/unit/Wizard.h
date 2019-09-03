@@ -9,7 +9,7 @@
 
 class Wizard : public SpellCaster {
     public:
-        Wizard(const char* charName);
+        Wizard(const std::string& charName);
         ~Wizard();
 };
 

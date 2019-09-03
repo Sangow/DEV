@@ -37,6 +37,7 @@
 #include "../unit/Wizard.h"
 #include "../unit/Warlock.h"
 #include "../unit/Demon.h"
+#include "../unit/Healer.h"
 #include "../weapon/Weapon.h"
 #include "../weapon/Dagger.h"
 #include "../weapon/Sword.h"
@@ -97,6 +98,12 @@ int main() {
     std::cout << *wizard << std::endl;
     std::cout << "============================" << std::endl;
 
+    warlock->useAbility();
+    warlock->useAbility();
+    warlock->useAbility();
+    warlock->useAbility();
+    warlock->useAbility();
+    warlock->useAbility();
     warlock->useAbility();
 
     std::cout << "============================" << std::endl;

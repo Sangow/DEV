@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include "Weapon.h"
-#include "../state/VampireState.h"
 
 class Claws : public Weapon {
     protected:

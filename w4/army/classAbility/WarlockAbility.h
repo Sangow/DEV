@@ -15,11 +15,10 @@ class WarlockAbility : public ClassAbility {
         WarlockAbility(Unit* owner);
         ~WarlockAbility();
 
-        virtual void useAbility();
-        virtual void useAbility(Unit* enemy);
+        virtual void useAbility() override;
+        virtual void useAbility(Unit* enemy) override;
 
         void summonSlave();
-        // void freeSlave();
 };
 
 #endif // WARLOCK_ABILITY_H

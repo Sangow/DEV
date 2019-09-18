@@ -4,36 +4,37 @@ void Unit::changeCharClass(const std::string& newCharClass) {
     this->charClass = newCharClass;
 };
 
-bool Unit::unitIsMage() const {
-    return this->mState != NULL;
+void Unit::ensureIsAlive() {
+    if ( this->getHP() == 0 ) {
+        throw OutOfHPException();
+    }
 };
 
 Unit::Unit(const std::string& charName, const std::string& charClass) : charClass(charClass), charName(charName) {};
 
 Unit::~Unit() {
     delete this->state;
-    delete this->mState;
     delete this->ability;
     delete this->weapon;
 };
 
-float Unit::getHP() const {
+double Unit::getHP() const {
     return this->state->getHP();
 };
 
-float Unit::getHPLimit() const {
+double Unit::getHPLimit() const {
     return this->state->getHPLimit();
 };
 
-float Unit::getStrength() const {
+double Unit::getStrength() const {
     return this->state->getStrength();
 };
 
-float Unit::getAgility() const {
+double Unit::getAgility() const {
     return this->state->getAgility();
 };
 
-float Unit::getDMG() const {
+double Unit::getDMG() const {
     return this->weapon->getDMG();
 };
 
@@ -45,18 +46,12 @@ Weapon& Unit::getWeapon() const {
     return *(this->weapon);
 };
 
-float Unit::getMana() const {
+double Unit::getMana() const {
     return 0;
 };
 
-float Unit::getManaLimit() const {
+double Unit::getManaLimit() const {
     return 0;
-};
-
-MagicState& Unit::getMagicState() const {
-    if ( this->unitIsMage() ) {
-        return *(this->mState);
-    }
 };
 
 const std::string& Unit::getCharClass() const {
@@ -67,15 +62,23 @@ const std::string& Unit::getCharName() const {
     return this->charName;
 };
 
-void Unit::takePhysDamage(float physDmg) {
+void Unit::takePhysDamage(double physDmg) {
     this->state->takePhysDamage(physDmg);
+
+    if ( this->getHP() == 0 ) {
+        notifySoulHunters();
+    }
 };
 
-void Unit::takeMagicDamage(float magicDmg) {
+void Unit::takeMagicDamage(double magicDmg) {
     this->state->takeMagicDamage(magicDmg);
+
+    if ( this->getHP() == 0 ) {
+        notifySoulHunters();
+    }
 };
 
-void Unit::increaseHP(float extraHP) {
+void Unit::increaseHP(double extraHP) {
     this->state->increaseHP(extraHP);
 };
 
@@ -106,13 +109,23 @@ bool Unit::readyToBeInfected() {
 
 void Unit::attack(Unit* enemy) {
     try {
-        this->weapon->attack(enemy);
-    } catch (OutOfHPException) {
-        std::cout << "Unit \"" << enemy->getCharName() << "\" is DEAD!!!" << std::endl;
+        this->ensureIsAlive();
+    } catch (OutOfHPException e) {
+        std::cout << this->getCharName() << " cannot attack " << enemy->getCharName() << ": " << this->getCharName() << e.message << std::endl;
+        return;
     }
-};
+
+    std::cout << this->getCharName() << " attacks " << enemy->getCharName() << std::endl;
+    this->weapon->attack(enemy);
 
 void Unit::counterAttack(Unit* enemy) {
+    try {
+        this->ensureIsAlive();
+    } catch (OutOfHPException e) {
+        std::cout << this->getCharName() << " cannot counterAttack " << enemy->getCharName() << ": " << e.message << std::endl;
+    }
+
+    std::cout << this->getCharName() << " counterAttacks " << enemy->getCharName() << std::endl;
     this->weapon->counterAttack(enemy);
 };
 
@@ -133,19 +146,27 @@ void Unit::useAbility(Unit* enemy) {
 };
 
 void Unit::notifySoulHunters() {
-    std::set<SoulHunter*>::iterator it = this->getSoulHunters().begin();
-    
-    for ( ; it != soulHunters.end(); it++ ) {
-        ((Unit*)(*it))->increaseHP(getHPLimit() / 10);
+    for ( std::set<SoulHunter*>::iterator it = this->getSoulHunters().begin(); it != this->getSoulHunters().end(); it++ ) {
+        (dynamic_cast<Unit*>(*it))->increaseHP(this->getHPLimit() / 10);
         (*it)->removeSoul(this);
     }
 };
 
-std::ostream& operator<<(std::ostream& out, const Unit& unit) {
-    out << unit.getCharClass() << ": " << unit.getCharName();
-    out << unit.getState();
-    out << unit.getWeapon() << std::endl;
-    out << "[mana: " << unit.getMana() << "/" << unit.getManaLimit() << "]";
+void Unit::notifySouls() {
+    for ( std::set<Soul*>:: iterator it = this->getSouls().begin(); it != this->getSouls().end(); it++ ) {
+        std::cout << this->getCharName() << " notifies " << (dynamic_cast<Unit*>(*it))->getCharName() << " that he is DEAD!" << std::endl;
+        (*it)->removeSoulHunter(this);
+    }
+};
 
+std::ostream& operator<<(std::ostream& out, const Unit& unit) {
+    out << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" << std::endl;
+    out << unit.getCharClass() << ": " << unit.getCharName() << std::endl;
+    out << unit.getState();
+    out << " [";
+    out << "mana: " << unit.getMana() << "/" << unit.getManaLimit();
+    out << "]" << std::endl;
+    out << unit.getWeapon() << std::endl;
+    out << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
     return out;
 };

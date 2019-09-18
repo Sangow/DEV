@@ -6,16 +6,12 @@
 #include "Weapon.h"
 
 class Claws : public Weapon {
-    protected:
-        int infectionChance;
-
     public:
         Claws(Unit* owner);
         ~Claws();
 
-        virtual void attack(Unit* enemy);
-        virtual void counterAttack(Unit* enemy);
-
+        virtual void attack(Unit* enemy) override;
+        virtual void counterAttack(Unit* enemy) override;
 };
 
 #endif // CLAWS_H

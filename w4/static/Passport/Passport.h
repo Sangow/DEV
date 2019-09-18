@@ -26,7 +26,7 @@ class Passport {
         void validNextSN();
         static bool isUpperCaseSymbol(char symbol);
     public:
-        Passport(const std::string& name = "Kon", const std::string& surname = "Cheniy", const Date& date = Date());
+        Passport(const std::string& name = "Kon`", const std::string& surname = "Pedal`niy", const Date& date = Date());
         ~Passport();
         static void setSN(const std::string& serial, int number = 1);
         const std::string getSerial() const;

@@ -9,7 +9,7 @@ class BerserkerState : public HumanState {
         BerserkerState();
         ~BerserkerState();
 
-        virtual void takeMagicDamage(float magicDmg);
+        virtual void takeMagicDamage(double magicDmg);
 };
 
 #endif // BERSERKER_STATE_H

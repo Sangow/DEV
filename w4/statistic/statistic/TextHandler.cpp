@@ -95,8 +95,8 @@ bool TextHandler::isSpecial(char symbol) {
 bool TextHandler::isDelimiter(char symbol) {
     return symbol == ' ' || symbol == '.';
 }
-bool TextHandler::isSpecialWordInSymbol(char symbol) {
-    return symbol == '-';
+bool TextHandler::isSpecialSymbolInWord(char symbol) {
+    return symbol == '-' || symbol == '\'';
 }
 
 void TextHandler::parseText() {
@@ -126,7 +126,7 @@ void TextHandler::parseText() {
             insert(currSymbol, specialSymbolsStatistics);
             quantity += 1;
         }
-        if ( isLetter(prevSymbol) & isSpecialWordInSymbol(currSymbol) ) {
+        if ( isLetter(prevSymbol) & isSpecialSymbolInWord(currSymbol) ) {
             word->push_back(currSymbol);
         }
         if ( isDelimiter(currSymbol) ) {

@@ -3,24 +3,25 @@
 
 #include <iostream>
 #include "../unit/Unit.h"
+#include "../unit/SpellCaster.h"
 
 class Unit;
-class MagicState;
+// class MagicState;
 
 class Spell {
     protected:
         MagicState* mState;
         const std::string spellName;
-        float cost;
-        float points;
+        double cost;
+        double points;
 
     public:
-        Spell(MagicState* mState, const std::string& spellName, float cost, float points);
+        Spell(MagicState* mState, const std::string& spellName, double cost, double points);
         virtual ~Spell();
 
         const std::string& getSpellName() const;
-        float getCost() const;
-        float getPoints() const;
+        double getCost() const;
+        double getPoints() const;
 
         virtual void action(Unit* enemy) = 0;
 };

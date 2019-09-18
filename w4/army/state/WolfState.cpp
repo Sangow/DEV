@@ -8,6 +8,6 @@ WolfState::WolfState() : WerewolfState(200) {
 
 WolfState::~WolfState() {};
 
-void WolfState::takeMagicDamage(float magicDmg) {
+void WolfState::takeMagicDamage(double magicDmg) {
     this->takePhysDamage(magicDmg * 2);
 };

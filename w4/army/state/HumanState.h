@@ -6,7 +6,7 @@
 
 class HumanState : public State {
     public:
-        HumanState(float hp, float strength, float agility);
+        HumanState(double hp, double strength, double agility);
         virtual ~HumanState();
 };
 

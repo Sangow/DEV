@@ -1,6 +1,6 @@
 #include "UndeadState.h"
 
-UndeadState::UndeadState(float hp) : State(hp) {
+UndeadState::UndeadState(double hp) : State(hp) {
     this->isUndead = true;
 };
 

@@ -1,20 +1,13 @@
-all: runall
-
-runall: Passport.o Date.o a.exe run
-
-compile: Passport.o Date.o a.exe
+all: Passport.o Date.o link
 
 Passport.o:
-	g++ -c Passport.cpp
+	g++ Passport.cpp -c
 
 Date.o:
-	g++ -c Date.cpp
+	g++ Date.cpp -c
 
-a.exe:
-	g++ *.o main.cpp -o a.exe
-
-run:
-	a.exe
+link:
+	g++ *.o main.cpp
 
 clean:
-	rm -rf *.o a.exe
+	rm -rf *.o a.out

@@ -35,14 +35,14 @@ Date::Date(int day, int month, int year) {
 Date::~Date() {}
 
 const std::string Date::getDay() const {
-    char result[2];
+    char result[3];
 
     sprintf(result, "%02d", this->day);
     return result;
 }
 
 const std::string Date::getMonth() const {
-    char result[2];
+    char result[3];
 
     sprintf(result, "%02d", this->month);
     return result;

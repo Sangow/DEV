@@ -3,9 +3,10 @@
 
 #include <iostream>
 #include "../interface/Soul.h"
-#include "../exceptions/Exceptions.h"
+#include "../interface/SoulHunter.h"
+#include "../exceptions/Exceptions.cpp"
 #include "../state/State.h"
-#include "../state/MagicState.h"
+// #include "../state/MagicState.h"
 #include "../classAbility/ClassAbility.h"
 #include "../weapon/Weapon.h"
 
@@ -14,10 +15,10 @@ class MagicState;
 class Weapon;
 class ClassAbility;
 
-class Unit : public Soul {
+class Unit : public Soul, public SoulHunter {
     protected:
         State* state;
-        MagicState* mState;
+        // MagicState* mState;
         Weapon* weapon;
         ClassAbility* ability;
         std::string charName;
@@ -25,33 +26,33 @@ class Unit : public Soul {
 
         void changeCharClass(const std::string& newCharClass);
 
+        void ensureIsAlive();
+
     public:
         Unit(const std::string& charName, const std::string& charClass);
         virtual ~Unit();
 
-        bool unitIsMage() const;
+        // bool unitIsMage() const;
         
-        float getHP() const;
-        float getHPLimit() const;
-        float getStrength() const;
-        float getAgility() const;
+        double getHP() const;
+        double getHPLimit() const;
+        double getStrength() const;
+        double getAgility() const;
         State& getState() const;
         
-        float getDMG() const;
+        double getDMG() const;
         Weapon& getWeapon() const;
         
         const std::string& getCharClass() const;
         const std::string& getCharName() const;
 
-        void takePhysDamage(float physDmg);
-        void takeMagicDamage(float magicDmg);
-        void increaseHP(float extraHP);
+        virtual void takePhysDamage(double physDmg);
+        virtual void takeMagicDamage(double magicDmg);
+        virtual void increaseHP(double extraHP);
 
-        MagicState& getMagicState()const;
-        virtual float getMana() const;
-        virtual float getManaLimit() const;
-        // void spendMana(float cost);
-        // void increaseMana(float extraMana);
+        // MagicState& getMagicState()const;
+        virtual double getMana() const;
+        virtual double getManaLimit() const;
 
         void changeWeapon(Weapon* newWeapon);
         void changeAbility(ClassAbility* newAbility);
@@ -65,7 +66,8 @@ class Unit : public Soul {
         void useAbility();
         void useAbility(Unit* enemy);
 
-        virtual void notifySoulHunters();
+        virtual void notifySoulHunters() override;
+        virtual void notifySouls() override;
 };
 
 std::ostream& operator<<(std::ostream& out, const Unit& unit);

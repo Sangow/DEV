@@ -6,7 +6,7 @@
 
 class UndeadState : public State {
     public:
-        UndeadState(float hp);
+        UndeadState(double hp);
         virtual ~UndeadState();
 };
 

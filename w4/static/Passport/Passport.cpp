@@ -51,14 +51,14 @@ void Passport::setSN(const std::string& serial, int number) {
 }
 
 const std::string Passport::getSerial() const {
-    char result[2];
+    char result[3];
 
     sprintf(result,"%c%c", this->serial[0], this->serial[1]);
     return result;
 }
 
 const std::string Passport::getNumber() const {
-    char buffer[6];
+    char buffer[7];
 
     sprintf(buffer, "%06d", this->number);
     return buffer;

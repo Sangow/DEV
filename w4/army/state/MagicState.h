@@ -2,7 +2,7 @@
 #define MAGIC_STATE_H
 
 #include <iostream>
-#include "../exceptions/Exceptions.h"
+#include "../exceptions/Exceptions.cpp"
 #include "../spellbook/SpellBook.h"
 #include "../unit/Unit.h"
 
@@ -13,24 +13,24 @@ class MagicState {
     protected:
         SpellBook* spellBook;
 
-        float mana;
-        float manaLimit;
-        float intellect;
-        float faith;
+        double mana;
+        double manaLimit;
+        double intellect;
+        double faith;
 
     public:
-        MagicState(float mana, float intellect, float faith);
+        MagicState(double mana, double intellect, double faith);
         virtual ~MagicState();
 
-        float getMana() const;
-        float getManaLimit() const;
-        float getIntellect() const;
-        float getFaith() const;
+        double getMana() const;
+        double getManaLimit() const;
+        double getIntellect() const;
+        double getFaith() const;
 
         SpellBook& getSpellBook() const;
 
-        void spendMana(float cost);
-        void increaseMana(float extraMana);
+        void spendMana(double cost);
+        void increaseMana(double extraMana);
 };
 
 std::ostream& operator<<(std::ostream& out, const MagicState& magicState);

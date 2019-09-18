@@ -10,14 +10,14 @@
 class WolfAbility : public ClassAbility {
     protected:
         int infectionChance;
-        float byteDamage;
+        double byteDamage;
 
     public:
         WolfAbility(Unit* owner);
         virtual ~WolfAbility();
 
-        virtual void useAbility();
-        virtual void useAbility(Unit* enemy);
+        virtual void useAbility() override;
+        virtual void useAbility(Unit* enemy) override;
 
         void transform();
         void bite(Unit* enemy);

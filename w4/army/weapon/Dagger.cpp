@@ -7,6 +7,5 @@ Dagger::Dagger(Unit* owner) : Weapon("Dagger", owner) {
 Dagger::~Dagger() {};
 
 void Dagger::attack(Unit* enemy) {
-    std::cout << owner->getCharName() << " attacks " << enemy->getCharName() << std::endl;
     enemy->takePhysDamage(this->dmg);
 };

@@ -18,7 +18,7 @@ void WarlockAbility::useAbility(Unit* enemy) {
 
 void WarlockAbility::summonSlave() {
     try {
-        owner->getMagicState().spendMana(20);
+        dynamic_cast<SpellCaster*>(owner)->getMagicState().spendMana(20);
     } catch (OutOfManaException) {
         std::cout << owner->getCharName() << " cannot summon Demon. No mana!" << std::endl;
         return;
@@ -28,12 +28,5 @@ void WarlockAbility::summonSlave() {
         delete (tmpDmn);
     }
     this->slave = new Demon(this);
-    // this->slave = new Demon();
     std::cout << owner->getCharName() << " summoned Demon!" << std::endl;
 };
-
-// void WarlockAbility::freeSlave() {
-//     Demon* tmpDmn = this->slave;
-//     delete (tmpDmn);
-//     this->slave = NULL;
-// };

@@ -10,8 +10,8 @@ class HolyChimes : public Weapon {
         HolyChimes(Unit* owner);
         ~HolyChimes();
 
-        virtual void attack(Unit* enemy);
-        virtual void counterAttack(Unit* enemy);
+        virtual void attack(Unit* enemy) override;
+        virtual void counterAttack(Unit* enemy) override;
 };
 
 #endif // HOLY_CHIMES_H

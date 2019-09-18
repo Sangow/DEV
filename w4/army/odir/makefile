@@ -1,6 +1,7 @@
 obj: exceptions spells spellbooks states units weapons classAbilities interface
 
 exceptions:
+	g++ ../exceptions/Exceptions.cpp -c
 
 interface:
 	g++ ../interface/Soul.cpp -c
@@ -66,7 +67,6 @@ units:
 	g++ ../unit/Healer.cpp -c
 	g++ ../unit/Priest.cpp -c
 	g++ ../unit/Necromancer.cpp -c
-# 	g++ ../unit/*.cpp -c
 
 weapons:
 	g++ ../weapon/Weapon.cpp -c
@@ -82,5 +82,8 @@ weapons:
 	g++ ../weapon/Chaplet.cpp -c
 	g++ ../weapon/Sickle.cpp -c
 
+link:
+	g++ *.o test.cpp
+
 clean:
-	rm -rf *.o a.out a.exe
+	rm -rf *.o a.out

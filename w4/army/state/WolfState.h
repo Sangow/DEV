@@ -10,7 +10,7 @@ class WolfState : public WerewolfState {
         WolfState();
         virtual ~WolfState();
 
-        virtual void takeMagicDamage(float magicDmg);
+        virtual void takeMagicDamage(double magicDmg);
 };
 
 #endif // WEREWOLF_STATE_H

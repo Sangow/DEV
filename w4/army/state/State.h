@@ -2,38 +2,37 @@
 #define STATE_H
 
 #include <iostream>
-#include "../exceptions/Exceptions.h"
+#include "../exceptions/Exceptions.cpp"
 #include "../unit/Unit.h"
 
 class State {
     protected:
-        float hp;
-        float hpLimit;
-        float strength;
-        float agility;
+        double hp;
+        double hpLimit;
+        double strength;
+        double agility;
 
     public:
         bool isVampire;
         bool isUndead;
         bool isWerewolf;
-        // bool isWolf;
 
-        void ensureIsAlive();
+        // void ensureIsAlive();
 
-        State(float hp);
+        State(double hp);
         virtual ~State();
 
-        float getHP() const;
-        float getHPLimit() const;
-        float getStrength() const;
-        float getAgility() const;
+        double getHP() const;
+        double getHPLimit() const;
+        double getStrength() const;
+        double getAgility() const;
 
         bool readyToBeInfected();
 
-        virtual void takePhysDamage(float physDmg);
-        virtual void takeMagicDamage(float magicDmg);
+        virtual void takePhysDamage(double physDmg);
+        virtual void takeMagicDamage(double magicDmg);
 
-        virtual void increaseHP(float extraHP);
+        virtual void increaseHP(double extraHP);
 };
 
 std::ostream& operator<<(std::ostream& out, const State& state);

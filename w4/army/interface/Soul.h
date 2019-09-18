@@ -8,7 +8,7 @@
 class SoulHunter;
 
 class Soul {
-    protected:
+    private:
         std::set<SoulHunter*> soulHunters;
     public:
         Soul();

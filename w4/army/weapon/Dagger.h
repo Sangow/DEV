@@ -10,7 +10,7 @@ class Dagger : public Weapon {
         Dagger(Unit* owner);
         ~Dagger();
 
-        void attack(Unit* enemy);
+        virtual void attack(Unit* enemy) override;
 };
 
 #endif // DAGGER_H

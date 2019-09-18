@@ -12,11 +12,10 @@ class WerewolfAbility : public ClassAbility {
         WerewolfAbility(Unit* owner);
         virtual ~WerewolfAbility();
 
-        virtual void useAbility();
-        virtual void useAbility(Unit* enemy);
+        virtual void useAbility() override;
+        virtual void useAbility(Unit* enemy) override;
 
         void transform();
-        void bite();
 };
 
 #endif // WEREWOLF_ABILITY

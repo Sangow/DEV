@@ -2,12 +2,12 @@
 #define HEALER_H
 
 #include <iostream>
-#include "Unit.h"
+#include "SpellCaster.h"
 #include "../state/HealerState.h"
 #include "../state/HealerMState.h"
 #include "../weapon/Scepter.h"
 
-class Healer : public Unit {
+class Healer : public SpellCaster {
     public:
         Healer(const std::string& charName);
         ~Healer();

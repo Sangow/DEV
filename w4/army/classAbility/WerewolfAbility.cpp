@@ -13,8 +13,8 @@ void WerewolfAbility::useAbility(Unit* enemy) {
 };
 
 void WerewolfAbility::transform() {
-    float oldHP = owner->getHP();
-    float oldHPLimit = owner->getHPLimit();
+    double oldHP = owner->getHP();
+    double oldHPLimit = owner->getHPLimit();
 
     owner->changeState(new WolfState(), "Wolf");
     owner->takePhysDamage(owner->getHPLimit() - (oldHP * owner->getHPLimit()) / oldHPLimit);

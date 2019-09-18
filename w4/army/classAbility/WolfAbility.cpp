@@ -15,7 +15,7 @@ void WolfAbility::useAbility(Unit* enemy) {
 };
 
 void WolfAbility::transform() {
-    float oldHP = owner->getHP();
+    double oldHP = owner->getHP();
 
     owner->changeState(new WerewolfState(), "Werewolf");
     owner->takePhysDamage(owner->getHPLimit() - (oldHP / 2));
@@ -25,13 +25,18 @@ void WolfAbility::transform() {
 };
 
 void WolfAbility::bite(Unit* enemy) {
-    enemy->takePhysDamage(this->byteDamage);
+    try {
+        enemy->takePhysDamage(this->byteDamage);
         std::cout << enemy->getCharName() << " was bitten by " << owner->getCharName() << "." << std::endl;
-    
+    } catch (OutOfHPException e) {
+        std::cout << owner->getCharName() << " cannot bite " << enemy->getCharName() << ": " << e.message << std::endl;
+        return;
+    }
+
     if ( this->infectionChance % 2 == 0 && enemy->readyToBeInfected() ) {
 
-        float oldHP = enemy->getHP();
-        float oldHPLimit = enemy->getHPLimit();
+        double oldHP = enemy->getHP();
+        double oldHPLimit = enemy->getHPLimit();
 
         enemy->changeState(new WerewolfState(), "Werewolf");
         enemy->takePhysDamage(enemy->getHPLimit() - (oldHP * enemy->getHPLimit()) / oldHPLimit);

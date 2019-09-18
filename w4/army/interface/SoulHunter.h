@@ -8,7 +8,7 @@
 class Soul;
 
 class SoulHunter {
-    protected:
+    private:
         std::set<Soul*> souls;
     public:
         SoulHunter();
@@ -19,7 +19,7 @@ class SoulHunter {
 
         const std::set<Soul*>& getSouls();
 
-        virtual void notitySouls() = 0;
+        virtual void notifySouls() = 0;
 };
 
 #endif // SOULHUNTER_H

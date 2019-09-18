@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "../unit/Unit.h"
-#include "../exceptions/Exceptions.h"
+#include "../exceptions/Exceptions.cpp"
 
 class Unit;
 
@@ -11,14 +11,14 @@ class Weapon {
     protected:
         Unit* owner;
         const std::string weaponName;
-        float dmg;
+        double dmg;
 
     public:
         Weapon(const std::string& weaponName, Unit* owner);
         virtual ~Weapon();
 
         const std::string& getWeaponName() const;
-        float getDMG() const;
+        double getDMG() const;
 
         virtual void attack(Unit* enemy);
         virtual void counterAttack(Unit* enemy);

@@ -13,8 +13,8 @@ class VampireAbility : public ClassAbility {
         VampireAbility(Unit* owner);
         ~VampireAbility();
 
-        virtual void useAbility();
-        virtual void useAbility(Unit* enemy);
+        virtual void useAbility() override;
+        virtual void useAbility(Unit* enemy) override;
 
         void kiss(Unit* enemy);
 };

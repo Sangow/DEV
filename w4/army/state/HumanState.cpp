@@ -1,6 +1,6 @@
 #include "HumanState.h"
 
-HumanState::HumanState(float hp, float strength, float agility) : State(hp) {
+HumanState::HumanState(double hp, double strength, double agility) : State(hp) {
     isVampire = false;
     isUndead = false;
     isWerewolf = false;

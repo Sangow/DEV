@@ -9,18 +9,17 @@ const std::string& Weapon::getWeaponName() const {
     return this->weaponName;
 };
 
-float Weapon::getDMG() const {
+double Weapon::getDMG() const {
     return this->dmg;
 };
 
 void Weapon::attack(Unit* enemy) {
-    std::cout << owner->getCharName() << " attacks " << enemy->getCharName() << std::endl;
     enemy->takePhysDamage(this->dmg);
+    
     enemy->counterAttack(this->owner);
 };
 
 void Weapon::counterAttack(Unit* enemy) {
-    std::cout << owner->getCharName() << " counterAttacks " << enemy->getCharName() << std::endl;
     enemy->takePhysDamage(this->dmg / 2);
 };
 

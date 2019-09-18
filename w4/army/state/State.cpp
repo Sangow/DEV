@@ -1,28 +1,22 @@
 #include "State.h"
 
-void State::ensureIsAlive() {
-    if ( this->hp == 0 ) {
-        throw OutOfHPException();
-    }
-};
-
-State::State(float hp) : hp(hp), hpLimit(hp) {};
+State::State(double hp) : hp(hp), hpLimit(hp) {};
 
 State::~State() {};
 
-float State::getHP() const {
+double State::getHP() const {
     return this->hp;
 };
 
-float State::getHPLimit() const {
+double State::getHPLimit() const {
     return this->hpLimit;
 };
 
-float State::getStrength() const {
+double State::getStrength() const {
     return this->strength;
 };
 
-float State::getAgility() const {
+double State::getAgility() const {
     return this->agility;
 };
 
@@ -30,9 +24,7 @@ bool State::readyToBeInfected() {
     return !this->isVampire && !this->isWerewolf;
 };
 
-void State::takePhysDamage(float physDmg) {
-    this->ensureIsAlive();
-
+void State::takePhysDamage(double physDmg) {
     if ( this->hp < physDmg ) {
         this->hp = 0;
         return;
@@ -40,13 +32,11 @@ void State::takePhysDamage(float physDmg) {
     this->hp -= physDmg;
 };
 
-void State::takeMagicDamage(float magicDmg) {
+void State::takeMagicDamage(double magicDmg) {
     this->takePhysDamage(magicDmg);
 };
 
-void State::increaseHP(float hp) {
-    this->ensureIsAlive();
-
+void State::increaseHP(double hp) {
     int totalHP = this->hp + hp;
 
     if ( totalHP > this->hpLimit ) {
@@ -57,9 +47,9 @@ void State::increaseHP(float hp) {
 };
 
 std::ostream& operator<<(std::ostream& out, const State& state) {
-    out << " [";
+    out << "[";
     out << "hp: " << state.getHP() << "/" << state.getHPLimit();
-    out << "]" << std::endl;
+    out << "]";
 
     return out;
 };

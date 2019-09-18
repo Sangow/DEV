@@ -1,4 +1,4 @@
-all: clean TextHandler.o templates.o run.exe
+all: clean TextHandler.o templates.o link
 
 TextHandler.o:
 	g++ TextHandler.cpp -c
@@ -6,11 +6,8 @@ TextHandler.o:
 templates.o:
 	g++ templates.cpp -c
 
-run.exe:
+link:
 	g++ *.o main.cpp
 
-start:
-	run.exe
-
 clean:
-	rm -rf *.o run.exe a.out
+	rm -rf *.o a.out

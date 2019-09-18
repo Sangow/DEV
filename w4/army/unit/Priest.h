@@ -2,12 +2,12 @@
 #define PRIEST_H
 
 #include <iostream>
-#include "Unit.h"
+#include "SpellCaster.h"
 #include "../state/PriestState.h"
 #include "../state/PriestMState.h"
 #include "../weapon/HolyChimes.h"
 
-class Priest : public Unit {
+class Priest : public SpellCaster {
     public:
         Priest(const std::string& charName);
         ~Priest();

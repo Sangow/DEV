@@ -1,5 +1,3 @@
-DO:
-
 __hello
 __max2, __max3, __max4, __max5
 __abcz1, __abcz2, __abcz3, __abcz4
@@ -17,8 +15,6 @@ __arrayShiftLeft(), __arrayShiftRight()
 <<strRot13()(no sense[func str_rot13()])>>
 <<strUpperCase()(no sense[func strtoupper()])>>
 <<strLowerCase()(no sense[func strtolower()])>>
-
-3. Realise classes below:
 
 __Point, __Vector, __Complex
 __Car, __Gun

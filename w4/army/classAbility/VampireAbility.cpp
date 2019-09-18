@@ -15,8 +15,8 @@ void VampireAbility::useAbility(Unit* enemy) {
 void VampireAbility::kiss(Unit* enemy) {
         std::cout << enemy->getCharName() << " was kissed by " << owner->getCharName() << "." << std::endl;
     if ( this->infectionChance % 2 == 0 && enemy->readyToBeInfected() ) {
-        float oldHP = enemy->getHP();
-        float oldHPLimit = enemy->getHPLimit();
+        double oldHP = enemy->getHP();
+        double oldHPLimit = enemy->getHPLimit();
 
         enemy->changeState(new VampireState(), "Vampire");
         enemy->takePhysDamage(enemy->getHPLimit() - (oldHP * enemy->getHPLimit()) / oldHPLimit);

@@ -2,31 +2,32 @@
 #define SPELLCASTER_H
 
 #include <iostream>
+#include <cstring>
 #include "../unit/Unit.h"
 #include "../state/MagicState.h"
 
 class SpellCaster : public Unit {
+    protected:
+        MagicState* mState;
     public:
-    SpellCaster(const std::string& charName, const std::string& charClass);
-    virtual ~SpellCaster();
+        SpellCaster(const std::string& charName, const std::string& charClass);
+        virtual ~SpellCaster();
 
-    virtual float getMana() const;
-    virtual float getManaLimit() const;
-    float getIntellect() const;
-    float getFaith() const;
-    MagicState& getMagicState() const;
+        virtual double getMana() const override;
+        virtual double getManaLimit() const override;
+        double getIntellect() const;
+        double getFaith() const;
+        const std::string& getCurrentSpell() const;
+        MagicState& getMagicState() const;
 
-    // const std::map<std::string, Spell*>& getSpellBook() const;
+        virtual void changeState(State* newState, const std::string& newCharClass) override;
+        void cleanMState();
 
-    // void spendMana(float cost);
-    // void increaseMana(float extraMana);
+        void changeSpell(const std::string& spellName);
 
-    virtual void changeState(State* newState, const std::string& newCharClass);
-    void cleanMState();
+        virtual void cast(Unit* enemy);
 
-    void changeSpell(const std::string& spellName);
-
-    virtual void cast(Unit* enemy);
+        bool unitIsMage() const;
 };
 
 std::ostream& operator<<(std::ostream& out, const SpellCaster& spellcaster);

@@ -1,3 +1,4 @@
+#include "../exceptions/Exceptions.cpp"
 #include "../spellbook/SpellBook.h"
 #include "../spellbook/WizardSpellBook.h"
 #include "../spellbook/HealerSpellBook.h"
@@ -38,6 +39,7 @@
 #include "../unit/Warlock.h"
 #include "../unit/Demon.h"
 #include "../unit/Healer.h"
+#include "../unit/Necromancer.h"
 #include "../weapon/Weapon.h"
 #include "../weapon/Dagger.h"
 #include "../weapon/Sword.h"
@@ -50,66 +52,40 @@
 #include "../weapon/HolyChimes.h"
 #include "../weapon/Chaplet.h"
 #include "../weapon/Sickle.h"
+#include "../interface/Soul.h"
+#include "../interface/SoulHunter.h"
 
 int main() {
-    Warlock* warlock = new Warlock("Kurva");
-    Wizard* wizard = new Wizard("Perdun");
+    Necromancer* necro1 = new Necromancer("Necro1");
+    Necromancer *necro2 = new Necromancer("Necro2");
 
-    std::cout << *warlock << std::endl;
-    std::cout << *wizard << std::endl;
-    std::cout << "============================" << std::endl;
+    std::cout << *necro1 << std::endl;
+    std::cout << *necro2 << std::endl;
 
-    wizard->cast(warlock);
+    necro1->attack(necro2);
+    // necro1->useAbility();
 
-    std::cout << "============================" << std::endl;
-    std::cout << *warlock << std::endl;
-    std::cout << *wizard << std::endl;
-    std::cout << "============================" << std::endl;
+    std::cout << *necro1 << std::endl;
+    std::cout << *necro2 << std::endl;
 
-    wizard->changeSpell("Zalupa");
-    wizard->changeSpell("Heal");
+    necro1->attack(necro2);
+    necro1->attack(necro2);
+    necro1->attack(necro2);
+    necro1->attack(necro2);
+    necro1->attack(necro2);
+    necro1->attack(necro2);
+    necro1->attack(necro2);
+    // necro1->attack(necro2);
+    // necro1->attack(necro2);
+    
 
-    wizard->cast(warlock);
+    std::cout << *necro1 << std::endl;
+    std::cout << *necro2 << std::endl;
 
-    std::cout << "============================" << std::endl;
-    std::cout << *warlock << std::endl;
-    std::cout << *wizard << std::endl;
-    std::cout << "============================" << std::endl;
+    // std::cout << *war << std::endl;
+    // std::cout << *necro << std::endl;
 
-    warlock->useAbility();
-
-    std::cout << "============================" << std::endl;
-    std::cout << *warlock << std::endl;
-    std::cout << *wizard << std::endl;
-    std::cout << "============================" << std::endl;
-
-    warlock->useAbility(wizard);
-    warlock->useAbility(wizard);
-
-    std::cout << "============================" << std::endl;
-    std::cout << *warlock << std::endl;
-    std::cout << *wizard << std::endl;
-    std::cout << "============================" << std::endl;
-
-    wizard->attack(warlock);
-
-    std::cout << "============================" << std::endl;
-    std::cout << *warlock << std::endl;
-    std::cout << *wizard << std::endl;
-    std::cout << "============================" << std::endl;
-
-    warlock->useAbility();
-    warlock->useAbility();
-    warlock->useAbility();
-    warlock->useAbility();
-    warlock->useAbility();
-    warlock->useAbility();
-    warlock->useAbility();
-
-    std::cout << "============================" << std::endl;
-    std::cout << *warlock << std::endl;
-    std::cout << *wizard << std::endl;
-    std::cout << "============================" << std::endl;
+    // std::cout << necro1->getSoulHunters().size() << std::endl;
 
     return 0;
 }

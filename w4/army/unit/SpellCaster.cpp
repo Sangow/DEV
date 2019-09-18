@@ -1,57 +1,49 @@
 #include "SpellCaster.h"
 
+bool SpellCaster::unitIsMage() const {
+    return this->mState != NULL;
+};
+
 SpellCaster::SpellCaster(const std::string& charName, const std::string& charClass) 
     : Unit(charName, charClass) {};
 
 SpellCaster::~SpellCaster() {};
 
-float SpellCaster::getMana() const {
+double SpellCaster::getMana() const {
     if ( this->unitIsMage() ) {
         return this->mState->getMana();
     }
     Unit::getMana();
 };
 
-float SpellCaster::getManaLimit() const {
+double SpellCaster::getManaLimit() const {
     if ( this->unitIsMage() ) {
         return this->mState->getManaLimit();
     }
     Unit::getManaLimit();
 };
 
-float SpellCaster::getIntellect() const {
+double SpellCaster::getIntellect() const {
     if ( this->unitIsMage() ) {
         return this->mState->getIntellect();
     }
     std::cout << this->getCharName() << " no longer a mage." << std::endl;
 };
 
-float SpellCaster::getFaith() const {
+double SpellCaster::getFaith() const {
     if ( this->unitIsMage() ) {
         return this->mState->getFaith();
     }
     std::cout << this->getCharName() << " no longer a mage." << std::endl;
 };
 
+const std::string& SpellCaster::getCurrentSpell() const {
+    return this->mState->getSpellBook().getCurrentSpell().getSpellName();
+};
+
 MagicState& SpellCaster::getMagicState() const {
     return *(this->mState);
 };
-
-// void SpellCaster::spendMana(float cost) {
-//     if ( this->unitIsMage() ) {
-//         this->mState->spendMana(cost);
-//         return;
-//     }
-//     std::cout << this->getCharName() << " no longer a mage." << std::endl;
-// };
-
-// void SpellCaster::increaseMana(float extraMana) {
-//     if ( this->unitIsMage() ) {
-//         this->mState->increaseMana(extraMana);
-//         return;
-//     }
-//     std::cout << this->getCharName() << " no longer a mage." << std::endl;
-// };
 
 void SpellCaster::changeState(State* newState, const std::string& newCharClass) {
     if ( this->unitIsMage() ) {
@@ -79,18 +71,30 @@ void SpellCaster::changeSpell(const std::string& spellName) {
 
 void SpellCaster::cast(Unit* enemy) {
     if ( this->unitIsMage() ) {
-        std::cout << this->getCharName() << " casts " << enemy->getCharName() << std::endl;
-        this->mState->getSpellBook().action(enemy);
+        try {
+            this->mState->getSpellBook().action(enemy);
+            std::cout << this->getCharName() << " casts " << enemy->getCharName() << std::endl;
+        } catch (OutOfHPException exc) {
+            std::cout << this->getCharName() << " cannot cast " << enemy->getCharName() << ": " << exc.message << std::endl;
+        } catch (OutOfManaException exc) {
+            std::cout << this->getCharName() << " cannot cast: " << exc.message << std::endl;
+        }
     } else {
         std::cout << this->getCharName() << " no longer a mage." << std::endl;
     }
 };
 
 std::ostream& operator<<(std::ostream& out, const SpellCaster& spellcaster) {
-    out << spellcaster.getCharClass() << ": " << spellcaster.getCharName();
+    out << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" << std::endl;
+    out << spellcaster.getCharClass() << ": " << spellcaster.getCharName() << std::endl;
     out << spellcaster.getState();
+    out << " [";
+    out << "mana: " << spellcaster.getMana() << "/" << spellcaster.getManaLimit();
+    out << "]" << std::endl;
     out << spellcaster.getWeapon() << std::endl;
-    out << spellcaster.getMagicState();
+    out << "Spell: ";
+    out << (spellcaster.unitIsMage() ? spellcaster.getCurrentSpell() : "NOSPELL") << std::endl;
+    out << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
 
     return out;
 };

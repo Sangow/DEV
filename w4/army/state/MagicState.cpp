@@ -1,24 +1,24 @@
 #include "MagicState.h"
 
-MagicState::MagicState(float mana, float intellect, float faith) : mana(mana), manaLimit(mana), intellect(intellect), faith(faith) {};
+MagicState::MagicState(double mana, double intellect, double faith) : mana(mana), manaLimit(mana), intellect(intellect), faith(faith) {};
 
 MagicState::~MagicState() {
     delete this->spellBook;
 };
 
-float MagicState::getMana() const {
+double MagicState::getMana() const {
     return this->mana;
 };
 
-float MagicState::getManaLimit() const {
+double MagicState::getManaLimit() const {
     return this->manaLimit;
 };
 
-float MagicState::getIntellect() const {
+double MagicState::getIntellect() const {
     return this->intellect;
 };
 
-float MagicState::getFaith() const {
+double MagicState::getFaith() const {
     return this->faith;
 };
 
@@ -26,14 +26,14 @@ SpellBook& MagicState::getSpellBook() const {
     return *(this->spellBook);
 };
 
-void MagicState::spendMana(float cost) {
+void MagicState::spendMana(double cost) {
     if ( this->mana < cost ) {
         throw OutOfManaException();
     }
     this->mana -= cost;
 };
 
-void MagicState::increaseMana(float mana) {
+void MagicState::increaseMana(double mana) {
     int totalMana = this->mana + mana;
 
     if ( totalMana > this->manaLimit ) {
@@ -45,8 +45,8 @@ void MagicState::increaseMana(float mana) {
 
 std::ostream& operator<<(std::ostream& out, const MagicState& magicState) {
     out << "Spell: " << magicState.getSpellBook().getCurrentSpell().getSpellName();
-    out << " [mana: " << magicState.getMana() << "/" << magicState.getManaLimit();
-    out << "]";
+    // out << " [mana: " << magicState.getMana() << "/" << magicState.getManaLimit();
+    // out << "]";
 
     return out;
 };

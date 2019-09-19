@@ -19,6 +19,7 @@ class WarlockAbility : public ClassAbility {
         virtual void useAbility(Unit* enemy) override;
 
         void summonSlave();
+        void slaveAttack(Unit* enemy);
 };
 
 #endif // WARLOCK_ABILITY_H

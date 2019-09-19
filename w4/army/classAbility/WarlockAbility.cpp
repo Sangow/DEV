@@ -13,7 +13,11 @@ void WarlockAbility::useAbility() {
 }
 
 void WarlockAbility::useAbility(Unit* enemy) {
-    std::cout << owner->getCharName() << ", nothing to do with this enemy unit!" << std::endl;
+    if ( this->slave == NULL ) {
+        std::cout << owner->getCharName() << ", your slave does not exist!" << std::endl;
+        return;
+    }
+    this->slaveAttack(enemy);
 };
 
 void WarlockAbility::summonSlave() {
@@ -29,4 +33,8 @@ void WarlockAbility::summonSlave() {
     }
     this->slave = new Demon(this);
     std::cout << owner->getCharName() << " summoned Demon!" << std::endl;
+};
+
+void WarlockAbility::slaveAttack(Unit* enemy) {
+    this->slave->attack(enemy);
 };

@@ -18,21 +18,17 @@ class ClassAbility;
 class Unit : public Soul, public SoulHunter {
     protected:
         State* state;
-        // MagicState* mState;
         Weapon* weapon;
         ClassAbility* ability;
         std::string charName;
         std::string charClass;
 
         void changeCharClass(const std::string& newCharClass);
-
         void ensureIsAlive();
 
     public:
         Unit(const std::string& charName, const std::string& charClass);
         virtual ~Unit();
-
-        // bool unitIsMage() const;
         
         double getHP() const;
         double getHPLimit() const;
@@ -50,7 +46,6 @@ class Unit : public Soul, public SoulHunter {
         virtual void takeMagicDamage(double magicDmg);
         virtual void increaseHP(double extraHP);
 
-        // MagicState& getMagicState()const;
         virtual double getMana() const;
         virtual double getManaLimit() const;
 

@@ -6,8 +6,6 @@
 #include "../unit/Unit.h"
 #include "../spell/Spell.h"
 
-class Spell;
-class Unit;
 class MagicState;
 
 class SpellBook {

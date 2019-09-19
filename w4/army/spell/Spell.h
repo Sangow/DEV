@@ -5,9 +5,6 @@
 #include "../unit/Unit.h"
 #include "../unit/SpellCaster.h"
 
-class Unit;
-// class MagicState;
-
 class Spell {
     protected:
         MagicState* mState;

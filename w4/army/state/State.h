@@ -17,8 +17,6 @@ class State {
         bool isUndead;
         bool isWerewolf;
 
-        // void ensureIsAlive();
-
         State(double hp);
         virtual ~State();
 

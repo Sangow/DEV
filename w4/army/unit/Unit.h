@@ -6,12 +6,9 @@
 #include "../interface/SoulHunter.h"
 #include "../exceptions/Exceptions.cpp"
 #include "../state/State.h"
-// #include "../state/MagicState.h"
 #include "../classAbility/ClassAbility.h"
 #include "../weapon/Weapon.h"
 
-class State;
-class MagicState;
 class Weapon;
 class ClassAbility;
 

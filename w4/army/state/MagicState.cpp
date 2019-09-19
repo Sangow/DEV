@@ -45,8 +45,6 @@ void MagicState::increaseMana(double mana) {
 
 std::ostream& operator<<(std::ostream& out, const MagicState& magicState) {
     out << "Spell: " << magicState.getSpellBook().getCurrentSpell().getSpellName();
-    // out << " [mana: " << magicState.getMana() << "/" << magicState.getManaLimit();
-    // out << "]";
 
     return out;
 };

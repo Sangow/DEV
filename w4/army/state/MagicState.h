@@ -7,7 +7,6 @@
 #include "../unit/Unit.h"
 
 class SpellBook;
-class Unit;
 
 class MagicState {
     protected:

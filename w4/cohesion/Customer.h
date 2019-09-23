@@ -12,6 +12,7 @@ class Customer {
         static int customerUID;
         static std::set<Customer*> allCustomers;
 
+        int customerID;
         std::set<Order*> allOrders;
     public:
         Customer();

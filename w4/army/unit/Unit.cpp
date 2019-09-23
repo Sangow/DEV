@@ -117,6 +117,7 @@ void Unit::attack(Unit* enemy) {
 
     std::cout << this->getCharName() << " attacks " << enemy->getCharName() << std::endl;
     this->weapon->attack(enemy);
+};
 
 void Unit::counterAttack(Unit* enemy) {
     try {

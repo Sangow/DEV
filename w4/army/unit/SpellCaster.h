@@ -2,15 +2,16 @@
 #define SPELLCASTER_H
 
 #include <iostream>
-#include <cstring>
+#include <cstring>the line of the error, but line 73 looks wrong, if
 #include "../unit/Unit.h"
 #include "../state/MagicState.h"
+
+class MagicState;
 
 class SpellCaster : public Unit {
     protected:
         MagicState* mState;
 
-        bool unitIsMage() const;
     public:
         SpellCaster(const std::string& charName, const std::string& charClass);
         virtual ~SpellCaster();
@@ -28,6 +29,8 @@ class SpellCaster : public Unit {
         void changeSpell(const std::string& spellName);
 
         virtual void cast(Unit* enemy);
+        
+        bool unitIsMage() const;
 };
 
 std::ostream& operator<<(std::ostream& out, const SpellCaster& spellcaster);

@@ -15,6 +15,7 @@ class Order {
         static int orderUID;
         static std::set<Order*> allOrders;
 
+        int orderID;
         std::set<Item*> allItems;
         Customer* customer;
     public:
@@ -27,8 +28,6 @@ class Order {
 
         void addItem(Item* newItem);
         void removeItem(Item* item);
-
-
 };
 
 #endif // ORDER_H

@@ -7,12 +7,14 @@
 #include "Order.h"
 
 class Order;
+class Category;
 
 class Item {
     private:
         static int itemUID;
         static std::set<Item*> allItems;
 
+        int itemID;
         std::set<Order*> allOrders;
         Category* category;
         std::string itemName;
@@ -20,7 +22,8 @@ class Item {
         Item(const std::string& itemName, Category* category);
         ~Item();
 
-        static const std::set<Item*>& getAllItems() const;
+        static const std::set<Item*>& getAllItems();
+        const std::string& getItemName() const;
         const std::set<Order*>& getAllOrders() const;
 };
 

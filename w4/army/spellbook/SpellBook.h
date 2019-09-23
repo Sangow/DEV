@@ -7,6 +7,7 @@
 #include "../spell/Spell.h"
 
 class MagicState;
+class Spell;
 
 class SpellBook {
     protected:

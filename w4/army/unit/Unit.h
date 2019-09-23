@@ -11,6 +11,7 @@
 
 class Weapon;
 class ClassAbility;
+class State;
 
 class Unit : public Soul, public SoulHunter {
     protected:

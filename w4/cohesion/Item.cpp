@@ -11,7 +11,11 @@ Item::Item(const std::string& itemName, Category* category) : itemName(itemName)
 }
 
 Item::~Item() {
+    for ( std::set<Order*>::iterator it = this->allOrders.begin(); it != this->allOrders.end(); it++ ) {
+        (*it)->removeItem(this);
+    }
     this->category->removeItem(this);
+    allItems.erase(this);
 };
 
 const std::set<Item*>& Item::getAllItems() {
@@ -22,6 +26,6 @@ const std::string& Item::getItemName() const {
     return this->itemName;
 };
 
-const std::set<Order*>& getAllOrders() const {
+const std::set<Order*>& Item::getAllOrders() const {
     return this->allOrders;
 };

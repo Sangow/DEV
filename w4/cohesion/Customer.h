@@ -14,12 +14,16 @@ class Customer {
 
         int customerID;
         std::set<Order*> allOrders;
+        std::string customerName;
     public:
-        Customer();
+        Customer(const std::string& customerName);
         ~Customer();
 
-        static const std::set<Customer*>& getAllCustomers() const;
+        static const std::set<Customer*>& getAllCustomers();
         const std::set<Order*> getAllOrders() const;
+
+        void addOrder(Order* newOrder);
+        void removeOrder(Order* order);
 };
 
 #endif // CUSTOMER_H

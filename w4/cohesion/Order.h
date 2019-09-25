@@ -22,7 +22,7 @@ class Order {
         Order(Customer* customer, Item* item);
         ~Order();
 
-        static const std::set<Order*>& getAllOrders() const;
+        static const std::set<Order*>& getAllOrders();
         const Customer& getCustomer() const;
         const std::set<Item*>& getAllItems() const;
 

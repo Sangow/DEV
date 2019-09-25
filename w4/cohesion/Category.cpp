@@ -9,7 +9,13 @@ Category::Category(const std::string& categoryName) : categoryName(categoryName)
     allCategories.insert(this);
 };
 
-Category::~Category() {};
+Category::~Category() {
+    for ( std::set<Item*>::iterator it = this->allItems.begin(); it != this->allItems.end(); it++ ) {
+        delete *it;
+    }
+    this->allItems.clear();
+    allCategories.erase(this);
+};
 
 void Category::addItem(Item* newItem) {
     this->allItems.insert(newItem);

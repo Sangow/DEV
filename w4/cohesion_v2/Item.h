@@ -8,6 +8,7 @@ class Item : public Basic {
     private:
         static int itemUID;
         static std::set<Item*> allItems;
+        Category* category;
     public:
         Item(const std::string& itemName, Category* category);
         ~Item();

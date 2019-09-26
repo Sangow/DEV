@@ -1,6 +1,6 @@
 #include "WizardMState.h"
 
-WizardMState::WizardMState() : MagicState(150, 1.5, 1) {
+WizardMState::WizardMState() : MagicState(150, 1, 0.5) {
     this->spellBook= new WizardSpellBook(this);
 };
 

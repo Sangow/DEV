@@ -4,8 +4,7 @@ bool SpellCaster::unitIsMage() const {
     return this->mState != NULL;
 };
 
-SpellCaster::SpellCaster(const std::string& charName, const std::string& charClass) 
-    : Unit(charName, charClass) {};
+SpellCaster::SpellCaster(const std::string& charName, const std::string& charClass) : Unit(charName, charClass) {};
 
 SpellCaster::~SpellCaster() {};
 

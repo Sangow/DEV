@@ -1,7 +1,7 @@
 #include "HolyChimes.h"
 
 HolyChimes::HolyChimes(Unit* owner) : Weapon("HolyChimes", owner) {
-    this->dmg = this->owner->getStrength() * this->owner->getAgility() * 20;
+    this->dmg = this->owner->getStrength() * this->owner->getAgility() * 10;
 };
 
 HolyChimes::~HolyChimes() {};

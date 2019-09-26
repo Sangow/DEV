@@ -5,6 +5,12 @@ WerewolfAbility::WerewolfAbility(Unit* owner) : ClassAbility(owner) {};
 WerewolfAbility::~WerewolfAbility() {};
 
 void WerewolfAbility::useAbility() {
+    try {
+        owner->ensureIsAlive();
+    } catch (OutOfHPException e) {
+        std::cout << owner->getCharName() << " cannot tranform: " << owner->getCharName() << e.message << std::endl;
+        return;
+    }
     this->transform();
 };
 

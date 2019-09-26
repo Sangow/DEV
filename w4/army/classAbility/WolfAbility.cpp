@@ -7,10 +7,22 @@ WolfAbility::WolfAbility(Unit* owner) : ClassAbility(owner), infectionChance(1) 
 WolfAbility::~WolfAbility() {};
 
 void WolfAbility::useAbility() {
+    try {
+        owner->ensureIsAlive();
+    } catch (OutOfHPException e) {
+        std::cout << owner->getCharName() << " cannot transform: " << owner->getCharName() << e.message << std::endl;
+        return;
+    }
     this->transform();
-}
+};
 
 void WolfAbility::useAbility(Unit* enemy) {
+    try {
+        owner->ensureIsAlive();
+    } catch (OutOfHPException e) {
+        std::cout << owner->getCharName() << " cannot bite: " << enemy->getCharName() << e.message << std::endl;
+        return;
+    }
     this->bite(enemy);
 };
 
@@ -26,15 +38,14 @@ void WolfAbility::transform() {
 
 void WolfAbility::bite(Unit* enemy) {
     try {
-        enemy->takePhysDamage(this->byteDamage);
-        std::cout << enemy->getCharName() << " was bitten by " << owner->getCharName() << "." << std::endl;
+        enemy->ensureIsAlive();
     } catch (OutOfHPException e) {
-        std::cout << owner->getCharName() << " cannot bite " << enemy->getCharName() << ": " << e.message << std::endl;
+        std::cout << owner->getCharName() << " cannot bite " << enemy->getCharName() << ": " << enemy->getCharName() << e.message << std::endl;
         return;
     }
+    std::cout << enemy->getCharName() << " was bitten by " << owner->getCharName() << std::endl;
 
     if ( this->infectionChance % 2 == 0 && enemy->readyToBeInfected() ) {
-
         double oldHP = enemy->getHP();
         double oldHPLimit = enemy->getHPLimit();
 

@@ -10,7 +10,6 @@ Soul::~Soul() {
 
 void Soul::addSoulHunter(SoulHunter* soulHunter) {
     soulHunters.insert(soulHunter);
-    // std::cout << "Soul added SoulHunter!!!" << std::endl;
 };
 
 void Soul::removeSoulHunter(SoulHunter* soulHunter) {

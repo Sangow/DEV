@@ -1,6 +1,6 @@
 #include "PriestMState.h"
 
-PriestMState::PriestMState() : MagicState(150, 1, 1.5) {
+PriestMState::PriestMState() : MagicState(150, 0.5, 1) {
     this->spellBook = new PriestSpellBook(this);
 };
 

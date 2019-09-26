@@ -115,6 +115,13 @@ void Unit::attack(Unit* enemy) {
         return;
     }
 
+    try {
+        enemy->ensureIsAlive();
+    } catch (OutOfHPException e) {
+        std::cout << enemy->getCharName() << " cannot be attacked by " << this->getCharName() << ": " << enemy->getCharName() << e.message << std::endl;
+        return;
+    }
+
     std::cout << this->getCharName() << " attacks " << enemy->getCharName() << std::endl;
     this->weapon->attack(enemy);
 };
@@ -123,7 +130,15 @@ void Unit::counterAttack(Unit* enemy) {
     try {
         this->ensureIsAlive();
     } catch (OutOfHPException e) {
-        std::cout << this->getCharName() << " cannot counterAttack " << enemy->getCharName() << ": " << e.message << std::endl;
+        std::cout << this->getCharName() << " cannot counterAttack " << enemy->getCharName() << ": " << this->getCharName() << e.message << std::endl;
+        return;
+    }
+
+    try {
+        enemy->ensureIsAlive();
+    } catch (OutOfHPException e) {
+        std::cout << enemy->getCharName() << " cannot be counterAttacked by " << this->getCharName() << ": " << enemy->getCharName() << e.message << std::endl;
+        return;
     }
 
     std::cout << this->getCharName() << " counterAttacks " << enemy->getCharName() << std::endl;

@@ -1,3 +1,5 @@
+all: clean obj link
+
 obj: exceptions spells spellbooks states units weapons classAbilities interface
 
 exceptions:

@@ -15,7 +15,6 @@ double Weapon::getDMG() const {
 
 void Weapon::attack(Unit* enemy) {
     enemy->takePhysDamage(this->dmg);
-    
     enemy->counterAttack(this->owner);
 };
 

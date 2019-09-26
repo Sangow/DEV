@@ -28,44 +28,71 @@ void Necromancer::takeMagicDamage(double magicDmg) {
 
 void Necromancer::attack(Unit* enemy) {
     try {
-        std::cout << this->getCharName() << " attacks " << enemy->getCharName() << std::endl;
-        this->weapon->attack(enemy);
-
-        if ( this->unitIsMage() && enemy->getHP() > 0 ) {
-            this->addSoul(enemy);
-        }
+        this->ensureIsAlive();
     } catch (OutOfHPException e) {
-        std::cout << this->getCharName() << " cannot attack " << enemy->getCharName() << ": " << e.message << std::endl;
+        std::cout << this->getCharName() << " cannot attack " << enemy->getCharName() << ": " << this->getCharName() << e.message << std::endl;
+        return;
     }
+
+    if ( this->unitIsMage() && enemy->getHP() > 0 ) {
+        this->addSoul(enemy);
+    }
+
+    try {
+        enemy->ensureIsAlive();
+    } catch (OutOfHPException e) {
+        std::cout << enemy->getCharName() << " cannot be attacked by " << this->getCharName() << ": " << enemy->getCharName() << e.message << std::endl;
+        return;
+    }
+
+    std::cout << this->getCharName() << " attacks " << enemy->getCharName() << std::endl;
+    this->weapon->attack(enemy);
 };
 
 void Necromancer::counterAttack(Unit* enemy) {
     try {
-        std::cout << this->getCharName() << " counterAttacks " << enemy->getCharName() << std::endl;
-        this->weapon->counterAttack(enemy);
-
-        if ( this->unitIsMage() && enemy->getHP() > 0 ) {
-            this->addSoul(enemy);
-        }
+        this->ensureIsAlive();
     } catch (OutOfHPException e) {
-        std::cout << this->getCharName() << " cannot counterAttack " << enemy->getCharName() << ": " << e.message << std::endl;
+        std::cout << this->getCharName() << " cannot counterAttack " << enemy->getCharName() << ": " << this->getCharName() << e.message << std::endl;
+        return;
     }
+
+    if ( this->unitIsMage() && enemy->getHP() > 0 ) {
+        this->addSoul(enemy);
+    }
+
+    try {
+        enemy->ensureIsAlive();
+    } catch (OutOfHPException e) {
+        std::cout << enemy->getCharName() << " cannot be counterAttacked by " << this->getCharName() << ": " << enemy->getCharName() << e.message << std::endl;
+        return;
+    }
+
+    std::cout << this->getCharName() << " counterAttacks " << enemy->getCharName() << std::endl;
+    this->weapon->counterAttack(enemy);
 };
 
 void Necromancer::cast(Unit* enemy) {
     if ( this->unitIsMage() ) {
         try {
-            this->mState->getSpellBook().action(enemy);
-            std::cout << this->getCharName() << " casts " << enemy->getCharName() << std::endl;
-
-            if ( enemy->getHP() != 0 ) {
-                this->addSoul(enemy);
-            }
+            this->ensureIsAlive();
         } catch (OutOfHPException e) {
-            std::cout << this->getCharName() << " cannot cast " << enemy->getCharName() << ": " << e.message << std::endl;
+            std::cout << this->getCharName() << " cannot cast on " << enemy->getCharName() << ": " << this->getCharName() << e.message << std::endl;
+            return;
         } catch (OutOfManaException e) {
             std::cout << this->getCharName() << " cannot cast: " << e.message << std::endl;
+            return;
         }
+
+        try {
+            enemy->ensureIsAlive();
+        } catch (OutOfHPException e) {
+            std::cout << enemy->getCharName() << " cannot be casted by " << this->getCharName() << ": " << enemy->getCharName() << e.message << std::endl;
+            return;
+        }
+
+        this->mState->getSpellBook().action(enemy);
+        std::cout << this->getCharName() << " casts " << enemy->getCharName() << std::endl;
     } else {
         std::cout << this->getCharName() << " no longer a mage." << std::endl;
     }

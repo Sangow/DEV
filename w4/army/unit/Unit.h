@@ -22,8 +22,6 @@ class Unit : public Soul, public SoulHunter {
         std::string charClass;
 
         void changeCharClass(const std::string& newCharClass);
-        void ensureIsAlive();
-
     public:
         Unit(const std::string& charName, const std::string& charClass);
         virtual ~Unit();
@@ -61,6 +59,8 @@ class Unit : public Soul, public SoulHunter {
 
         virtual void notifySoulHunters() override;
         virtual void notifySouls() override;
+        
+        void ensureIsAlive();
 };
 
 std::ostream& operator<<(std::ostream& out, const Unit& unit);

@@ -2,7 +2,6 @@
 #define SPELLCASTER_H
 
 #include <iostream>
-#include <cstring>the line of the error, but line 73 looks wrong, if
 #include "../unit/Unit.h"
 #include "../state/MagicState.h"
 

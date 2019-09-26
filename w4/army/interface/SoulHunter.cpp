@@ -10,7 +10,6 @@ SoulHunter::~SoulHunter() {
 
 void SoulHunter::addSoul(Soul* soul) {
     this->souls.insert(soul);
-    // std::cout << "SoulHunter added Soul!!!" << std::endl;
     soul->addSoulHunter(this);
 };
 

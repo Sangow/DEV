@@ -14,6 +14,9 @@ class Item : public Basic {
         ~Item();
 
         static const std::set<Item*>& getAllItems();
+
+        virtual void addConnection(Basic* newConnection) override;
+        virtual void removeConnection(Basic* connection) override;
 };
 
 #endif // ITEM_H

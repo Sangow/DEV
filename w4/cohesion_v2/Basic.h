@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <set>
+#include "Exceptions.cpp"
 
 class Basic {
     protected:
@@ -15,10 +16,10 @@ class Basic {
 
         int getID() const;
         const std::string& getName() const;
-        const std::set<Basic*> getConnectionList() const;
+        const std::set<Basic*>& getConnectionList() const;
 
         virtual void addConnection(Basic* newConnection);
-        void removeConnection(Basic* connection);
+        virtual void removeConnection(Basic* connection);
 
         void printConnectionList();
 };

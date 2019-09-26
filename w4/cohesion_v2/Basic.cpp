@@ -12,7 +12,7 @@ const std::string& Basic::getName() const {
     return this->name;
 };
 
-const std::set<Basic*> Basic::getConnectionList() const {
+const std::set<Basic*>& Basic::getConnectionList() const {
     return this->connectionList;
 };
 
@@ -25,8 +25,8 @@ void Basic::removeConnection(Basic* connection) {
 };
 
 void Basic::printConnectionList() {
-    for ( std::set<Basic*>::iterator bit = this->connectionList.begin(); bit != this->connectionList.end(); bit++ ) {
-        std::cout << "---" << (*bit) << std::endl;
+    for ( std::set<Basic*>::const_iterator bit = this->connectionList.begin(); bit != this->connectionList.end(); bit++ ) {
+        std::cout << "---" << **bit << std::endl;
     }
 };
 

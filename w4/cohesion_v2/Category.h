@@ -1,7 +1,6 @@
 #ifndef CATEGORY_H
 #define CATEGORY_H
 
-// #include <iostream>
 #include "Basic.h"
 
 class Category : public Basic {
@@ -13,6 +12,11 @@ class Category : public Basic {
         ~Category();
 
         static const std::set<Category*>& getAllCategories();
+
+        // const std::set<Item*>& getAllItems() const;
+
+        // void addItem(Item* newItem);
+        // void removeItem(Item* item);
 };
 
 #endif // CATEGORY_H

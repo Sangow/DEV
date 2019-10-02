@@ -69,10 +69,4 @@ public class Passport {
                             + "S/N:\t\t\t" + this.serial + " " + String.format("%06d", this.number) + "\n"
                             + "Date of birth:\t" + this.date);
     }
-
-    public static void main(String[] args) throws InvalidDate, PassportException {
-        Passport p = new Passport("Grisha", "Misha", new Date(1, 4, 980));
-
-        System.out.println(p);
-    }
 }

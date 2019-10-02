@@ -5,7 +5,6 @@ Order::Order(Item* item, Customer* customer) : Basic("Order"), customer(customer
     this->id = orderUID;
     this->customer->addConnection(this);
     this->addConnection(item);
-    // item->addConnection(this);
     allOrders.insert(this);
 };
 

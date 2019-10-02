@@ -4,6 +4,8 @@
 #include "Basic.h"
 #include "Category.h"
 
+class Category;
+
 class Item : public Basic {
     private:
         static int itemUID;
@@ -17,6 +19,8 @@ class Item : public Basic {
 
         virtual void addConnection(Basic* newConnection) override;
         virtual void removeConnection(Basic* connection) override;
+
+        void changeCategory(Category* newCategory = NULL);
 };
 
 #endif // ITEM_H

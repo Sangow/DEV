@@ -68,5 +68,14 @@ int main() {
         (*it)->printConnectionList();
     }
 
+    std::cout << *cars << std::endl;
+
+
+    std::cout << "=========" << std::endl;
+
+    for ( std::set<Category*>::const_iterator it = Category::getAllCategories().begin(); it != Category::getAllCategories().end(); it++ ) {
+        std::cout << *it << std::endl;
+    }
+
     return 0;
 }

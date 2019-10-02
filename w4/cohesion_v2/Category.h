@@ -2,6 +2,9 @@
 #define CATEGORY_H
 
 #include "Basic.h"
+#include "Item.h"
+
+class Item;
 
 class Category : public Basic {
     private:
@@ -12,11 +15,6 @@ class Category : public Basic {
         ~Category();
 
         static const std::set<Category*>& getAllCategories();
-
-        // const std::set<Item*>& getAllItems() const;
-
-        // void addItem(Item* newItem);
-        // void removeItem(Item* item);
 };
 
 #endif // CATEGORY_H

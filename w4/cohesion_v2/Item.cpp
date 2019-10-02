@@ -36,5 +36,9 @@ void Item::removeConnection(Basic* connection) {
     }
 };
 
+void Item::changeCategory(Category* newCategory) {
+    this->category = newCategory;
+};
+
 int Item::itemUID = 0;
 std::set<Item*> Item::allItems;

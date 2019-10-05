@@ -28,6 +28,10 @@ public class Network {
     }
 
     public Network(IPv4Address address, int maskLength) {
+        if ( maskLength < 0 || maskLength > 32 ) {
+            throw new IllegalArgumentException("Mask is out of range");
+        }
+
         this.ipAddress = address;
         this.maskLength = maskLength;
         this.lMask = mask32 & mask32 << 32 - this.maskLength;

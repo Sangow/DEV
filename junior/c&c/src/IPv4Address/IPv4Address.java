@@ -35,7 +35,7 @@ public class IPv4Address {
     }
 
     public IPv4Address(long address) throws IllegalArgumentException {
-        if ( address < 1 || address > 4294967295L ) {
+        if ( address < 0 || address > 4294967295L ) { // 0.0.0.0 - 255.255.255.255
             throw new IllegalArgumentException("Address is too short / too long!");
         }
 
@@ -54,6 +54,7 @@ public class IPv4Address {
     public boolean lessThan(IPv4Address address) {
         return this.lIPAddress < address.lIPAddress;
     }
+
     public boolean greaterThan(IPv4Address address) {
         return !this.lessThan(address);
     }
@@ -68,20 +69,5 @@ public class IPv4Address {
 
     public long toLong() {
         return this.lIPAddress;
-    }
-
-    public static void main(String[] args) {
-        IPv4Address ip = new IPv4Address(2131504406);
-
-        System.out.println(ip.equals(new IPv4Address("127.12.45.22")));
-        System.out.println(ip.equals(new IPv4Address(2131504406L)));           // true
-        System.out.println(ip.equals(new IPv4Address(0xF834AD02L)));           // false
-        System.out.println(ip.equals(new IPv4Address("189.11.23.211")));
-
-        System.out.println(ip.greaterThan(new IPv4Address("131.16.34.66")));   // false
-        System.out.println(ip.lessThan(new IPv4Address("131.16.34.66")));      // true
-
-//        System.out.println(ip.toString());
-//        System.out.println(ip.toLong());
     }
 }

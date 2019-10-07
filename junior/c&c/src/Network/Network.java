@@ -1,7 +1,6 @@
 package Network;
 
 import IPv4Address.IPv4Address;
-import com.sun.security.jgss.GSSUtil;
 
 public class Network {
     private static long mask32 = 4294967295L;
@@ -10,7 +9,7 @@ public class Network {
     private long lMask;
     private String sMask;
 
-    private IPv4Address ipAddress;
+//    private IPv4Address ipAddress;
     private IPv4Address networkAddress;
     private IPv4Address firstNetworkAddress;
     private IPv4Address lastNetworkAddress;
@@ -32,14 +31,22 @@ public class Network {
             throw new IllegalArgumentException("Mask is out of range");
         }
 
-        this.ipAddress = address;
         this.maskLength = maskLength;
         this.lMask = mask32 & mask32 << 32 - this.maskLength;
         this.sMask = this.longToStringAddress(this.lMask);
-        this.networkAddress = new IPv4Address(this.ipAddress.toLong() & (mask32 << (32 - this.maskLength)));
-        this.broadcastNetworkAddress = new IPv4Address(this.networkAddress.toLong() | ~this.lMask & mask32);
-        this.lastNetworkAddress = new IPv4Address(this.broadcastNetworkAddress.toLong() - 1);
-        this.firstNetworkAddress = new IPv4Address(this.networkAddress.toLong() + 1);
+        this.networkAddress = new IPv4Address(address.toLong() & (mask32 << (32 - this.maskLength)));
+
+        if (  this.maskLength == 31 ) {
+            this.broadcastNetworkAddress = new IPv4Address(this.networkAddress.toLong() + 1);
+            this.firstNetworkAddress = this.lastNetworkAddress = null;
+        } else if ( this.maskLength == 32 ) {
+            this.broadcastNetworkAddress = null;
+            this.firstNetworkAddress = this.lastNetworkAddress = new IPv4Address(this.networkAddress.toLong());
+        } else {
+            this.broadcastNetworkAddress = new IPv4Address(this.networkAddress.toLong() | ~this.lMask & mask32);
+            this.lastNetworkAddress = new IPv4Address(this.broadcastNetworkAddress.toLong() - 1);
+            this.firstNetworkAddress = new IPv4Address(this.networkAddress.toLong() + 1);
+        }
     }
 
     public boolean contains(IPv4Address address) {
@@ -47,7 +54,7 @@ public class Network {
     }
 
     public IPv4Address getAddress() {
-        return this.ipAddress;
+        return this.networkAddress;
     }
 
     public IPv4Address getBroadcastAddress() {
@@ -75,6 +82,10 @@ public class Network {
     }
 
     public Network[] getSubnets() {
+        if ( this.maskLength > 30 ) {
+            return null;
+        }
+
         Network[] subnets = new Network[2];
 
         subnets[0] = new Network(new IPv4Address(this.networkAddress.toLong()),this.maskLength + 1);
@@ -84,23 +95,36 @@ public class Network {
     }
 
     public long getTotalHosts() {
-        return this.lastNetworkAddress.toLong() - this.networkAddress.toLong();
+        if ( this.maskLength == 31 ) {
+            return 0;
+        } else if ( this.maskLength == 32 ) {
+            return 1;
+        } else {
+            return this.lastNetworkAddress.toLong() - this.networkAddress.toLong();
+        }
     }
 
     public boolean isPublic() {
-        if ( new Network(new IPv4Address("10.0.0.0"), 8).contains(this.ipAddress)
-            || new Network(new IPv4Address("172.16.0.0"), 12).contains(this.ipAddress)
-            || new Network(new IPv4Address("192.168.0.0"), 12).contains(this.ipAddress)
-            || new Network(new IPv4Address("127.0.0.0"), 12).contains(this.ipAddress)
-            || this.ipAddress.equals(new IPv4Address("255.255.255.255"))) {
-                return false;
-        } else {
-            return true;
-        }
+        return !new Network(new IPv4Address("10.0.0.0"), 8).contains(this.networkAddress)
+                && !new Network(new IPv4Address("172.16.0.0"), 12).contains(this.networkAddress)
+                && !new Network(new IPv4Address("192.168.0.0"), 12).contains(this.networkAddress)
+                && !new Network(new IPv4Address("127.0.0.0"), 12).contains(this.networkAddress)
+                && !this.networkAddress.equals(new IPv4Address("255.255.255.255"));
     }
 
     @Override
     public String toString() {
-        return this.ipAddress.toString() + "/" + this.maskLength;
+        return this.networkAddress.toString() + "/" + this.maskLength;
+    }
+
+    public static void main(String[] args) {
+        Network net = new Network(new IPv4Address("8.8.8.8"), 31);
+        System.out.println(net.getTotalHosts());
+        net.getFirstUsableAddress().toString();
+//        System.out.println(net.getFirstUsableAddress().toString());
+//        System.out.println(net.getLastUsableAddress().toString());
+        System.out.println(net.getBroadcastAddress().toString());
+
+        System.out.println(net.isPublic());
     }
 }

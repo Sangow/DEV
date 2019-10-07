@@ -41,4 +41,10 @@ public class Route {
                     + ", interface: " + this.interfaceName + ", metric: " + this.metric;
         }
     }
+
+    public static void main(String[] args) {
+        Route r = new Route(new Network(new IPv4Address("255.255.255.100"), 0), new IPv4Address("10.10.10.10"), "zhopa", 10);
+
+        System.out.println(r);
+    }
 }

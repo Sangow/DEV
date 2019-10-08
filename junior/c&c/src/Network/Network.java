@@ -9,7 +9,6 @@ public class Network {
     private long lMask;
     private String sMask;
 
-//    private IPv4Address ipAddress;
     private IPv4Address networkAddress;
     private IPv4Address firstNetworkAddress;
     private IPv4Address lastNetworkAddress;
@@ -118,13 +117,15 @@ public class Network {
     }
 
     public static void main(String[] args) {
-        Network net = new Network(new IPv4Address("8.8.8.8"), 31);
-        System.out.println(net.getTotalHosts());
-        net.getFirstUsableAddress().toString();
+        Network net = new Network(new IPv4Address("0.0.0.0"), 0);
+//        System.out.println(net.getTotalHosts());
+//        net.getFirstUsableAddress().toString();
 //        System.out.println(net.getFirstUsableAddress().toString());
 //        System.out.println(net.getLastUsableAddress().toString());
-        System.out.println(net.getBroadcastAddress().toString());
+//        System.out.println(net.getBroadcastAddress().toString());
 
-        System.out.println(net.isPublic());
+        System.out.println(net.getAddress().toLong());
+        System.out.println(net.getMask());
+//        System.out.println(net.isPublic());
     }
 }

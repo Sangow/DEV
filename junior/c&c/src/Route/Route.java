@@ -33,13 +33,16 @@ public class Route {
     }
 
     public String toString() {
-        if ( this.gateway == null ) {
-            return "net: " + this.network.toString() + ", interface: " + this.interfaceName
-                    + ", metric: " + this.metric;
-        } else {
-            return "net: " + this.network.toString() + ", gateway: " + this.gateway.toString()
-                    + ", interface: " + this.interfaceName + ", metric: " + this.metric;
+        if ( this.network != null ) {
+            if (this.gateway == null) {
+                return "net: " + this.network.toString() + ", interface: " + this.interfaceName
+                        + ", metric: " + this.metric;
+            } else {
+                return "net: " + this.network.toString() + ", gateway: " + this.gateway.toString()
+                        + ", interface: " + this.interfaceName + ", metric: " + this.metric;
+            }
         }
+        return "";
     }
 
     public static void main(String[] args) {

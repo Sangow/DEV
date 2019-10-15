@@ -34,7 +34,7 @@ public class Route {
 
     public String toString() {
         if ( this.network != null ) {
-            if (this.gateway == null) {
+            if ( this.gateway == null ) {
                 return "net: " + this.network.toString() + ", interface: " + this.interfaceName
                         + ", metric: " + this.metric;
             } else {

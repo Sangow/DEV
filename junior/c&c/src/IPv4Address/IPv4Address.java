@@ -70,4 +70,38 @@ public class IPv4Address {
     public long toLong() {
         return this.lIPAddress;
     }
+
+//    public void smth() throws IOException {
+////        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream("output.txt"));
+////                DataInputStream dis = new DataInputStream(new FileInputStream("output.txt"))) {
+////
+////            dos.writeUTF("Zhopa");
+////            dos.writeInt(10);
+////            dos.writeBoolean(true);
+////            dos.writeDouble(1.56);
+////
+////            System.out.printf("Name: %s, Age: %d, Man: %b, Height: %f", dis.readUTF(), dis.readInt(), dis.readBoolean(),
+////                                                                        dis.readDouble());
+////
+////        } catch (FileNotFoundException e) {
+////            e.printStackTrace();
+////        }
+//        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//                BufferedWriter bw = new BufferedWriter(new FileWriter("output.txt"))) {
+//
+//
+//            String txt;
+//
+//            while ( !(txt = br.readLine()).equals("ESC") ) {
+//                bw.write(txt + "\n");
+//                bw.flush();
+//            }
+//        }
+//
+//    }
+
+        public static void main(String[] args) {
+        IPv4Address ip = new IPv4Address("192.168.1.1");
+//        ip.smth();
+    }
 }

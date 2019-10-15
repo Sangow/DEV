@@ -117,15 +117,16 @@ public class Network {
     }
 
     public static void main(String[] args) {
-        Network net = new Network(new IPv4Address("0.0.0.0"), 0);
+        Network net = new Network(new IPv4Address("10.123.0.0"), 20);
 //        System.out.println(net.getTotalHosts());
 //        net.getFirstUsableAddress().toString();
 //        System.out.println(net.getFirstUsableAddress().toString());
 //        System.out.println(net.getLastUsableAddress().toString());
 //        System.out.println(net.getBroadcastAddress().toString());
 
-        System.out.println(net.getAddress().toLong());
-        System.out.println(net.getMask());
+//        System.out.println(net.getAddress().toLong());
+//        System.out.println(net.getMask());
 //        System.out.println(net.isPublic());
+        System.out.println(net.contains(new IPv4Address("10.123.14.1")));
     }
 }

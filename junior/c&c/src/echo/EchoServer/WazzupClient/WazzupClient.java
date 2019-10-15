@@ -1,4 +1,4 @@
-package WazzupClient;
+package echo.EchoServer.WazzupClient;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

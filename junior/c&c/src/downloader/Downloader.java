@@ -5,24 +5,31 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.Scanner;
 
 
 public class Downloader {
-    Downloader(String FILE_URL) {
-        URL url = null;
+    Downloader() {
+        URL url;
         ReadableByteChannel rbc = null;
         FileOutputStream fos = null;
+        String fileName;
 
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter URL address: ");
         try {
-            url = new URL(FILE_URL);
+            url = new URL(sc.nextLine());
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return;
         }
 
+        fileName = url.getFile().substring(url.getFile().lastIndexOf('/') + 1);
+
         try {
             rbc = Channels.newChannel(url.openStream());
-            fos = new FileOutputStream(url.getFile().substring(url.getFile().lastIndexOf('/') + 1));
+            fos = new FileOutputStream(fileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -30,15 +37,13 @@ public class Downloader {
         }
 
         try {
+            System.out.println("Downloading: \"" + fileName + "\" file.");
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
             fos.close();
             rbc.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        Downloader down = new Downloader("https://storyfox.ru/wp-content/uploads/2019/07/1_2_1559816747220.jpg");
+        System.out.println("File: \"" + fileName + "\" successfully stored.");
     }
 }

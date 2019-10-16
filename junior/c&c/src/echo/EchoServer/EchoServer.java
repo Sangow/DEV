@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class EchoServer implements Runnable {
     static LinkedList<ClientServerHandler> clientList = new LinkedList<>();
-    private ServerSocket ss;
+    private ServerSocket ss = null;
 
     private static final int DEFAULT_PORT = 8080;
     private int serverPort;
@@ -49,35 +49,30 @@ public class EchoServer implements Runnable {
             try {
                 cs = this.ss.accept();
             } catch (IOException e) {
+                if ( ss.isClosed() ) {
+                    return;
+                }
                 e.printStackTrace();
             }
 
-            System.out.println("Client " + cs.toString() + " connected.");
-            csh = new ClientServerHandler(cs);
-            clientList.add(csh);
-            csh.start();
+            System.out.println("---Client " + cs.toString().toUpperCase() + " connected.");
+            clientList.add(new ClientServerHandler(cs));
         }
-
-//            System.out.println("Client connected: " + cs.toString());
-//
-//            try ( BufferedReader in = new BufferedReader(new InputStreamReader(cs.getInputStream()));
-//                   BufferedWriter out = new BufferedWriter(new OutputStreamWriter(cs.getOutputStream()));) {
-//                String clientInput;
-//
-//                while ( (clientInput = in.readLine()) != null && !clientInput.contains("disconnect") ) {
-//                    System.out.println("Client said: " + clientInput);
-//                    out.write("Echo: " + clientInput + "\n");
-//                    out.flush();
-//                }
-//                System.out.println("Client gone...");
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 
-    public void stop() {
-        this.isRunning = false;
+    public void stop(Thread echoServer) throws IOException {
+        if ( !clientList.isEmpty() ) {
+            System.out.println("Disconnecting all clients.");
+        }
+        if ( isRunning ) {
+            for ( ClientServerHandler csh : clientList ) {
+                csh.closeClient();
+            }
+            ss.close();
+            echoServer.interrupt();
+            isRunning = false;
+
+            System.out.println("ServerSocket closed.");
+        }
     }
 }

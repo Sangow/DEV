@@ -12,14 +12,6 @@ public class WazzupClient {
     private BufferedWriter out;
 
     public WazzupClient() {
-        try {
-            try {
-                this.clientSocket = new Socket("localhost", 8080);
-            } finally {
-                clientSocket.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 }

@@ -1,12 +1,22 @@
 package echo.EchoServer;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class EchoMain {
     public static void main(String[] args) throws IOException {
-        EchoServer es = new EchoServer();
-        Thread server = new Thread(es);
+        EchoServer echoServer = new EchoServer();
+        Thread serverThread = new Thread(echoServer);
 
-        server.start();
+        serverThread.start();
+
+        BufferedReader adminInput = new BufferedReader(new InputStreamReader(System.in));
+        String adminCommand;
+
+        while ( (adminCommand = adminInput.readLine()) != null && !adminCommand.contains("stop") ) {
+            System.out.println("Admin said: " + adminCommand);
+        }
+        echoServer.stop(serverThread);
     }
 }

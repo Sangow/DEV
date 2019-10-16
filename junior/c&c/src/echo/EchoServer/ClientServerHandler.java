@@ -38,7 +38,6 @@ public class ClientServerHandler extends Thread {
         }
 
         closeClient();
-        EchoServer.clientList.remove(this);
     }
 
     public void closeClient() {
@@ -49,5 +48,6 @@ public class ClientServerHandler extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        EchoServer.clientList.remove(this);
     }
 }

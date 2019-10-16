@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class EchoServer implements Runnable {
     static LinkedList<ClientServerHandler> clientList = new LinkedList<>();
-    private ServerSocket ss = null;
+    private ServerSocket ss;
 
     private static final int DEFAULT_PORT = 8080;
     private int serverPort;
@@ -29,6 +29,7 @@ public class EchoServer implements Runnable {
         return this.serverPort;
     }
 
+    @Override
     public void run() {
         ClientServerHandler csh;
         Socket cs = null;

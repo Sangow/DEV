@@ -5,21 +5,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.util.Scanner;
 
-
-public class Downloader {
-    Downloader() {
+public class downloader {
+    downloader(String inputPath) {
         URL url;
         ReadableByteChannel rbc = null;
         FileOutputStream fos = null;
         String fileName;
 
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter URL address: ");
         try {
-            url = new URL(sc.nextLine());
+            url = new URL(inputPath);
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return;
@@ -45,5 +40,13 @@ public class Downloader {
             e.printStackTrace();
         }
         System.out.println("File: \"" + fileName + "\" successfully stored.");
+    }
+
+    public static void main(String[] args) {
+        if ( args.length == 0 ) {
+            System.out.println("Usage: javac downloader.java && java downloader [url]");
+            return;
+        }
+        new downloader(args[0]);
     }
 }

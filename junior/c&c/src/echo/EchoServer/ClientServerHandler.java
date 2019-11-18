@@ -19,7 +19,7 @@ public class ClientServerHandler extends Thread {
         String clientInput;
 
         try (BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()))) {
+             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()))) {
 
             out.write("HI! Its Sangows' EchoServer! If you wanna exit - type \"disconnect\".\n");
             out.flush();

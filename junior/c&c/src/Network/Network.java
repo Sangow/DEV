@@ -1,6 +1,7 @@
 package Network;
 
 import IPv4Address.IPv4Address;
+import IPv4Address.IPAddressException;
 
 public class Network {
     private static long mask32 = 4294967295L;
@@ -15,7 +16,7 @@ public class Network {
     private IPv4Address broadcastNetworkAddress;
 
     private String longToStringAddress(long address) {
-        String octets[] = new String[4];
+        String[] octets = new String[4];
 
         for (int i = 3; i >= 0; i-- ) {
             octets[i] = String.valueOf(address & 255);
@@ -25,7 +26,7 @@ public class Network {
         return String.join(".", octets);
     }
 
-    public Network(IPv4Address address, int maskLength) {
+    public Network(IPv4Address address, int maskLength) throws IPAddressException {
         if ( maskLength < 0 || maskLength > 32 ) {
             throw new IllegalArgumentException("Mask is out of range");
         }
@@ -48,9 +49,9 @@ public class Network {
         }
     }
 
-    public boolean contains(IPv4Address address) {
-        return address.greaterThan(this.networkAddress) && address.lessThan(this.broadcastNetworkAddress);
-    }
+//    public boolean contains(IPv4Address address) {
+//        return address.greaterThan(this.networkAddress) && address.lessThan(this.broadcastNetworkAddress);
+//    }
 
     public IPv4Address getAddress() {
         return this.networkAddress;
@@ -80,7 +81,7 @@ public class Network {
         return this.maskLength;
     }
 
-    public Network[] getSubnets() {
+    public Network[] getSubnets() throws IPAddressException {
         if ( this.maskLength > 30 ) {
             return null;
         }
@@ -103,30 +104,29 @@ public class Network {
         }
     }
 
-    public boolean isPublic() {
-        return !new Network(new IPv4Address("10.0.0.0"), 8).contains(this.networkAddress)
-                && !new Network(new IPv4Address("172.16.0.0"), 12).contains(this.networkAddress)
-                && !new Network(new IPv4Address("192.168.0.0"), 12).contains(this.networkAddress)
-                && !new Network(new IPv4Address("127.0.0.0"), 12).contains(this.networkAddress)
-                && !this.networkAddress.equals(new IPv4Address("255.255.255.255"));
-    }
+//    public boolean isPublic() {
+//        return !new Network(new IPv4Address("10.0.0.0"), 8).contains(this.networkAddress)
+//                && !new Network(new IPv4Address("172.16.0.0"), 12).contains(this.networkAddress)
+//                && !new Network(new IPv4Address("192.168.0.0"), 12).contains(this.networkAddress)
+//                && !new Network(new IPv4Address("127.0.0.0"), 12).contains(this.networkAddress)
+//                && !this.networkAddress.equals(new IPv4Address("255.255.255.255"));
+//    }
 
     @Override
     public String toString() {
         return this.networkAddress.toString() + "/" + this.maskLength;
     }
 
-    public static void main(String[] args) {
-        Network net = new Network(new IPv4Address("10.123.0.0"), 20);
+//    public static void main(String[] args) {
+//        Network net = new Network(new IPv4Address("192.168.0.1"), 32);
 //        System.out.println(net.getTotalHosts());
-//        net.getFirstUsableAddress().toString();
 //        System.out.println(net.getFirstUsableAddress().toString());
 //        System.out.println(net.getLastUsableAddress().toString());
 //        System.out.println(net.getBroadcastAddress().toString());
-
-//        System.out.println(net.getAddress().toLong());
-//        System.out.println(net.getMask());
-//        System.out.println(net.isPublic());
-        System.out.println(net.contains(new IPv4Address("10.123.14.1")));
-    }
+////
+////        System.out.println(net.getAddress().toLong());
+////        System.out.println(net.getMask());
+////        System.out.println(net.isPublic());
+////        System.out.println(net.contains(new IPv4Address("10.123.14.1")));
+//    }
 }

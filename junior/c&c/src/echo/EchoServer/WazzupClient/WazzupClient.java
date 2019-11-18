@@ -30,9 +30,9 @@ public class WazzupClient {
         System.out.println("Client connected to server: " + serverSocket.toString().toUpperCase());
 
         try (BufferedReader in = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
-                BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
-                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(serverSocket.getOutputStream()));
-                BufferedWriter userOutput = new BufferedWriter(new OutputStreamWriter(System.out))) {
+             BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(serverSocket.getOutputStream()));
+             BufferedWriter userOutput = new BufferedWriter(new OutputStreamWriter(System.out))) {
 
             System.out.println(in.readLine());
 

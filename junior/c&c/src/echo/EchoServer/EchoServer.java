@@ -62,13 +62,12 @@ public class EchoServer implements Runnable {
     }
 
     public void stop(Thread echoServer) throws IOException {
-        if ( !clientList.isEmpty() ) {
-            System.out.println("Disconnecting all clients.");
-        }
         if ( isRunning ) {
-            for ( ClientServerHandler csh : clientList ) {
-                csh.closeClient();
+
+            while ( !clientList.isEmpty() ) {
+                clientList.getFirst().closeClient();
             }
+
             ss.close();
             echoServer.interrupt();
             isRunning = false;

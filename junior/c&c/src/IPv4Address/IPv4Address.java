@@ -4,7 +4,7 @@ public class IPv4Address {
     private static final long maxIP = 4294967295L;
     private long ipAddress;
 
-    private int[] validStringIP(String address) throws IPAddressException {
+    private void setStringIP(String address) throws IPAddressException {
         if ( address == null || address.isEmpty() ) {
             throw new IPAddressException("Address is empty!"); // ?
         }
@@ -12,15 +12,13 @@ public class IPv4Address {
         String[] temp = address.split("\\."); // ?
 
         if ( temp.length != 4 ) {
-            throw new IPAddressException("Not enough octets!"); // ?
+            throw new IPAddressException("Incorrect number of octets!"); // ?
         }
 
-        int[] result = new int[4]; // ?
-        int counter = 0; // ?
-        int octet; // ?
+        int octet;
 
         for ( String str : temp ) {
-            String s = str.trim(); // ?
+            String s = str.trim();
 
             if ( s.isEmpty() || !s.matches("\\d+") ) {
                 throw new IPAddressException("Octet is null OR have smth besides digits");
@@ -28,20 +26,15 @@ public class IPv4Address {
             octet = Integer.parseInt(s);
 
             if ( octet < 0 || octet > 255 ) {
-                throw new IPAddressException("Invalid value in octet!"); // ?
+                throw new IPAddressException("Invalid value in octet!");
             }
-            result[counter] = octet;
-            counter += 1;
-        }
-        return result;
-    }
 
-    public IPv4Address(String address) throws IllegalArgumentException, IPAddressException {
-        int[] octets = this.validStringIP(address);
-
-        for ( int octet : octets ) {
             this.ipAddress = octet + (this.ipAddress << 8);
         }
+    }
+
+    public IPv4Address(String address) throws IPAddressException {
+        this.setStringIP(address);
     }
 
     public IPv4Address(long address) throws IPAddressException {
@@ -66,7 +59,7 @@ public class IPv4Address {
 
     public String toString() {
         long ip = this.ipAddress;
-        String octets[] = new String[4];
+        String[] octets = new String[4];
 
         for ( int i = 3; i >= 0; i-- ) {
             octets[i] = String.valueOf(ip & 255);
@@ -81,9 +74,11 @@ public class IPv4Address {
     }
 
     public static void main(String[] args) throws IPAddressException {
-        IPv4Address ip = new IPv4Address(4294967295L);
+        IPv4Address ip = new IPv4Address(0);
         System.out.println(ip.toString());
-        IPv4Address ipp = new IPv4Address("  255.   255      .255.255");
+
+        IPv4Address ipp = new IPv4Address("192.168.0.255");
+
         System.out.println(ipp.toString());
         System.out.println(ipp.toLong());
     }

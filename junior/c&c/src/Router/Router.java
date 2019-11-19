@@ -5,13 +5,12 @@ import Network.Network;
 import Route.Route;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Router {
     private ArrayList<Route> routes;
     private Route defaultRoute;
 
-    public Router(Iterable<Route> routes) {
+    public Router(Iterable<Route> routes) { // Should be TreeSet with Comparator(f: address.toLong(), s: metric)
         this.routes = (ArrayList<Route>) routes;
 
         for ( Route r : this.routes ) {

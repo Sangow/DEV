@@ -3,54 +3,52 @@ package Network;
 import IPv4Address.IPv4Address;
 import IPv4Address.IPAddressException;
 
+import java.util.HashSet;
+
 public class Network {
     private static long mask32 = 4294967295L;
 
+    private static HashSet<Network> privateNets;
+
     private int maskLength;
     private long mask;
-
     private IPv4Address networkAddress;
-//    private IPv4Address firstNetworkAddress; // ? should be counted when is needed
-//    private IPv4Address lastNetworkAddress; // ? should be counted when is needed
-//    private IPv4Address broadcastNetworkAddress; // ? should be counted when is needed
 
-    public Network(IPv4Address address, int maskLength) throws IPAddressException { // ?
+    private void validMask(int maskLength) throws IPAddressException {
         if ( maskLength < 0 || maskLength > 32 ) {
-            throw new IllegalArgumentException("Mask is out of range");
+            throw new IPAddressException("Mask is out of range");
         }
 
         this.maskLength = maskLength;
-        this.mask = mask32 & mask32 << 32 - this.maskLength;
-        this.networkAddress = new IPv4Address(address.toLong() & (mask32 << (32 - this.maskLength)));
-
-//        if (  this.maskLength == 31 ) {
-//            this.broadcastNetworkAddress = new IPv4Address(this.networkAddress.toLong() + 1L);
-//            this.firstNetworkAddress = this.lastNetworkAddress = null;
-//        } else if ( this.maskLength == 32 ) {
-//            this.broadcastNetworkAddress = null;
-//            this.firstNetworkAddress = this.lastNetworkAddress = new IPv4Address(this.networkAddress.toLong());
-//        } else {
-//            this.broadcastNetworkAddress = new IPv4Address(this.networkAddress.toLong() | ~this.mask & mask32);
-//            this.lastNetworkAddress = new IPv4Address(this.broadcastNetworkAddress.toLong() - 1L);
-//            this.firstNetworkAddress = new IPv4Address(this.networkAddress.toLong() + 1L);
-//        }
+        this.mask = Network.mask32 & Network.mask32 << 32 - this.maskLength;
     }
 
-//    private Network(Network net) {
-//        this.
-//    }
+    private static void initPrivateNets() throws IPAddressException {
+        Network.privateNets = new HashSet<Network>(4);
 
-//    public boolean contains(IPv4Address address) {
-//        return address.greaterThan(this.networkAddress) && address.lessThan(this.broadcastNetworkAddress);
-//    }
+        Network.privateNets.add(new Network(new IPv4Address("10.0.0.0"), 8));
+        Network.privateNets.add(new Network(new IPv4Address("172.16.0.0"), 12));
+        Network.privateNets.add(new Network(new IPv4Address("192.168.0.0"), 12));
+        Network.privateNets.add(new Network(new IPv4Address("127.0.0.0"), 12));
+    }
+
+    public Network(IPv4Address address, int maskLength) throws IPAddressException {
+        this(address.toLong(), maskLength);
+    }
+
+    private Network(long ip, int maskLength) throws IPAddressException {
+        this.validMask(maskLength);
+
+        this.networkAddress = new IPv4Address(ip & (Network.mask32 << (32 - this.maskLength)));
+    }
+
+    public boolean contains(IPv4Address address) throws IPAddressException {
+        return address.greaterThan(this.networkAddress) && address.lessThan(this.getBroadcastAddress());
+    }
 
     public IPv4Address getAddress() {
         return this.networkAddress;
     }
-
-//    public IPv4Address getBroadcastAddress() {
-//        return this.broadcastNetworkAddress;
-//    }
 
     public IPv4Address getBroadcastAddress() throws IPAddressException {
         if ( this.maskLength == 31 ) {
@@ -58,12 +56,9 @@ public class Network {
         } else if ( this.maskLength == 32 ) {
             return null;
         }
-        return new IPv4Address(this.networkAddress.toLong() | ~this.mask & mask32);
+        return new IPv4Address(this.networkAddress.toLong() | ~this.mask & Network.mask32);
     }
 
-//    public IPv4Address getFirstUsableAddress() {
-//        return this.firstNetworkAddress;
-//    }
     public IPv4Address getFirstUsableAddress() throws IPAddressException {
         if ( this.maskLength == 31 ) {
             return null;
@@ -72,10 +67,6 @@ public class Network {
         }
         return new IPv4Address(this.networkAddress.toLong() + 1L);
     }
-
-//    public IPv4Address getLastUsableAddress() {
-//        return this.lastNetworkAddress;
-//    }
 
     public IPv4Address getLastUsableAddress() throws IPAddressException {
         if ( this.maskLength == 31 ) {
@@ -105,10 +96,8 @@ public class Network {
 
         Network[] subnets = new Network[2];
 
-        //subnets[0] = new Network(new IPv4Address(this.networkAddress.toLong()),this.maskLength + 1); // ? Maybe copy this.network with maskLength + 1
-        //subnets[1] = new Network(new IPv4Address(subnets[0].broadcastNetworkAddress.toLong() + 1), this.maskLength + 1); // ?
-//        subnets[0] = this;
-//        subnets[0].
+        subnets[0] = new Network(this.networkAddress.toLong(), this.maskLength + 1);
+        subnets[1] = new Network(subnets[0].getBroadcastAddress().toLong() + 1L, this.maskLength + 1);
 
         return subnets;
     }
@@ -123,13 +112,18 @@ public class Network {
         }
     }
 
-//    public boolean isPublic() { // ?
-//        return !new Network(new IPv4Address("10.0.0.0"), 8).contains(this.networkAddress)
-//                && !new Network(new IPv4Address("172.16.0.0"), 12).contains(this.networkAddress)
-//                && !new Network(new IPv4Address("192.168.0.0"), 12).contains(this.networkAddress)
-//                && !new Network(new IPv4Address("127.0.0.0"), 12).contains(this.networkAddress)
-//                && !this.networkAddress.equals(new IPv4Address("255.255.255.255"));
-//    }
+    public boolean isPublic() throws IPAddressException {
+        if (Network.privateNets == null) {
+            Network.initPrivateNets();
+        }
+
+        for ( Network net : Network.privateNets ) {
+            if ( net.contains(this.networkAddress) ) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
     public String toString() {
@@ -137,15 +131,16 @@ public class Network {
     }
 
     public static void main(String[] args) throws IPAddressException {
-        Network net = new Network(new IPv4Address("192.168.0.1"), 30);
+        Network net = new Network(new IPv4Address(3232235520L), 30);
         System.out.println(net.getTotalHosts());
         System.out.println(net.getFirstUsableAddress().toString());
         System.out.println(net.getLastUsableAddress().toString());
         System.out.println(net.getBroadcastAddress().toString());
-//
-//        System.out.println(net.getAddress().toLong());
-//        System.out.println(net.getMask());
-//        System.out.println(net.isPublic());
-//        System.out.println(net.contains(new IPv4Address("10.123.14.1")));
+
+        System.out.println(net.getAddress().toLong());
+        System.out.println(net.getMask());
+        System.out.println(net.isPublic());
+        System.out.println(net.isPublic());
+        System.out.println(net.contains(new IPv4Address("10.123.14.1")));
     }
 }

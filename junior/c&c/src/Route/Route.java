@@ -3,7 +3,7 @@ package Route;
 import IPv4Address.IPv4Address;
 import Network.Network;
 
-public class Route {
+public class Route implements Comparable<Route> {
     private int metric;
     private String interfaceName;
     private IPv4Address gateway;
@@ -30,6 +30,16 @@ public class Route {
 
     public Network getNetwork() {
         return this.network;
+    }
+
+    @Override
+    public int compareTo(Route route) {
+        int result = Long.compare(route.getNetwork().getAddress().toLong(), this.getNetwork().getAddress().toLong());
+
+        if ( result == 0 ) {
+            result = Integer.compare(this.getMetric(), route.getMetric());
+        }
+        return result;
     }
 
     public String toString() {

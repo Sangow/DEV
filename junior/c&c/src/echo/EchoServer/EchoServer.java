@@ -1,12 +1,12 @@
 package echo.EchoServer;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.LinkedList;
 
 public class EchoServer implements Runnable {
-    static LinkedList<ClientServerHandler> clientList = new LinkedList<>();
+    static LinkedList<ClientHandler> clientList = new LinkedList<>();
     private ServerSocket ss;
 
     private static final int DEFAULT_PORT = 8080;
@@ -31,7 +31,6 @@ public class EchoServer implements Runnable {
 
     @Override
     public void run() {
-        ClientServerHandler csh;
         Socket cs = null;
         isRunning = true;
 
@@ -57,7 +56,7 @@ public class EchoServer implements Runnable {
             }
 
             System.out.println("---Client " + cs.toString().toUpperCase() + " connected.");
-            clientList.add(new ClientServerHandler(cs));
+            clientList.add(new ClientHandler(cs));
         }
     }
 

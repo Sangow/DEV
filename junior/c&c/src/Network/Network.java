@@ -131,16 +131,14 @@ public class Network {
     }
 
     public static void main(String[] args) throws IPAddressException {
-        Network net = new Network(new IPv4Address(3232235520L), 30);
-        System.out.println(net.getTotalHosts());
-        System.out.println(net.getFirstUsableAddress().toString());
-        System.out.println(net.getLastUsableAddress().toString());
-        System.out.println(net.getBroadcastAddress().toString());
+        Network net4 = new Network(new IPv4Address("255.255.255.255"), 10);
+        Network net3 = new Network(new IPv4Address("255.255.255.255"), 16);
+        Network net2 = new Network(new IPv4Address("255.255.255.255"), 20);
+        Network net1 = new Network(new IPv4Address("255.255.255.255"), 24);
 
-        System.out.println(net.getAddress().toLong());
-        System.out.println(net.getMask());
-        System.out.println(net.isPublic());
-        System.out.println(net.isPublic());
-        System.out.println(net.contains(new IPv4Address("10.123.14.1")));
+        System.out.println(net4.getAddress().toLong());
+        System.out.println(net3.getAddress().toLong());
+        System.out.println(net2.getAddress().toLong());
+        System.out.println(net1.getAddress().toLong());
     }
 }

@@ -6,13 +6,13 @@ public class IPv4Address {
 
     private void setStringIP(String address) throws IPAddressException {
         if ( address == null || address.isEmpty() ) {
-            throw new IPAddressException("Address is empty!"); // ?
+            throw new IPAddressException("Address is empty!");
         }
 
-        String[] temp = address.split("\\."); // ?
+        String[] temp = address.split("\\.");
 
         if ( temp.length != 4 ) {
-            throw new IPAddressException("Incorrect number of octets!"); // ?
+            throw new IPAddressException("Incorrect number of octets!");
         }
 
         int octet;
@@ -38,8 +38,8 @@ public class IPv4Address {
     }
 
     public IPv4Address(long address) throws IPAddressException {
-        if ( address < 0 || address > maxIP ) { // 0.0.0.0 - 255.255.255.255  // ?
-            throw new IPAddressException("Address is too short / too long!"); // ?
+        if ( address < 0 || address > maxIP ) { // 0.0.0.0 - 255.255.255.255
+            throw new IPAddressException("Address is too short / too long!");
         }
 
         this.ipAddress = address;

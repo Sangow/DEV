@@ -5,3 +5,5 @@
 *.exe
 # Ignore (generated) *.out files
 *.out
+# Ignore (generated) *.class files
+*.class

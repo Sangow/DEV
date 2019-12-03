@@ -1,0 +1,5 @@
+1.  CREATE DATABASE shop;
+2.  CREATE USER shop WITH PASSWORD 'shop';
+    GRANT ALL PRIVILEGES ON DATABASE "shop" to shop;
+3.  CREATE USER viewer WITH PASSWORD 'viewer';
+    

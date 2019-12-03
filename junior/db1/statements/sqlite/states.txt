@@ -1,8 +1,40 @@
-1. sqlite shop.db
-2. N/A
-3. N/A
-4. CREATE TABLE "category" (category_name text);
-5. INSERT INTO "category" VALUES ("cars");
-   INSERT INTO "category" VALUES ("trains");
-   INSERT INTO "category" VALUES ("ships");
-6.
+1.  sqlite shop.db
+2.  N/A
+3.  N/A
+4.  CREATE TABLE "category" (
+        category_id integer not null,
+        category_name varchar(20) not null,
+        PRIMARY KEY (category_id),
+        UNIQUE (category_name)
+    );
+5.  INSERT INTO "category" VALUES(0, "cars");
+    INSERT INTO "category" VALUES(1, "ships");
+    INSERT INTO "category" VALUES(2, "trains");
+6.  CREATE TABLE "item" (
+        item_id integer not null,
+        category_id integer not null,
+        item_name varchar(30) not null,
+        item_prise decimal(10, 3) not null,
+        PRIMARY KEY (item_id),
+        FOREIGN KEY (category_id) REFERENCES "category" (category_id),
+        UNIQUE (item_name)
+    );
+7.  INSERT INTO "item" VALUES (0, 0, "zhigul`", 1.00);
+    INSERT INTO "item" VALUES (1, 0, "bmw", 1.00);
+    INSERT INTO "item" VALUES (2, 0, "mazerati", 1.00);
+    INSERT INTO "item" VALUES (3, 1, "titanic", 1.00);
+    INSERT INTO "item" VALUES (4, 2, "ukrzaliznica", 1.00);
+8.  UPDATE "item" SET item_prise = 3.50 WHERE item_id=0;
+9.  UPDATE "item" SET item_prise = item_prise + item_prise*0.10;
+10. DELETE FROM "item" WHERE item_id=2;
+11. SELECT item_name, item_prise FROM "item" ORDER BY item_name;
+12. SELECT item_name, item_prise FROM "item" ORDER BY item_prise DESC;
+13. SELECT item_name, item_prise FROM "item" ORDER BY item_prise DESC LIMIT 3;
+14. SELECT item_name, item_prise FROM "item" ORDER BY item_prise LIMIT 3;
+15. SELECT item_name, item_prise FROM "item" ORDER BY item_prise DESC LIMIT 3 OFFSET 3;
+16. SELECT item_name FROM "item" WHERE item_prise = (SELECT MAX(item_prise) FROM "item");
+17. SELECT item_name FROM "item" WHERE item_prise = (SELECT MIN(item_prise) FROM "item");
+    SELECT item_name FROM "item" WHERE item_prise = (SELECT MIN(item_prise) FROM "item") LIMIT 1;
+18. SELECT COUNT(*) FROM "item";
+19. SELECT AVG(item_prise) FROM "item";
+20. 

@@ -37,4 +37,4 @@
     SELECT item_name FROM "item" WHERE item_prise = (SELECT MIN(item_prise) FROM "item") LIMIT 1;
 18. SELECT COUNT(*) FROM "item";
 19. SELECT AVG(item_prise) FROM "item";
-20. 
+20. CREATE VIEW "top_3_items" AS SELECT item_name FROM "item" ORDER BY item_prise DESC LIMIT 3;

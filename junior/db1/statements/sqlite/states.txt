@@ -1,0 +1,8 @@
+1. sqlite shop.db
+2. N/A
+3. N/A
+4. CREATE TABLE "category" (category_name text);
+5. INSERT INTO "category" VALUES ("cars");
+   INSERT INTO "category" VALUES ("trains");
+   INSERT INTO "category" VALUES ("ships");
+6.

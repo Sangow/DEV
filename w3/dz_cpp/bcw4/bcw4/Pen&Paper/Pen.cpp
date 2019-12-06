@@ -34,4 +34,3 @@ void Pen::write(Paper& paper, const std::string& message) {
 void Pen::refill() {
     this->inkAmount = this->inkCapacity;
 }
-

@@ -2,4 +2,41 @@
 2.  CREATE USER shop WITH PASSWORD 'shop';
     GRANT ALL PRIVILEGES ON DATABASE "shop" to shop;
 3.  CREATE USER viewer WITH PASSWORD 'viewer';
-    
+    GRANT SELECT ON ALL TABLES IN SCHEMA public TO viewer;
+4.  CREATE TABLE "category" (
+        category_id integer not null,
+        category_name varchar(20) not null,
+        PRIMARY KEY (category_id),
+        UNIQUE (category_name)
+    );
+5.  INSERT INTO "category" VALUES (1, 'cars'), (2, 'ships'), (3, 'trains');
+6.  CREATE TABLE "item" (
+        item_id integer not null,
+        category_id integer not null,
+        item_name varchar(20) not null,
+        item_price decimal(10,3) not null,
+        PRIMARY KEY (item_id),
+        UNIQUE (item_name)
+    );
+    ALTER TABLE "item" ADD CONSTRAINT fk_item_category FOREIGN KEY (category_id) REFERENCES category (category_id);
+7.  INSERT INTO "item" VALUES (1, 1, 'mers', 1.00);
+    INSERT INTO "item" VALUES (2, 1, 'zhiga', 1.00);
+    INSERT INTO "item" VALUES (3, 1, 'bmw', 1.00);
+    INSERT INTO "item" VALUES (4, 2, 'titanic', 1.00);
+    INSERT INTO "item" VALUES (5, 2, 'britanic', 1.00);
+    INSERT INTO "item" VALUES (6, 3, 'huindai', 1.00);
+    INSERT INTO "item" VALUES (7, 3, 'ukrZAL', 1.00);
+    INSERT INTO "item" VALUES (8, 3, 'kosmos', 1.00);
+8.  UPDATE "item" SET item_price = 3.50 WHERE item_id = 1;
+9.  UPDATE "item" SET item_price = item_price + item_price*0.1;
+10. DELETE FROM "item" WHERE item_id = 2;
+11. SELECT item_name, item_price FROM "item" ORDER BY item_name;
+12. SELECT item_name, item_price FROM "item" ORDER BY item_price DESC;
+13. SELECT item_name, item_price FROM "item" ORDER BY item_price DESC LIMIT 3;
+14. SELECT item_name, item_price FROM "item" ORDER BY item_price LIMIT 3;
+15. SELECT item_name, item_price FROM "item" ORDER BY item_price DESC LIMIT 3 OFFSET 3;
+16. SELECT item_name FROM "item" WHERE item_price = (SELECT MAX(item_price) FROM "item");
+17. SELECT item_name FROM "item" WHERE item_price = (SELECT MIN(item_price) FROM "item");
+18. SELECT COUNT(*) FROM "item";
+19. SELECT AVG(item_price) FROM "item";
+20. CREATE VIEW "top_3_items" AS SELECT item_name FROM "item" ORDER BY item_price DESC LIMIT 3;

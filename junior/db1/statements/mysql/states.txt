@@ -1,0 +1,15 @@
+1.  CREATE DATABASE shop;
+2.  CREATE USER 'shop'@'localhost' IDENTIFIED BY 'shop';
+    GRANT ALL PRIVILEGES ON shop.* TO 'shop'@'localhost';
+3.  CREATE USER 'viewer'@'localhost' IDENTIFIED BY 'viewer';
+    GRANT SELECT ON shop.* TO 'viewer'@'localhost';
+4.  CREATE TABLE category (
+	category_id serial,
+	category_name VARCHAR(20) NOT NULL,
+	PRIMARY KEY (category_id),
+	UNIQUE (category_name)
+    );
+5.  INSERT INTO category (category_name) VALUES ('cars');
+    INSERT INTO category (category_name) VALUES ('ships');
+    INSERT INTO category (category_name) VALUES ('trains');
+6.  

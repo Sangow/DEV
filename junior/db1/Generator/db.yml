@@ -1,0 +1,10 @@
+Article:
+  fields:
+    title: varchar(50)
+    text: text
+
+Category:
+  fields:
+    title: varchar(50)
+
+# Map<String, Map<String, Map<String, String>>>

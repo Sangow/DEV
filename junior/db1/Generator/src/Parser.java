@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.StringJoiner;
 
 class YamlReader {
-
     public Map<String, Map<String, Map<String, String>>> read(String path) throws IOException {
         InputStream in = Files.newInputStream(Paths.get(path));
         Yaml yaml = new Yaml();
@@ -18,30 +17,42 @@ class YamlReader {
 }
 
 public class Parser {
-    public static void main(String[] args) throws IOException {
-        ArrayList<String> statements = new ArrayList<>();
-        YamlReader reader = new YamlReader();
+    private ArrayList<String> statements;
+    private YamlReader reader;
+    private String path;
 
-        Map<String, Map<String, Map<String, String>>> config = reader.read("db.yml");
+    public Parser(String path) {
+        this.statements = new ArrayList<>();
+        this.reader = new YamlReader();
+        this.path = path;
+    }
 
-        for( Map.Entry<String, Map<String, Map<String, String>>> entry0 : reader.read("db.yml").entrySet() ) {
+    public ArrayList<String> parse() throws IOException {
+        for( Map.Entry<String, Map<String, Map<String, String>>> entry0 : reader.read(this.path).entrySet() ) {
             for ( Map.Entry<String, Map<String, String>> entry1 : entry0.getValue().entrySet() ) {
                 StringJoiner sj = new StringJoiner(", ", "", "");
 
-                sj.add("\n\t" + entry0.getKey() + "_id");
+                sj.add(String.format("\n\t%s_id", entry0.getKey()));
 
                 for ( Map.Entry<String, String> entry2 : entry1.getValue().entrySet() ) {
-                    sj.add("\n\t" + entry2.getKey() + " " + entry2.getValue());
+                    sj.add(String.format("\n\t%s_%s %s", entry0.getKey(), entry2.getKey(), entry2.getValue()));
                 }
 
-                statements.add("CREATE TABLE \"" + entry0.getKey() + "\" (" + sj + "\n);");
+                this.statements.add(String.format("CREATE TABLE \"%s\" (%s\n);", entry0.getKey(), sj));
             }
 
         }
+        return statements;
+    }
 
-        for ( String s : statements ) {
-            System.out.println(s);
+    public static void main(String[] args) throws IOException {
+        if ( args.length == 0 ) {
+            System.err.println("INPUT Yaml file path.");
+            return;
         }
 
+        for ( String s : new Parser(args[0]).parse() ) {
+            System.out.println(s);
+        }
     }
 }

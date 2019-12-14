@@ -1,9 +1,9 @@
-Article:
+article:
   fields:
     title: varchar(50)
     text: text
 
-Category:
+category:
   fields:
     title: varchar(50)
 

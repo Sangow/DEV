@@ -20,11 +20,11 @@ public class IPv4Address {
         for ( String str : temp ) {
             String s = str.trim();
 
-            if ( s.isEmpty() || !s.matches("\\d+") ) {
-                throw new IPAddressException("Octet is null OR have smth besides digits");
+            try {
+                octet = Integer.parseInt(s);
+            } catch (NumberFormatException nfe) {
+                throw new IPAddressException("Invalid data type!");
             }
-            octet = Integer.parseInt(s);
-
             if ( octet < 0 || octet > 255 ) {
                 throw new IPAddressException("Invalid value in octet!");
             }
@@ -58,15 +58,11 @@ public class IPv4Address {
     }
 
     public String toString() {
-        long ip = this.ipAddress;
-        String[] octets = new String[4];
-
-        for ( int i = 3; i >= 0; i-- ) {
-            octets[i] = String.valueOf(ip & 255);
-            ip >>= 8;
-        }
-
-        return String.join(".", octets);
+        return String.format("%d.%d.%d.%d", (this.ipAddress & 0xFF000000) >> 24,
+                                            (this.ipAddress & 0x00FF0000) >> 16,
+                                            (this.ipAddress & 0x0000FF00) >> 8,
+                                             this.ipAddress & 0x000000FF
+                            );
     }
 
     public long toLong() {
@@ -74,12 +70,7 @@ public class IPv4Address {
     }
 
     public static void main(String[] args) throws IPAddressException {
-        IPv4Address ip = new IPv4Address(0);
-        System.out.println(ip.toString());
-
-        IPv4Address ipp = new IPv4Address("192.168.0.255");
-
-        System.out.println(ipp.toString());
-        System.out.println(ipp.toLong());
+        IPv4Address ip = new IPv4Address("255.255.255.255");
+        System.out.println(ip);
     }
 }

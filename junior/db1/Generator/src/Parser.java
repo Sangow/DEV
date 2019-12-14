@@ -20,21 +20,21 @@ class YamlReader {
 public class Parser {
     public static void main(String[] args) throws IOException {
         ArrayList<String> statements = new ArrayList<>();
-        StringBuilder sb;
         YamlReader reader = new YamlReader();
 
         Map<String, Map<String, Map<String, String>>> config = reader.read("db.yml");
 
-        for(Map.Entry<String, Map<String, Map<String, String>>> entry0 : config.entrySet()) {
-            sb = new StringBuilder();
-
+        for( Map.Entry<String, Map<String, Map<String, String>>> entry0 : reader.read("db.yml").entrySet() ) {
             for ( Map.Entry<String, Map<String, String>> entry1 : entry0.getValue().entrySet() ) {
                 StringJoiner sj = new StringJoiner(", ", "", "");
 
+                sj.add("\n\t" + entry0.getKey() + "_id");
+
                 for ( Map.Entry<String, String> entry2 : entry1.getValue().entrySet() ) {
-                    sj.add(entry2.getKey() + " " + entry2.getValue());
+                    sj.add("\n\t" + entry2.getKey() + " " + entry2.getValue());
                 }
-                statements.add(sb.append("CREATE TABLE \"" + entry0.getKey() + "\" ( " + sj + " );").toString());
+
+                statements.add("CREATE TABLE \"" + entry0.getKey() + "\" (" + sj + "\n);");
             }
 
         }

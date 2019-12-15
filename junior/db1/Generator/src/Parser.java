@@ -21,6 +21,31 @@ public class Parser {
     private YamlReader reader;
     private String path;
 
+    private String timestamp(String tableName) {
+        return String.format("%s_created timestamp not null default now()," +
+                             "\n\t%s_updated timestamp not null default now()",
+                                                                                tableName, tableName);
+    }
+
+    private String createFunction(String tableName) {
+        return String.format("CREATE FUNCTION trigger_set_timestamp()" +
+                             "\nRETURNS TRIGGER AS $$" +
+                             "\nBEGIN" +
+                                 "\n\tNEW.%s_updated = NOW();" +
+                                 "\n\tRETURN NEW;" +
+                             "\nEND;" +
+                             "\n$$ LANGUAGE plpgsql;",
+                                                        tableName);
+    }
+
+    private String createTrigger(String tableName){
+        return String.format("CREATE TRIGGER set_timestamp" +
+                             "\nBEFORE UPDATE ON %s" +
+                             "\nFOR EACH ROW" +
+                             "\nEXECUTE PROCEDURE trigger_set_timestamp();",
+                                                                            tableName);
+    }
+
     public Parser(String path) {
         this.statements = new ArrayList<>();
         this.reader = new YamlReader();
@@ -32,15 +57,19 @@ public class Parser {
             for ( Map.Entry<String, Map<String, String>> entry1 : entry0.getValue().entrySet() ) {
                 StringJoiner sj = new StringJoiner(", ", "", "");
 
-                sj.add(String.format("\n\t%s_id", entry0.getKey()));
+                sj.add(String.format("\n\t%s_id integer not null", entry0.getKey()));
 
                 for ( Map.Entry<String, String> entry2 : entry1.getValue().entrySet() ) {
-                    sj.add(String.format("\n\t%s_%s %s", entry0.getKey(), entry2.getKey(), entry2.getValue()));
+                    sj.add(String.format("\n\t%s_%s %s not null", entry0.getKey(), entry2.getKey(), entry2.getValue()));
                 }
 
-                this.statements.add(String.format("CREATE TABLE \"%s\" (%s\n);", entry0.getKey(), sj));
-            }
+                sj.add("\n\t" + this.timestamp(entry0.getKey()));
+                sj.add(String.format("\n\tPRIMARY KEY (%s_id)", entry0.getKey()));
 
+                this.statements.add(String.format("CREATE TABLE \"%s\" (%s\n);", entry0.getKey(), sj));
+                this.statements.add(createFunction(entry0.getKey()));
+                this.statements.add(createTrigger(entry0.getKey()));
+            }
         }
         return statements;
     }
@@ -52,7 +81,7 @@ public class Parser {
         }
 
         for ( String s : new Parser(args[0]).parse() ) {
-            System.out.println(s);
+            System.out.println(s + "\n");
         }
     }
 }

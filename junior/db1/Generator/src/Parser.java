@@ -28,22 +28,22 @@ public class Parser {
     }
 
     private String createFunction(String tableName) {
-        return String.format("CREATE FUNCTION trigger_set_timestamp()" +
+        return String.format("CREATE FUNCTION %s_trigger_set_timestamp()" +
                              "\nRETURNS TRIGGER AS $$" +
                              "\nBEGIN" +
                                  "\n\tNEW.%s_updated = NOW();" +
                                  "\n\tRETURN NEW;" +
                              "\nEND;" +
                              "\n$$ LANGUAGE plpgsql;",
-                                                        tableName);
+                                                        tableName, tableName);
     }
 
     private String createTrigger(String tableName){
-        return String.format("CREATE TRIGGER set_timestamp" +
+        return String.format("CREATE TRIGGER %s_timestamp_changed" +
                              "\nBEFORE UPDATE ON %s" +
                              "\nFOR EACH ROW" +
-                             "\nEXECUTE PROCEDURE trigger_set_timestamp();",
-                                                                            tableName);
+                             "\nEXECUTE PROCEDURE %s_trigger_set_timestamp();",
+                                                                            tableName, tableName, tableName);
     }
 
     public Parser(String path) {

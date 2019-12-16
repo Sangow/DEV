@@ -46,6 +46,10 @@ public class Parser {
                                                                             tableName, tableName, tableName);
     }
 
+//    private String makeFieldStatements(Map<String, String> fieldKeyValue) {
+//        return
+//    }
+
     public Parser(String path) {
         this.statements = new ArrayList<>();
         this.reader = new YamlReader();
@@ -53,22 +57,21 @@ public class Parser {
     }
 
     public ArrayList<String> parse() throws IOException {
-        for( Map.Entry<String, Map<String, Map<String, String>>> entry0 : reader.read(this.path).entrySet() ) {
-            for ( Map.Entry<String, Map<String, String>> entry1 : entry0.getValue().entrySet() ) {
-                StringJoiner sj = new StringJoiner(", ", "", "");
-
-                sj.add(String.format("\n\t%s_id integer not null", entry0.getKey()));
+        for( Map.Entry<String, Map<String, Map<String, String>>> tableName : reader.read(this.path).entrySet() ) {
+            StringJoiner sj = new StringJoiner(", ", "", "");
+            for ( Map.Entry<String, Map<String, String>> entry1 : tableName.getValue().entrySet() ) {
+                sj.add(String.format("\n\t%s_id integer not null", tableName.getKey()));
 
                 for ( Map.Entry<String, String> entry2 : entry1.getValue().entrySet() ) {
-                    sj.add(String.format("\n\t%s_%s %s not null", entry0.getKey(), entry2.getKey(), entry2.getValue()));
+                    sj.add(String.format("\n\t%s_%s %s not null", tableName.getKey(), entry2.getKey(), entry2.getValue()));
                 }
 
-                sj.add("\n\t" + this.timestamp(entry0.getKey()));
-                sj.add(String.format("\n\tPRIMARY KEY (%s_id)", entry0.getKey()));
+                sj.add("\n\t" + this.timestamp(tableName.getKey()));
+                sj.add(String.format("\n\tPRIMARY KEY (%s_id)", tableName.getKey()));
 
-                this.statements.add(String.format("CREATE TABLE \"%s\" (%s\n);", entry0.getKey(), sj));
-                this.statements.add(createFunction(entry0.getKey()));
-                this.statements.add(createTrigger(entry0.getKey()));
+                this.statements.add(String.format("CREATE TABLE \"%s\" (%s\n);", tableName.getKey(), sj));
+                this.statements.add(createFunction(tableName.getKey()));
+                this.statements.add(createTrigger(tableName.getKey()));
             }
         }
         return statements;

@@ -72,5 +72,6 @@ public class IPv4Address {
     public static void main(String[] args) throws IPAddressException {
         IPv4Address ip = new IPv4Address("255.255.255.255");
         System.out.println(ip);
+
     }
 }

@@ -22,28 +22,28 @@ public class Parser {
     private String path;
 
     private String timestamp(String tableName) {
-        return String.format("%s_created timestamp not null default now()," +
-                             "\n\t%s_updated timestamp not null default now()",
-                                                                                tableName, tableName);
+        return String.format("%1$s_created timestamp not null default now()," +
+                             "\n\t%1$s_updated timestamp not null default now()",
+                                                                                tableName);
     }
 
     private String createFunction(String tableName) {
-        return String.format("CREATE FUNCTION %s_trigger_set_timestamp()" +
+        return String.format("CREATE FUNCTION %1$s_trigger_set_timestamp()" +
                              "\nRETURNS TRIGGER AS $$" +
                              "\nBEGIN" +
-                                 "\n\tNEW.%s_updated = NOW();" +
+                                 "\n\tNEW.%1$s_updated = NOW();" +
                                  "\n\tRETURN NEW;" +
                              "\nEND;" +
                              "\n$$ LANGUAGE plpgsql;",
-                                                        tableName, tableName);
+                                                        tableName);
     }
 
     private String createTrigger(String tableName){
-        return String.format("CREATE TRIGGER %s_timestamp_changed" +
-                             "\nBEFORE UPDATE ON %s" +
+        return String.format("CREATE TRIGGER %1$s_timestamp_changed" +
+                             "\nBEFORE UPDATE ON %1$s" +
                              "\nFOR EACH ROW" +
-                             "\nEXECUTE PROCEDURE %s_trigger_set_timestamp();",
-                                                                            tableName, tableName, tableName);
+                             "\nEXECUTE PROCEDURE %1$s_trigger_set_timestamp();",
+                                                                            tableName);
     }
 
     private void parsePair(Map<String, String> pair, StringJoiner sj, String tableName) {

@@ -27,15 +27,34 @@ public abstract class Entity {
     }
 
     public Entity(Integer id) {
+        if ( db == null ) {
+            throw new NullPointerException();
+        }
+        this.id = id;
+        this.table = this.getClass().getSimpleName();
 
+        try {
+//            ResultSet resultSet = db.createStatement().executeQuery(String.format(SELECT_QUERY, this.table));
+            PreparedStatement ps =  db.prepareStatement(String.format(SELECT_QUERY, this.table));
+            ps.setInt(1, this.id);
+            ps.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static final void setDatabase(Connection connection) {
+        if ( connection == null ) {
+            throw new NullPointerException();
+        }
+        db = connection;
         // throws NullPointerException
     }
 
     public final int getId() {
         // try to guess youtself
+        return 0;
     }
 
     public final java.util.Date getCreated() {

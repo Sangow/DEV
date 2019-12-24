@@ -8,8 +8,14 @@ import java.sql.SQLException;
 public class Main {
     private static Connection connection = null;
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        initDatabase();
+    public static void main(String[] args) {
+        try {
+            initDatabase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());;
+        }
 
         Entity.setDatabase(connection);
 
@@ -25,7 +31,7 @@ public class Main {
 //                }
 //            }
 //        }
-        Section s = new Section(3);
+        Section s = new Section(1);
         System.out.println(s.getTitle());
         System.out.println(s.getId());
         System.out.println(s.getCreated());
@@ -36,7 +42,7 @@ public class Main {
         Class.forName("org.postgresql.Driver");
 
         connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost/orm", "orm",
-                    "orm");
+                    "jdbc:postgresql://localhost:8080/shop", "shop",
+                    "shop");
     }
 }

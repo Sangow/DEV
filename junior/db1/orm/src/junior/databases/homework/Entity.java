@@ -37,13 +37,11 @@ public abstract class Entity {
             ps.setInt(1, this.id);
             ResultSet rs =  ps.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
+            rs.next();
 
-            while (rs.next()) {
-                for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
-                    fields.put(rsmd.getColumnName(i), rs.getObject(i));
-                }
+            for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
+                fields.put(rsmd.getColumnName(i), rs.getObject(i));
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

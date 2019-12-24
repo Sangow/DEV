@@ -2,7 +2,6 @@ package junior.databases.homework;
 
 import java.util.*;
 import java.sql.*;
-import java.lang.reflect.Constructor;
 
 public abstract class Entity {
     private static String DELETE_QUERY   = "DELETE FROM \"%1$s\" WHERE %1$s_id=?";
@@ -31,13 +30,19 @@ public abstract class Entity {
             throw new NullPointerException();
         }
         this.id = id;
-        this.table = this.getClass().getSimpleName();
+        this.table = this.getClass().getSimpleName().toLowerCase();
 
         try {
-//            ResultSet resultSet = db.createStatement().executeQuery(String.format(SELECT_QUERY, this.table));
             PreparedStatement ps =  db.prepareStatement(String.format(SELECT_QUERY, this.table));
             ps.setInt(1, this.id);
-            ps.executeQuery();
+            ResultSet rs =  ps.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            while (rs.next()) {
+                for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
+                    fields.put(rsmd.getColumnName(i), rs.getObject(i));
+                }
+            }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -53,24 +58,27 @@ public abstract class Entity {
     }
 
     public final int getId() {
-        // try to guess youtself
-        return 0;
+        return this.id;
     }
 
     public final java.util.Date getCreated() {
         // try to guess youtself
+        return new java.util.Date((int)this.fields.get(String.format("%s_created", this.table)));
     }
 
     public final java.util.Date getUpdated() {
         // try to guess youtself
+        return new java.util.Date((int)this.fields.get(String.format("%s_updated", this.table)));
     }
 
     public final Object getColumn(String name) {
         // return column name from fields by key
+        return this.fields.get(String.format("%s_%s", this.table, name));
     }
 
     public final <T extends Entity> T getParent(Class<T> cls) {
         // get parent id from fields as <classname>_id, create and return an instance of class T with that id
+        return null;
     }
 
     public final <T extends Entity> List<T> getChildren(Class<T> cls) {
@@ -78,6 +86,7 @@ public abstract class Entity {
         // convert each row from ResultSet to instance of class T with appropriate id
         // fill each of new instances with column data
         // return list of children instances
+        return null;
     }
 
     public final <T extends Entity> List<T> getSiblings(Class<T> cls) {
@@ -85,6 +94,7 @@ public abstract class Entity {
         // convert each row from ResultSet to instance of class T with appropriate id
         // fill each of new instances with column data
         // return list of sibling instances
+        return null;
     }
 
     public final void setColumn(String name, Object value) {
@@ -122,40 +132,48 @@ public abstract class Entity {
         // convert each row from ResultSet to instance of class T with appropriate id
         // fill each of new instances with column data
         // aggregate all new instances into a single List<T> and return it
+        return null;
     }
 
     private static Collection<String> genPlaceholders(int size) {
         // return a collection, consisting of <size> "?" symbols,
         // which should be joined later.
         // each "?" is used in insert statements as a placeholder for values (google prepared statements)
+        return null;
     }
 
     private static Collection<String> genPlaceholders(int size, String placeholder) {
         // return a collection, consisting of <size> <placeholder> symbols,
         // which should be joined later.
         // each <placeholder> is used in insert statements as a placeholder for values (google prepared statements)
+        return null;
     }
 
     private static String getJoinTableName(String leftTable, String rightTable) {
         // generate the name of associative table for many-to-many relation
         // sort left and right tables alphabetically
         // return table name using format <table>__<table>
+        return null;
     }
 
     private java.util.Date getDate(String column) {
         // pwoerful method, used to remove copypaste from getCreated and getUpdated methods
+        return null;
     }
 
     private static String join(Collection<String> sequence) {
         // join collection of strings with ", " as <glue> and return a joined string
+        return null;
     }
 
     private static String join(Collection<String> sequence, String glue) {
         // join collection of strings with <glue> and return a joined string
+        return null;
     }
 
     private static <T extends Entity> List<T> rowsToEntities(Class<T> cls, ResultSet rows) {
         // convert a ResultSet of database rows to list of instances of corresponding class
         // each instance must be filled with its data so that it must not produce additional queries to database to get it's fields
+        return null;
     }
 }

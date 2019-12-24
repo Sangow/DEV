@@ -14,24 +14,29 @@ public class Main {
         Entity.setDatabase(connection);
 
 
-        for ( Post post : Post.all() ) {
-            System.out.println(post.getId() + ": " + post.getTitle());
-
-            for ( Tag tag : post.getTags() ) {
-                System.out.println("  " + tag.getName());
-
-                for ( Post p : tag.getPosts() ) {
-                    System.out.println("    " + p.getId() + ": " + p.getTitle());
-                }
-            }
-        }
+//        for ( Post post : Post.all() ) {
+//            System.out.println(post.getId() + ": " + post.getTitle());
+//
+//            for ( Tag tag : post.getTags() ) {
+//                System.out.println("  " + tag.getName());
+//
+//                for ( Post p : tag.getPosts() ) {
+//                    System.out.println("    " + p.getId() + ": " + p.getTitle());
+//                }
+//            }
+//        }
+        Section s = new Section(3);
+        System.out.println(s.getTitle());
+        System.out.println(s.getId());
+        System.out.println(s.getCreated());
+        System.out.println(s.getUpdated());
     }
 
     private static void initDatabase() throws SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
 
         connection = DriverManager.getConnection(
-                    "jdbc:postgresql://<host>/<name>", "<user>",
-                    "<password>");
+                    "jdbc:postgresql://localhost/orm", "orm",
+                    "orm");
     }
 }

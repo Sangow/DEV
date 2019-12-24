@@ -1,9 +1,6 @@
-public class Child extends Test {
-    public static void main(String[] args) {
-        Child ch = new Child();
+import java.sql.SQLException;
 
-        System.out.println(ch.getClassN());
-    }
+public class Child extends Test {
 }
 
 

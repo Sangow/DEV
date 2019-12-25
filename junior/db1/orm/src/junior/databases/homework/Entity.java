@@ -29,6 +29,7 @@ public abstract class Entity {
         if ( db == null ) {
             throw new NullPointerException();
         }
+
         this.id = id;
         this.table = this.getClass().getSimpleName().toLowerCase();
 
@@ -43,7 +44,7 @@ public abstract class Entity {
                 fields.put(rsmd.getColumnName(i), rs.getObject(i));
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 

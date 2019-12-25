@@ -20,18 +20,18 @@ public abstract class Entity {
     private int id = 0;
     protected Map<String, Object> fields = new HashMap<String, Object>();
 
-    private void lazyLoad() throws SQLException {
-        PreparedStatement ps =  db.prepareStatement(String.format(SELECT_QUERY, this.table));
-        ps.setInt(1, this.id);
-        ResultSet rs =  ps.executeQuery();
-        ResultSetMetaData rsmd = rs.getMetaData();
-        rs.next();
-
-        for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
-            fields.put(rsmd.getColumnName(i), rs.getObject(i));
-        }
-        this.isLoaded = true;
-    }
+//    private void lazyLoad() throws SQLException {
+//        PreparedStatement ps =  db.prepareStatement(String.format(SELECT_QUERY, this.table));
+//        ps.setInt(1, this.id);
+//        ResultSet rs =  ps.executeQuery();
+//        ResultSetMetaData rsmd = rs.getMetaData();
+//        rs.next();
+//
+//        for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
+//            fields.put(rsmd.getColumnName(i), rs.getObject(i));
+//        }
+//        this.isLoaded = true;
+//    }
 
 
     public Entity() {
@@ -71,11 +71,7 @@ public abstract class Entity {
 
     public final Object getColumn(String name) {
         if ( !this.isLoaded ) {
-            try {
-                this.lazyLoad();
-            } catch (SQLException e) {
-                System.err.println(e.getMessage());;
-            }
+            this.load();
         }
         // return column name from fields by key
         return this.fields.get(String.format("%s_%s", this.table, name));
@@ -111,6 +107,21 @@ public abstract class Entity {
     }
 
     private void load() {
+        try {
+            PreparedStatement ps =  db.prepareStatement(String.format(SELECT_QUERY, this.table));
+            ps.setInt(1, this.id);
+            ResultSet rs =  ps.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            rs.next();
+
+            for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
+                fields.put(rsmd.getColumnName(i), rs.getObject(i));
+            }
+        } catch (SQLException se) {
+            System.err.println(se.getMessage());
+        }
+
+        this.isLoaded = true;
         // check, if current object is already loaded
         // get a single row from corresponding table by id
         // store columns as object fields with unchanged column names as keys

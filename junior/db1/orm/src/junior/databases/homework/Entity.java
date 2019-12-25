@@ -20,6 +20,19 @@ public abstract class Entity {
     private int id = 0;
     protected Map<String, Object> fields = new HashMap<String, Object>();
 
+    private void lazyLoad() throws SQLException {
+        PreparedStatement ps =  db.prepareStatement(String.format(SELECT_QUERY, this.table));
+        ps.setInt(1, this.id);
+        ResultSet rs =  ps.executeQuery();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        rs.next();
+
+        for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
+            fields.put(rsmd.getColumnName(i), rs.getObject(i));
+        }
+        this.isLoaded = true;
+    }
+
 
     public Entity() {
 
@@ -32,20 +45,6 @@ public abstract class Entity {
 
         this.id = id;
         this.table = this.getClass().getSimpleName().toLowerCase();
-
-        try {
-            PreparedStatement ps =  db.prepareStatement(String.format(SELECT_QUERY, this.table));
-            ps.setInt(1, this.id);
-            ResultSet rs =  ps.executeQuery();
-            ResultSetMetaData rsmd = rs.getMetaData();
-            rs.next();
-
-            for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
-                fields.put(rsmd.getColumnName(i), rs.getObject(i));
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
     }
 
     public static final void setDatabase(Connection connection) {
@@ -71,6 +70,13 @@ public abstract class Entity {
     }
 
     public final Object getColumn(String name) {
+        if ( !this.isLoaded ) {
+            try {
+                this.lazyLoad();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());;
+            }
+        }
         // return column name from fields by key
         return this.fields.get(String.format("%s_%s", this.table, name));
     }

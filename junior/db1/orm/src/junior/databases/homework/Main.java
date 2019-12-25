@@ -33,9 +33,10 @@ public class Main {
 //        }
         Section s = new Section(1);
         System.out.println(s.getTitle());
-        System.out.println(s.getId());
-        System.out.println(s.getCreated());
-        System.out.println(s.getUpdated());
+        System.out.println(s.getTitle());
+//        System.out.println(s.getId());
+//        System.out.println(s.getCreated());
+//        System.out.println(s.getUpdated());
     }
 
     private static void initDatabase() throws SQLException, ClassNotFoundException {

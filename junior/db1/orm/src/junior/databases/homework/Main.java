@@ -4,6 +4,7 @@ import junior.databases.homework.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Main {
     private static Connection connection = null;
@@ -32,11 +33,23 @@ public class Main {
 //            }
 //        }
         Section s = new Section(1);
-        System.out.println(s.getTitle());
-        System.out.println(s.getTitle());
+        s.setTitle("newZalupa");
+        s.setTitle("zhopka");
+        try {
+            s.save();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            System.err.println(e.getNextException().getMessage());
+        }
 //        System.out.println(s.getId());
 //        System.out.println(s.getCreated());
 //        System.out.println(s.getUpdated());
+//        try {
+//            Statement st = connection.createStatement();
+//            st.execute("UPDATE \"section\" SET section_title = \'sec\' WHERE section_id=1");
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
     }
 
     private static void initDatabase() throws SQLException, ClassNotFoundException {

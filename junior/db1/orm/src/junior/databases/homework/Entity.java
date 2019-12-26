@@ -1,5 +1,6 @@
 package junior.databases.homework;
 
+import javax.swing.plaf.nimbus.State;
 import java.util.*;
 import java.sql.*;
 
@@ -48,11 +49,11 @@ public abstract class Entity {
     }
 
     public static final void setDatabase(Connection connection) {
+        // throws NullPointerException
         if ( connection == null ) {
             throw new NullPointerException();
         }
         db = connection;
-        // throws NullPointerException
     }
 
     public final int getId() {
@@ -70,10 +71,10 @@ public abstract class Entity {
     }
 
     public final Object getColumn(String name) {
+        // return column name from fields by key
         if ( !this.isLoaded ) {
             this.load();
         }
-        // return column name from fields by key
         return this.fields.get(String.format("%s_%s", this.table, name));
     }
 
@@ -100,6 +101,12 @@ public abstract class Entity {
 
     public final void setColumn(String name, Object value) {
         // put a value into fields with <table>_<name> as a key
+//        if ( this.fields.containsKey(String.format("%s_%s", this.table, name)) ) {
+            this.fields.put(String.format("%s_%s", this.table, name), value);
+            this.isModified = true;
+//            return;
+//        }
+//        System.err.println("Field does not exist!");
     }
 
     public final void setParent(String name, Integer id) {
@@ -107,6 +114,9 @@ public abstract class Entity {
     }
 
     private void load() {
+        // check, if current object is already loaded
+        // get a single row from corresponding table by id
+        // store columns as object fields with unchanged column names as keys
         try {
             PreparedStatement ps =  db.prepareStatement(String.format(SELECT_QUERY, this.table));
             ps.setInt(1, this.id);
@@ -122,9 +132,6 @@ public abstract class Entity {
         }
 
         this.isLoaded = true;
-        // check, if current object is already loaded
-        // get a single row from corresponding table by id
-        // store columns as object fields with unchanged column names as keys
     }
 
     private void insert() throws SQLException {
@@ -132,6 +139,16 @@ public abstract class Entity {
     }
 
     private void update() throws SQLException {
+//        "UPDATE \"%1$s\" SET %2$s WHERE %1$s_id=?"
+        PreparedStatement ps = null;
+//        ps.setInt(1, this.id);
+
+        for ( String columnName : this.fields.keySet() ) {
+            ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, String.format("%s = '%s'", columnName, this.fields.get(columnName))));
+            ps.setInt(1, this.id);
+            ps.addBatch();
+        }
+        ps.executeBatch();
         // execute an update query, built from fields keys and values
     }
 
@@ -141,6 +158,11 @@ public abstract class Entity {
 
     public final void save() throws SQLException {
         // execute either insert or update query, depending on instance id
+        if ( this.id == 0 ) {
+            this.insert();
+        } else {
+            this.update();
+        }
     }
 
     protected static <T extends Entity> List<T> all(Class<T> cls) {

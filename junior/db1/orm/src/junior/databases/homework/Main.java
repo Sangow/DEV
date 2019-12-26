@@ -32,15 +32,23 @@ public class Main {
 //                }
 //            }
 //        }
-        Section s = new Section(1);
-        s.setTitle("newZalupa");
-        s.setTitle("zhopka");
+        User u = new User(1);
+        u.setName("Koni");
+        u.setEmail("konio@uk.not");
         try {
-            s.save();
+            u.save();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-            System.err.println(e.getNextException().getMessage());
         }
+//        Section s = new Section(1);
+////        s.setTitle("newZalupa");
+//        s.setTitle("zhopa");
+//        try {
+//            s.save();
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//            System.err.println(e.getNextException().getMessage());
+//        }
 //        System.out.println(s.getId());
 //        System.out.println(s.getCreated());
 //        System.out.println(s.getUpdated());
@@ -56,7 +64,7 @@ public class Main {
         Class.forName("org.postgresql.Driver");
 
         connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost/orm", "orm",
-                    "orm");
+                    "jdbc:postgresql://localhost:8080/shop", "shop",
+                    "shop");
     }
 }

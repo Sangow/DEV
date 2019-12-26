@@ -1,6 +1,5 @@
 package junior.databases.homework;
 
-import javax.swing.plaf.nimbus.State;
 import java.util.*;
 import java.sql.*;
 
@@ -57,21 +56,27 @@ public abstract class Entity {
     }
 
     public final int getId() {
-        return this.id;
+//        return this.id;
+        return (int)this.getColumn("id");
     }
 
     public final java.util.Date getCreated() {
         // try to guess youtself
-        return new java.util.Date((int)this.fields.get(String.format("%s_created", this.table)));
+//        return new java.util.Date((int)this.fields.get(String.format("%s_created", this.table)));
+        return this.getDate("created");
     }
 
     public final java.util.Date getUpdated() {
         // try to guess youtself
-        return new java.util.Date((int)this.fields.get(String.format("%s_updated", this.table)));
+//        return new java.util.Date((int)this.fields.get(String.format("%s_updated", this.table)));
+        return this.getDate("updated");
     }
 
     public final Object getColumn(String name) {
         // return column name from fields by key
+        if ( this.isModified ) {
+            System.err.println("Modified!");
+        }
         if ( !this.isLoaded ) {
             this.load();
         }
@@ -136,20 +141,23 @@ public abstract class Entity {
 
     private void insert() throws SQLException {
         // execute an insert query, built from fields keys and values
+        this.isModified = false;
     }
 
     private void update() throws SQLException {
-//        "UPDATE \"%1$s\" SET %2$s WHERE %1$s_id=?"
-        PreparedStatement ps = null;
-//        ps.setInt(1, this.id);
+        // execute an update query, built from fields keys and values
+        StringJoiner sj = new StringJoiner(", ", "", "");
 
         for ( String columnName : this.fields.keySet() ) {
-            ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, String.format("%s = '%s'", columnName, this.fields.get(columnName))));
-            ps.setInt(1, this.id);
-            ps.addBatch();
+            sj.add(String.format("%s = '%s'", columnName, this.fields.get(columnName)));
         }
-        ps.executeBatch();
-        // execute an update query, built from fields keys and values
+
+        PreparedStatement ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, sj));
+
+        ps.setInt(1, this.id);
+        ps.executeUpdate();
+
+        this.isModified = false;
     }
 
     public final void delete() throws SQLException {
@@ -196,7 +204,7 @@ public abstract class Entity {
 
     private java.util.Date getDate(String column) {
         // pwoerful method, used to remove copypaste from getCreated and getUpdated methods
-        return null;
+        return new java.util.Date((int)this.getColumn(column));
     }
 
     private static String join(Collection<String> sequence) {

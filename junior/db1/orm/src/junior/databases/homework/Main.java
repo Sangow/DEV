@@ -64,7 +64,7 @@ public class Main {
         Class.forName("org.postgresql.Driver");
 
         connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:8080/shop", "shop",
+                    "jdbc:postgresql://localhost/shop", "shop",
                     "shop");
     }
 }

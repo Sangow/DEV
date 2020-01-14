@@ -20,20 +20,6 @@ public abstract class Entity {
     private int id = 0;
     protected Map<String, Object> fields = new HashMap<String, Object>();
 
-//    private void lazyLoad() throws SQLException {
-//        PreparedStatement ps =  db.prepareStatement(String.format(SELECT_QUERY, this.table));
-//        ps.setInt(1, this.id);
-//        ResultSet rs =  ps.executeQuery();
-//        ResultSetMetaData rsmd = rs.getMetaData();
-//        rs.next();
-//
-//        for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
-//            fields.put(rsmd.getColumnName(i), rs.getObject(i));
-//        }
-//        this.isLoaded = true;
-//    }
-
-
     public Entity() {
 
     }
@@ -55,23 +41,6 @@ public abstract class Entity {
         db = connection;
     }
 
-    public final int getId() {
-//        return this.id;
-        return (int)this.getColumn("id");
-    }
-
-    public final java.util.Date getCreated() {
-        // try to guess youtself
-//        return new java.util.Date((int)this.fields.get(String.format("%s_created", this.table)));
-        return this.getDate("created");
-    }
-
-    public final java.util.Date getUpdated() {
-        // try to guess youtself
-//        return new java.util.Date((int)this.fields.get(String.format("%s_updated", this.table)));
-        return this.getDate("updated");
-    }
-
     public final Object getColumn(String name) {
         // return column name from fields by key
         if ( this.isModified ) {
@@ -81,6 +50,26 @@ public abstract class Entity {
             this.load();
         }
         return this.fields.get(String.format("%s_%s", this.table, name));
+    }
+
+    public final int getId() {
+//        return this.id;
+        return (int)this.getColumn("id");
+    }
+
+    private java.util.Date getDate(String column) {
+        // pwoerful method, used to remove copypaste from getCreated and getUpdated methods
+        return new java.util.Date((int)this.getColumn(column));
+    }
+
+    public final java.util.Date getCreated() {
+        // try to guess youtself
+        return this.getDate("created");
+    }
+
+    public final java.util.Date getUpdated() {
+        // try to guess youtself
+        return this.getDate("updated");
     }
 
     public final <T extends Entity> T getParent(Class<T> cls) {
@@ -146,18 +135,20 @@ public abstract class Entity {
 
     private void update() throws SQLException {
         // execute an update query, built from fields keys and values
-        StringJoiner sj = new StringJoiner(", ", "", "");
+//        StringJoiner sj = new StringJoiner(", ", "", "");
 
-        for ( String columnName : this.fields.keySet() ) {
-            sj.add(String.format("%s = '%s'", columnName, this.fields.get(columnName)));
-        }
+        Entity.join(this.fields.keySet());
 
-        PreparedStatement ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, sj));
-
-        ps.setInt(1, this.id);
-        ps.executeUpdate();
-
-        this.isModified = false;
+//        for ( String columnName : this.fields.keySet() ) {
+//            sj.add(String.format("%s = '%s'", columnName, this.fields.get(columnName)));
+//        }
+//
+//        PreparedStatement ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, sj));
+//
+//        ps.setInt(1, this.id);
+//        ps.executeUpdate();
+//
+//        this.isModified = false;
     }
 
     public final void delete() throws SQLException {
@@ -202,18 +193,20 @@ public abstract class Entity {
         return null;
     }
 
-    private java.util.Date getDate(String column) {
-        // pwoerful method, used to remove copypaste from getCreated and getUpdated methods
-        return new java.util.Date((int)this.getColumn(column));
-    }
-
     private static String join(Collection<String> sequence) {
         // join collection of strings with ", " as <glue> and return a joined string
-        return null;
+         return Entity.join(sequence, ", ");
     }
 
     private static String join(Collection<String> sequence, String glue) {
         // join collection of strings with <glue> and return a joined string
+        StringJoiner sj = new StringJoiner(glue);
+
+        for ( String columnName : sequence ) {
+            sj.add(String.format("%s = '%s'", columnName));
+        }
+
+
         return null;
     }
 

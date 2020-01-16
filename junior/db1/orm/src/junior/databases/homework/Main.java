@@ -32,8 +32,8 @@ public class Main {
 //                }
 //            }
 //        }
-        User u = new User(1);
-        u.setName("Koni");
+        User u = new User(2);
+        u.setName("Konw");
         u.setEmail("konio@uk.not");
         try {
             u.save();

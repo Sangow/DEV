@@ -114,8 +114,10 @@ public abstract class Entity {
         try {
             PreparedStatement ps =  db.prepareStatement(String.format(SELECT_QUERY, this.table));
             ps.setInt(1, this.id);
+
             ResultSet rs =  ps.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
+
             rs.next();
 
             for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
@@ -135,20 +137,18 @@ public abstract class Entity {
 
     private void update() throws SQLException {
         // execute an update query, built from fields keys and values
-//        StringJoiner sj = new StringJoiner(", ", "", "");
+        ArrayList<String> seq = new ArrayList<>();
 
-        Entity.join(this.fields.keySet());
+        for ( String columnName : this.fields.keySet() ) {
+            seq.add(String.format("%s = '%s'", columnName, this.fields.get(columnName)));
+        }
 
-//        for ( String columnName : this.fields.keySet() ) {
-//            sj.add(String.format("%s = '%s'", columnName, this.fields.get(columnName)));
-//        }
-//
-//        PreparedStatement ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, sj));
-//
-//        ps.setInt(1, this.id);
-//        ps.executeUpdate();
-//
-//        this.isModified = false;
+        PreparedStatement ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, Entity.join(seq)));
+
+        ps.setInt(1, this.id);
+        ps.executeUpdate();
+
+        this.isModified = false;
     }
 
     public final void delete() throws SQLException {
@@ -202,12 +202,11 @@ public abstract class Entity {
         // join collection of strings with <glue> and return a joined string
         StringJoiner sj = new StringJoiner(glue);
 
-        for ( String columnName : sequence ) {
-            sj.add(String.format("%s = '%s'", columnName));
+        for ( String part : sequence ) {
+            sj.add(part);
         }
 
-
-        return null;
+        return sj.toString();
     }
 
     private static <T extends Entity> List<T> rowsToEntities(Class<T> cls, ResultSet rows) {

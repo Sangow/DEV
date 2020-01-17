@@ -140,7 +140,7 @@ public abstract class Entity {
         ArrayList<String> seq = new ArrayList<>();
 
         for ( Map.Entry<String, Object> e : this.fields.entrySet() ) {
-            seq.add(String.format("%s = %s", e.getKey(), e.getValue().toString()));
+            seq.add(String.format("%s = '%s'", e.getKey(), e.getValue().toString()));
         }
 
         PreparedStatement ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, Entity.join(seq)));

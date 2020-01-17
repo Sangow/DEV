@@ -33,8 +33,8 @@ public class Main {
 //            }
 //        }
         User u = new User(1);
-        u.setName("'Konwwww'");
-        u.setEmail("'Very interesting'");
+        u.setName("Konwwww");
+        u.setEmail("Very interesting content with some freakin \"quotes\"");
         try {
             u.save();
         } catch (SQLException e) {

@@ -4,6 +4,7 @@ import junior.databases.homework.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Main {
     private static Connection connection = null;
@@ -31,19 +32,39 @@ public class Main {
 //                }
 //            }
 //        }
-        Section s = new Section(1);
-        System.out.println(s.getTitle());
-        System.out.println(s.getTitle());
+        User u = new User(1);
+        u.setName("Konwwww");
+        u.setEmail("Very interesting content with some freakin \"quotes\"");
+        try {
+            u.save();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+//        Section s = new Section(1);
+////        s.setTitle("newZalupa");
+//        s.setTitle("zhopa");
+//        try {
+//            s.save();
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//            System.err.println(e.getNextException().getMessage());
+//        }
 //        System.out.println(s.getId());
 //        System.out.println(s.getCreated());
 //        System.out.println(s.getUpdated());
+//        try {
+//            Statement st = connection.createStatement();
+//            st.execute("UPDATE \"section\" SET section_title = \'sec\' WHERE section_id=1");
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
     }
 
     private static void initDatabase() throws SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
 
         connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost/orm", "orm",
-                    "orm");
+                    "jdbc:postgresql://localhost/shop", "shop",
+                    "shop");
     }
 }

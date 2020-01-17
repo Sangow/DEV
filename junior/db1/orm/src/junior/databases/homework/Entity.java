@@ -139,8 +139,8 @@ public abstract class Entity {
         // execute an update query, built from fields keys and values
         ArrayList<String> seq = new ArrayList<>();
 
-        for ( String columnName : this.fields.keySet() ) {
-            seq.add(String.format("%s = '%s'", columnName, this.fields.get(columnName)));
+        for ( Map.Entry<String, Object> e : this.fields.entrySet() ) {
+            seq.add(String.format("%s = %s", e.getKey(), e.getValue().toString()));
         }
 
         PreparedStatement ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, Entity.join(seq)));

@@ -21,7 +21,11 @@ public abstract class Entity {
     protected Map<String, Object> fields = new HashMap<String, Object>();
 
     public Entity() {
+        if ( db == null ) {
+            throw new NullPointerException();
+        }
 
+        this.table = this.getClass().getSimpleName().toLowerCase();
     }
 
     public Entity(Integer id) {
@@ -95,12 +99,8 @@ public abstract class Entity {
 
     public final void setColumn(String name, Object value) {
         // put a value into fields with <table>_<name> as a key
-//        if ( this.fields.containsKey(String.format("%s_%s", this.table, name)) ) {
-            this.fields.put(String.format("%s_%s", this.table, name), value);
-            this.isModified = true;
-//            return;
-//        }
-//        System.err.println("Field does not exist!");
+        this.fields.put(String.format("%s_%s", this.table, name), value);
+        this.isModified = true;
     }
 
     public final void setParent(String name, Integer id) {
@@ -132,6 +132,18 @@ public abstract class Entity {
 
     private void insert() throws SQLException {
         // execute an insert query, built from fields keys and values
+        PreparedStatement ps = db.prepareStatement(String.format(INSERT_QUERY, this.table,
+                                                            Entity.join(this.fields.keySet()),
+                                                            Entity.join(Entity.genPlaceholders(this.fields.size()))));
+
+        Iterator<Object> it = this.fields.values().iterator();
+        for ( int i = 1; i <= this.fields.size(); i++ ) {
+            ps.setString(i, (String) it.next());
+        }
+
+
+        ps.execute();
+
         this.isModified = false;
     }
 
@@ -176,14 +188,14 @@ public abstract class Entity {
         // return a collection, consisting of <size> "?" symbols,
         // which should be joined later.
         // each "?" is used in insert statements as a placeholder for values (google prepared statements)
-        return null;
+        return Entity.genPlaceholders(size, "?");
     }
 
     private static Collection<String> genPlaceholders(int size, String placeholder) {
         // return a collection, consisting of <size> <placeholder> symbols,
         // which should be joined later.
         // each <placeholder> is used in insert statements as a placeholder for values (google prepared statements)
-        return null;
+        return Collections.nCopies(size, placeholder);
     }
 
     private static String getJoinTableName(String leftTable, String rightTable) {

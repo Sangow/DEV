@@ -32,9 +32,9 @@ public class Main {
 //                }
 //            }
 //        }
-        User u = new User(1);
-        u.setName("Konwwww");
-        u.setEmail("Very interesting content with some freakin \"quotes\"");
+        User u = new User();
+        u.setName("Kon3");
+        u.setEmail("Very interesting");
         try {
             u.save();
         } catch (SQLException e) {

@@ -49,6 +49,7 @@ public abstract class Entity {
         // return column name from fields by key
         if ( this.isModified ) {
             System.err.println("Modified!");
+            return null;
         }
         if ( !this.isLoaded ) {
             this.load();
@@ -122,6 +123,7 @@ public abstract class Entity {
 
             for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
                 fields.put(rsmd.getColumnName(i), rs.getObject(i));
+                System.out.println(rsmd.getColumnName(i));
             }
         } catch (SQLException se) {
             System.err.println(se.getMessage());
@@ -141,8 +143,13 @@ public abstract class Entity {
             ps.setString(i, (String) it.next());
         }
 
+        ResultSet rs = ps.executeQuery();
 
-        ps.execute();
+//        rs.next();
+//        this.id = rs.getInt(this.table + "_id");
+//        while () {
+//
+//        }
 
         this.isModified = false;
     }
@@ -169,10 +176,12 @@ public abstract class Entity {
 
     public final void save() throws SQLException {
         // execute either insert or update query, depending on instance id
-        if ( this.id == 0 ) {
-            this.insert();
-        } else {
-            this.update();
+        if ( this.isModified ) {
+            if ( this.id == 0 ) {
+                this.insert();
+            } else {
+                this.update();
+            }
         }
     }
 

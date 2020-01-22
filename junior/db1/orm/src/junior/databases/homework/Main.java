@@ -32,9 +32,10 @@ public class Main {
 //                }
 //            }
 //        }
-        User u = new User();
-        u.setName("Kon3");
-        u.setEmail("Very interesting");
+        User u = new User(1);
+//        u.setName("Kon4");
+        System.out.println(u.getName());
+//        u.setEmail("Very interesting");
         try {
             u.save();
         } catch (SQLException e) {

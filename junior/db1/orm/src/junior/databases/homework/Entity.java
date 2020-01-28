@@ -21,7 +21,11 @@ public abstract class Entity {
     protected Map<String, Object> fields = new HashMap<String, Object>();
 
     public Entity() {
+        if ( db == null ) {
+            throw new NullPointerException();
+        }
 
+        this.table = this.getClass().getSimpleName().toLowerCase();
     }
 
     public Entity(Integer id) {
@@ -45,10 +49,18 @@ public abstract class Entity {
         // return column name from fields by key
         if ( this.isModified ) {
             System.err.println("Modified!");
+            return null;
         }
+
+        if ( this.id == 0 ) {
+            System.err.println("ID is 0");
+            return null;
+        }
+
         if ( !this.isLoaded ) {
             this.load();
         }
+
         return this.fields.get(String.format("%s_%s", this.table, name));
     }
 
@@ -95,12 +107,8 @@ public abstract class Entity {
 
     public final void setColumn(String name, Object value) {
         // put a value into fields with <table>_<name> as a key
-//        if ( this.fields.containsKey(String.format("%s_%s", this.table, name)) ) {
-            this.fields.put(String.format("%s_%s", this.table, name), value);
-            this.isModified = true;
-//            return;
-//        }
-//        System.err.println("Field does not exist!");
+        this.fields.put(String.format("%s_%s", this.table, name), value);
+        this.isModified = true;
     }
 
     public final void setParent(String name, Integer id) {
@@ -132,7 +140,22 @@ public abstract class Entity {
 
     private void insert() throws SQLException {
         // execute an insert query, built from fields keys and values
+        PreparedStatement ps = db.prepareStatement(String.format(INSERT_QUERY, this.table,
+                                                            Entity.join(this.fields.keySet()),
+                                                            Entity.join(Entity.genPlaceholders(this.fields.size()))));
+
+        Iterator<Object> it = this.fields.values().iterator();
+        for ( int i = 1; it.hasNext(); i++ ) {
+            ps.setString(i, (String) it.next());
+        }
+
+        ResultSet rs =  ps.executeQuery();
+        if ( rs.next() ) {
+            this.id = rs.getInt(this.table + "_id");
+        }
+
         this.isModified = false;
+        this.fields.clear();
     }
 
     private void update() throws SQLException {
@@ -143,12 +166,15 @@ public abstract class Entity {
             seq.add(String.format("%s = '%s'", e.getKey(), e.getValue().toString()));
         }
 
+
         PreparedStatement ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, Entity.join(seq)));
 
         ps.setInt(1, this.id);
+
         ps.executeUpdate();
 
         this.isModified = false;
+        this.fields.clear();
     }
 
     public final void delete() throws SQLException {
@@ -157,10 +183,12 @@ public abstract class Entity {
 
     public final void save() throws SQLException {
         // execute either insert or update query, depending on instance id
-        if ( this.id == 0 ) {
-            this.insert();
-        } else {
-            this.update();
+        if ( this.isModified ) {
+            if ( this.id == 0 ) {
+                this.insert();
+            } else {
+                this.update();
+            }
         }
     }
 
@@ -176,14 +204,14 @@ public abstract class Entity {
         // return a collection, consisting of <size> "?" symbols,
         // which should be joined later.
         // each "?" is used in insert statements as a placeholder for values (google prepared statements)
-        return null;
+        return Entity.genPlaceholders(size, "?");
     }
 
     private static Collection<String> genPlaceholders(int size, String placeholder) {
         // return a collection, consisting of <size> <placeholder> symbols,
         // which should be joined later.
         // each <placeholder> is used in insert statements as a placeholder for values (google prepared statements)
-        return null;
+        return Collections.nCopies(size, placeholder);
     }
 
     private static String getJoinTableName(String leftTable, String rightTable) {

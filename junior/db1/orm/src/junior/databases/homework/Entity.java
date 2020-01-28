@@ -51,9 +51,16 @@ public abstract class Entity {
             System.err.println("Modified!");
             return null;
         }
+
+        if ( this.id == 0 ) {
+            System.err.println("ID is 0");
+            return null;
+        }
+
         if ( !this.isLoaded ) {
             this.load();
         }
+
         return this.fields.get(String.format("%s_%s", this.table, name));
     }
 
@@ -123,7 +130,6 @@ public abstract class Entity {
 
             for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
                 fields.put(rsmd.getColumnName(i), rs.getObject(i));
-                System.out.println(rsmd.getColumnName(i));
             }
         } catch (SQLException se) {
             System.err.println(se.getMessage());
@@ -139,19 +145,17 @@ public abstract class Entity {
                                                             Entity.join(Entity.genPlaceholders(this.fields.size()))));
 
         Iterator<Object> it = this.fields.values().iterator();
-        for ( int i = 1; i <= this.fields.size(); i++ ) {
+        for ( int i = 1; it.hasNext(); i++ ) {
             ps.setString(i, (String) it.next());
         }
 
-        ResultSet rs = ps.executeQuery();
-
-//        rs.next();
-//        this.id = rs.getInt(this.table + "_id");
-//        while () {
-//
-//        }
+        ResultSet rs =  ps.executeQuery();
+        if ( rs.next() ) {
+            this.id = rs.getInt(this.table + "_id");
+        }
 
         this.isModified = false;
+        this.fields.clear();
     }
 
     private void update() throws SQLException {
@@ -162,12 +166,15 @@ public abstract class Entity {
             seq.add(String.format("%s = '%s'", e.getKey(), e.getValue().toString()));
         }
 
+
         PreparedStatement ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, Entity.join(seq)));
 
         ps.setInt(1, this.id);
+
         ps.executeUpdate();
 
         this.isModified = false;
+        this.fields.clear();
     }
 
     public final void delete() throws SQLException {

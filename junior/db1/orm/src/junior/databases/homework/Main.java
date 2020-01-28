@@ -32,15 +32,25 @@ public class Main {
 //                }
 //            }
 //        }
-        User u = new User(1);
-//        u.setName("Kon4");
-        System.out.println(u.getName());
-//        u.setEmail("Very interesting");
+        User u = new User(14);
+        u.setName("KonAN");
+//        System.out.println(u.getEmail());
+        u.setEmail("Very interesting");
         try {
             u.save();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+
+//        u.setName("Kon14");
+//
+//        System.out.println(u.getName());
+//        try {
+//            u.save();
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
+
 //        Section s = new Section(1);
 ////        s.setTitle("newZalupa");
 //        s.setTitle("zhopa");

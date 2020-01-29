@@ -204,6 +204,27 @@ public abstract class Entity {
         // convert each row from ResultSet to instance of class T with appropriate id
         // fill each of new instances with column data
         // aggregate all new instances into a single List<T> and return it
+
+//        ResultSetMetaData rsmd = rs.getMetaData();
+//
+//        rs.next();
+//
+//        for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
+//            fields.put(rsmd.getColumnName(i), rs.getObject(i));
+//        }
+
+        try {
+            List<T> list = new ArrayList<T>();
+            ResultSet rs = Entity.db.createStatement().executeQuery(String.format(LIST_QUERY,
+                                                                                    cls.getSimpleName().toLowerCase()));
+
+
+                list.add(new T());
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());;
+        }
+
         return null;
     }
 

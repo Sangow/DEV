@@ -120,7 +120,7 @@ public abstract class Entity {
         // get a single row from corresponding table by id
         // store columns as object fields with unchanged column names as keys
         try {
-            PreparedStatement ps =  db.prepareStatement(String.format(SELECT_QUERY, this.table));
+            PreparedStatement ps =  Entity.db.prepareStatement(String.format(SELECT_QUERY, this.table));
             ps.setInt(1, this.id);
 
             ResultSet rs =  ps.executeQuery();
@@ -140,7 +140,7 @@ public abstract class Entity {
 
     private void insert() throws SQLException {
         // execute an insert query, built from fields keys and values
-        PreparedStatement ps = db.prepareStatement(String.format(INSERT_QUERY, this.table,
+        PreparedStatement ps = Entity.db.prepareStatement(String.format(INSERT_QUERY, this.table,
                                                             Entity.join(this.fields.keySet()),
                                                             Entity.join(Entity.genPlaceholders(this.fields.size()))));
 
@@ -167,7 +167,7 @@ public abstract class Entity {
         }
 
 
-        PreparedStatement ps = db.prepareStatement(String.format(UPDATE_QUERY, this.table, Entity.join(seq)));
+        PreparedStatement ps = Entity.db.prepareStatement(String.format(UPDATE_QUERY, this.table, Entity.join(seq)));
 
         ps.setInt(1, this.id);
 
@@ -179,6 +179,13 @@ public abstract class Entity {
 
     public final void delete() throws SQLException {
         // execute a delete query with current instance id
+        if ( this.id == 0 ) {
+            throw new SQLException("Row id is not selected!");
+        }
+
+        PreparedStatement ps =  Entity.db.prepareStatement(String.format(DELETE_QUERY, this.table));
+        ps.setInt(1, this.id);
+        ps.execute();
     }
 
     public final void save() throws SQLException {

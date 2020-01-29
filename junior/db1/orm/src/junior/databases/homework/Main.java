@@ -32,12 +32,12 @@ public class Main {
 //                }
 //            }
 //        }
-        User u = new User(14);
-        u.setName("KonAN");
+        User u = new User();
+//        u.setName("KonAN");
 //        System.out.println(u.getEmail());
-        u.setEmail("Very interesting");
+//        u.setEmail("Very interesting");
         try {
-            u.save();
+            u.delete();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }

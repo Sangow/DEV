@@ -1,5 +1,6 @@
 package junior.databases.homework;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.sql.*;
 
@@ -115,6 +116,10 @@ public abstract class Entity {
         // put parent id into fields with <name>_<id> as a key
     }
 
+    public void forceLoad() {
+        this.load();
+    }
+
     private void load() {
         // check, if current object is already loaded
         // get a single row from corresponding table by id
@@ -204,28 +209,25 @@ public abstract class Entity {
         // convert each row from ResultSet to instance of class T with appropriate id
         // fill each of new instances with column data
         // aggregate all new instances into a single List<T> and return it
-
-//        ResultSetMetaData rsmd = rs.getMetaData();
-//
-//        rs.next();
-//
-//        for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
-//            fields.put(rsmd.getColumnName(i), rs.getObject(i));
-//        }
+        List<T> list = new ArrayList();
 
         try {
-            List<T> list = new ArrayList<T>();
             ResultSet rs = Entity.db.createStatement().executeQuery(String.format(LIST_QUERY,
                                                                                     cls.getSimpleName().toLowerCase()));
 
+            while( rs.next() ) {
+                list.add(cls.getConstructor(Integer.class).newInstance(rs.getInt(1)));
+            }
 
-                list.add(new T());
+            for ( T t : list ) {
+                t.forceLoad();
+            }
 
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());;
+        } catch (SQLException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
         }
 
-        return null;
+        return list;
     }
 
     private static Collection<String> genPlaceholders(int size) {

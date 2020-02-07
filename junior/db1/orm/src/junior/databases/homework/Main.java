@@ -32,15 +32,16 @@ public class Main {
 //                }
 //            }
 //        }
-        User u = new User();
+//        User u = new User();
+        User.all();
 //        u.setName("KonAN");
 //        System.out.println(u.getEmail());
 //        u.setEmail("Very interesting");
-        try {
-            u.delete();
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
+//        try {
+//            u.delete();
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
 
 //        u.setName("Kon14");
 //

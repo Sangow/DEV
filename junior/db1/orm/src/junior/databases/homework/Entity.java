@@ -48,17 +48,11 @@ public abstract class Entity {
 
     public final Object getColumn(String name) {
         // return column name from fields by key
-        if ( this.isModified ) {
-            System.err.println("Modified!");
-            return null;
-        }
-
-        if ( this.id == 0 ) {
-            System.err.println("ID is 0");
-            return null;
-        }
-
         if ( !this.isLoaded ) {
+            if ( this.isModified ) {
+                this.fields.clear();
+            }
+
             this.load();
         }
 
@@ -66,7 +60,6 @@ public abstract class Entity {
     }
 
     public final int getId() {
-//        return this.id;
         return (int)this.getColumn("id");
     }
 
@@ -116,10 +109,6 @@ public abstract class Entity {
         // put parent id into fields with <name>_<id> as a key
     }
 
-    public void forceLoad() {
-        this.load();
-    }
-
     private void load() {
         // check, if current object is already loaded
         // get a single row from corresponding table by id
@@ -150,11 +139,13 @@ public abstract class Entity {
                                                             Entity.join(Entity.genPlaceholders(this.fields.size()))));
 
         Iterator<Object> it = this.fields.values().iterator();
+
         for ( int i = 1; it.hasNext(); i++ ) {
             ps.setString(i, (String) it.next());
         }
 
         ResultSet rs =  ps.executeQuery();
+
         if ( rs.next() ) {
             this.id = rs.getInt(this.table + "_id");
         }
@@ -209,7 +200,7 @@ public abstract class Entity {
         // convert each row from ResultSet to instance of class T with appropriate id
         // fill each of new instances with column data
         // aggregate all new instances into a single List<T> and return it
-        List<T> list = new ArrayList();
+        List<T> list = new ArrayList<>();
 
         try {
             ResultSet rs = Entity.db.createStatement().executeQuery(String.format(LIST_QUERY,
@@ -218,11 +209,6 @@ public abstract class Entity {
             while( rs.next() ) {
                 list.add(cls.getConstructor(Integer.class).newInstance(rs.getInt(1)));
             }
-
-            for ( T t : list ) {
-                t.forceLoad();
-            }
-
         } catch (SQLException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }

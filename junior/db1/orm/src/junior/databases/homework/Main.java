@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class Main {
     private static Connection connection = null;
@@ -33,7 +34,11 @@ public class Main {
 //            }
 //        }
 //        User u = new User();
-        User.all();
+        List<User> allUsers = User.all();
+
+        for ( User u : allUsers ) {
+            System.out.println(u.getName());
+        }
 //        u.setName("KonAN");
 //        System.out.println(u.getEmail());
 //        u.setEmail("Very interesting");

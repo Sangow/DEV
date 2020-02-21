@@ -1,5 +1,6 @@
 package junior.databases.homework;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.sql.*;
 
@@ -47,17 +48,11 @@ public abstract class Entity {
 
     public final Object getColumn(String name) {
         // return column name from fields by key
-        if ( this.isModified ) {
-            System.err.println("Modified!");
-            return null;
-        }
-
-        if ( this.id == 0 ) {
-            System.err.println("ID is 0");
-            return null;
-        }
-
         if ( !this.isLoaded ) {
+            if ( this.isModified ) {
+                this.fields.clear();
+            }
+
             this.load();
         }
 
@@ -65,7 +60,6 @@ public abstract class Entity {
     }
 
     public final int getId() {
-//        return this.id;
         return (int)this.getColumn("id");
     }
 
@@ -131,8 +125,8 @@ public abstract class Entity {
             for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
                 fields.put(rsmd.getColumnName(i), rs.getObject(i));
             }
-        } catch (SQLException se) {
-            System.err.println(se.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         this.isLoaded = true;
@@ -145,11 +139,13 @@ public abstract class Entity {
                                                             Entity.join(Entity.genPlaceholders(this.fields.size()))));
 
         Iterator<Object> it = this.fields.values().iterator();
+
         for ( int i = 1; it.hasNext(); i++ ) {
             ps.setString(i, (String) it.next());
         }
 
         ResultSet rs =  ps.executeQuery();
+
         if ( rs.next() ) {
             this.id = rs.getInt(this.table + "_id");
         }
@@ -204,7 +200,16 @@ public abstract class Entity {
         // convert each row from ResultSet to instance of class T with appropriate id
         // fill each of new instances with column data
         // aggregate all new instances into a single List<T> and return it
-        return null;
+        ResultSet rs = null;
+
+        try {
+            rs = Entity.db.createStatement().executeQuery(String.format(LIST_QUERY,
+                                                                    cls.getSimpleName().toLowerCase()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Entity.rowsToEntities(cls, rs);
     }
 
     private static Collection<String> genPlaceholders(int size) {
@@ -247,6 +252,16 @@ public abstract class Entity {
     private static <T extends Entity> List<T> rowsToEntities(Class<T> cls, ResultSet rows) {
         // convert a ResultSet of database rows to list of instances of corresponding class
         // each instance must be filled with its data so that it must not produce additional queries to database to get it's fields
-        return null;
+        List<T> list = new ArrayList<T>();
+
+        try {
+            while ( rows.next() ) {
+                list.add(cls.getConstructor(Integer.class).newInstance(rows.getInt(1)));
+            }
+        } catch (SQLException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 }

@@ -125,8 +125,8 @@ public abstract class Entity {
             for ( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
                 fields.put(rsmd.getColumnName(i), rs.getObject(i));
             }
-        } catch (SQLException se) {
-            System.err.println(se.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         this.isLoaded = true;
@@ -200,20 +200,16 @@ public abstract class Entity {
         // convert each row from ResultSet to instance of class T with appropriate id
         // fill each of new instances with column data
         // aggregate all new instances into a single List<T> and return it
-        List<T> list = new ArrayList<>();
+        ResultSet rs = null;
 
         try {
-            ResultSet rs = Entity.db.createStatement().executeQuery(String.format(LIST_QUERY,
-                                                                                    cls.getSimpleName().toLowerCase()));
-
-            while( rs.next() ) {
-                list.add(cls.getConstructor(Integer.class).newInstance(rs.getInt(1)));
-            }
-        } catch (SQLException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            rs = Entity.db.createStatement().executeQuery(String.format(LIST_QUERY,
+                                                                    cls.getSimpleName().toLowerCase()));
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return list;
+        return Entity.rowsToEntities(cls, rs);
     }
 
     private static Collection<String> genPlaceholders(int size) {
@@ -256,6 +252,16 @@ public abstract class Entity {
     private static <T extends Entity> List<T> rowsToEntities(Class<T> cls, ResultSet rows) {
         // convert a ResultSet of database rows to list of instances of corresponding class
         // each instance must be filled with its data so that it must not produce additional queries to database to get it's fields
-        return null;
+        List<T> list = new ArrayList<T>();
+
+        try {
+            while ( rows.next() ) {
+                list.add(cls.getConstructor(Integer.class).newInstance(rows.getInt(1)));
+            }
+        } catch (SQLException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 }

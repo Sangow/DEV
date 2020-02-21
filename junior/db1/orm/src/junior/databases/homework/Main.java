@@ -21,60 +21,11 @@ public class Main {
 
         Entity.setDatabase(connection);
 
-
-//        for ( Post post : Post.all() ) {
-//            System.out.println(post.getId() + ": " + post.getTitle());
-//
-//            for ( Tag tag : post.getTags() ) {
-//                System.out.println("  " + tag.getName());
-//
-//                for ( Post p : tag.getPosts() ) {
-//                    System.out.println("    " + p.getId() + ": " + p.getTitle());
-//                }
-//            }
-//        }
-//        User u = new User();
         List<User> allUsers = User.all();
 
         for ( User u : allUsers ) {
             System.out.println(u.getName());
         }
-//        u.setName("KonAN");
-//        System.out.println(u.getEmail());
-//        u.setEmail("Very interesting");
-//        try {
-//            u.delete();
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//        }
-
-//        u.setName("Kon14");
-//
-//        System.out.println(u.getName());
-//        try {
-//            u.save();
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//        }
-
-//        Section s = new Section(1);
-////        s.setTitle("newZalupa");
-//        s.setTitle("zhopa");
-//        try {
-//            s.save();
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//            System.err.println(e.getNextException().getMessage());
-//        }
-//        System.out.println(s.getId());
-//        System.out.println(s.getCreated());
-//        System.out.println(s.getUpdated());
-//        try {
-//            Statement st = connection.createStatement();
-//            st.execute("UPDATE \"section\" SET section_title = \'sec\' WHERE section_id=1");
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//        }
     }
 
     private static void initDatabase() throws SQLException, ClassNotFoundException {

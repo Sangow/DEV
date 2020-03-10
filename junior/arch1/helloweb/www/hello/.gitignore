@@ -1,0 +1,5 @@
+__pytcache__/
+*.py[cod]
+.idea/
+.DS_Store
+sftp-config.json

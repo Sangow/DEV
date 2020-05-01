@@ -1,0 +1,67 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+    <servlet>
+        <servlet-name>Ch3 Beer</servlet-name>
+        <servlet-class>com.example.web.BeerSelect</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListenerTester</servlet-name>
+        <servlet-class>com.example.ListenerTester</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SessiomTester</servlet-name>
+        <servlet-class>com.example.web.SessionTester</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ParamGetter</servlet-name>
+        <servlet-class>com.example.web.GetNameParameter</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CookieChecker</servlet-name>
+        <servlet-class>com.example.web.CheckCookie</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Ch3 Beer</servlet-name>
+        <url-pattern>/SelectBeer.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListenerTester</servlet-name>
+        <url-pattern>/ListenTest.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SessiomTester</servlet-name>
+        <url-pattern>/SessionTest.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ParamGetter</servlet-name>
+        <url-pattern>/CookieGet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CookieChecker</servlet-name>
+        <url-pattern>/checkcookie.do</url-pattern>
+    </servlet-mapping>
+
+    <context-param>
+        <param-name>breed</param-name>
+        <param-value>Greate Dane</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>com.example.MyServletContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.example.web.BeerSessionCounter</listener-class>
+    </listener>
+<!--     <listener>
+        <listener-class>com.example.web.AttributeSessionListener</listener-class>
+    </listener> -->
+
+    <session-config>
+        <session-timeout>2</session-timeout>
+    </session-config>
+
+</web-app>

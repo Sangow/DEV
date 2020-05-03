@@ -10,12 +10,12 @@
 <description>Welcome to Hello Application</description>
  
 <servlet>
-    <servlet-name>HelloStart</servlet-name>
-    <servlet-class>HelloStart</servlet-class>
+    <servlet-name>HandleGetMethod</servlet-name>
+    <servlet-class>com.example.GetHandler</servlet-class>
 </servlet>
 <servlet-mapping>
-    <servlet-name>HelloStart</servlet-name>
-    <url-pattern>/hell</url-pattern>
+    <servlet-name>HandleGetMethod</servlet-name>
+    <url-pattern>/get</url-pattern>
 </servlet-mapping>
  
 </web-app>

@@ -1,0 +1,58 @@
+/* grid */
+
+$width:100%;
+$columns:7;
+$col_margin: 3.5%;
+
+/* margin between columns */
+$col_width:($width - ($col_margin * ($columns - 1))) / $columns;
+$col_total_width:$col_width + $col_margin;
+
+/* create row div */
+@mixin row() {
+    @include clearfix;
+    width: $width;
+    // overflow: hidden;
+}
+
+/* create a column div */
+@mixin col($n:1) {
+    float: left;
+    @include span($n);
+}
+
+/* make an element span n columns */
+@mixin span($n:1) {
+    width: ($n * $col_width) + (($n - 1) * $col_margin);
+    @if $n==$columns {
+        margin-left: 0;
+    }
+    @else {
+        margin-left: $col_margin;
+    }
+}
+
+/* the first column in a row needs this */
+@mixin first() {
+    margin-left: 0;
+}
+
+/* prepend n blank columns  */
+@mixin prepend($n:1) {
+    margin-left: $col_total_width * $n
+}
+
+/* append n blank columns */
+@mixin append($n:1) {
+    margin-right: $col_total_width * $n + $col_margin
+}
+/* end grid */
+
+/* clearfix */
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}

@@ -3,10 +3,10 @@ package com.example;
 import java.util.Map;
 import java.util.TreeMap;
 
-class RequestSorter {
+class GetRequestSorter {
     private Map<String, String> readyMap;
 
-    RequestSorter() {
+    GetRequestSorter() {
         this.readyMap = new TreeMap<>();
     }
 

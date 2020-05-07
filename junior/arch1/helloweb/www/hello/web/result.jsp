@@ -1,5 +1,5 @@
 <%@ page import="java.util.*" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html" %>
 
 <%!     public String toTable(Map<String, String> input) {
             StringBuilder sb = new StringBuilder();
@@ -13,7 +13,7 @@
 %>
 <html>
  <head>
-  <title>GETHANDLER</title>
+  <title>RESULT</title>
  </head>
  <body>
     <table border="1">
@@ -21,6 +21,6 @@
             <th>Параметр</th>
             <th>Значение</th>
         </tr>
-        <%= toTable((Map<String, String>)request.getAttribute("sortedMap")) %>
+        <%= toTable((Map<String, String>)request.getAttribute("tableKeyValues")) %>
     </body>
 </html>

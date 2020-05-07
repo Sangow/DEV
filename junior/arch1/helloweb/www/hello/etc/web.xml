@@ -6,16 +6,28 @@
                              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" 
          version="2.5">
  
-<display-name>Hello app</display-name>
-<description>Welcome to Hello Application</description>
- 
-<servlet>
-    <servlet-name>HandleGetMethod</servlet-name>
-    <servlet-class>com.example.GetHandler</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>HandleGetMethod</servlet-name>
-    <url-pattern>/get</url-pattern>
-</servlet-mapping>
- 
+    <display-name>Hello app</display-name>
+    <description>Welcome to Hello Application</description>
+     
+    <servlet>
+        <servlet-name>HandleGetPostMethod</servlet-name>
+        <servlet-class>com.example.GetPostHandler</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>HandleGetPostMethod</servlet-name>
+        <url-pattern>/get/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HandleGetPostMethod</servlet-name>
+        <url-pattern>/post</url-pattern>
+    </servlet-mapping>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
 </web-app>

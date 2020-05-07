@@ -4,12 +4,6 @@ import java.util.*;
 import java.io.*;
 
 public class PostRequestParamHandler {
-    private static final List<String> leftFilds = new ArrayList<>(
-                                        List.of("Имя",
-                                                "Пол",
-                                                "Образование",
-                                                "Комментарий",
-                                                "Получать спам"));
 
     private Map<String, String> readyMap;
 
@@ -18,31 +12,10 @@ public class PostRequestParamHandler {
     }
 
     public Map<String, String> getReadyTableValues(Map<String, String[]> input) {
-        int counter = 0;
-
-        // for ( Map.Entry<String, String[]> entry : input.entrySet() ) {
-        //     this.readyMap.put(leftFilds.get(counter), String.join(" ",entry.getValue()));
-        //     counter += 1;
-        // }
-
         for ( Map.Entry<String, String[]> entry : input.entrySet() ) {
             switch (entry.getKey()) {
                 case "name":
-                // try {
-                //         FileWriter fr = new FileWriter("/opt/out.txt");
-                //         fr.write( String.join(" ", entry.getValue()));
-                //         fr.flush();
-                //         fr.close();
-                //     } catch (IOException e) {
-                //         e.printStackTrace();
-                //     }
                     readyMap.put("Имя", String.join(" ", entry.getValue()));
-                    // readyMap.put("Имя", "Лулу");
-                    // try {
-                    //     readyMap.put("Имя", new String(String.join(" ", entry.getValue()).getBytes("UTF-8"), "UTF-8"));
-                    // } catch (UnsupportedEncodingException e) {
-                    //     e.printStackTrace();
-                    // }
                     break;
                 case "sex":
                     if (entry.getValue()[0].equals("male")) {

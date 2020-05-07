@@ -21,6 +21,6 @@
             <th>Параметр</th>
             <th>Значение</th>
         </tr>
-        <%= toTable((Map<String, String>)request.getAttribute("sortedMap")) %>
+        <%= toTable((Map<String, String>)request.getAttribute("tableKeyValues")) %>
     </body>
 </html>

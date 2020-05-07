@@ -10,20 +10,16 @@
     <description>Welcome to Hello Application</description>
      
     <servlet>
-        <servlet-name>HandleGetMethod</servlet-name>
-        <servlet-class>com.example.GetHandler</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>HandlePostMethod</servlet-name>
-        <servlet-class>com.example.PostHandler</servlet-class>
+        <servlet-name>HandleGetPostMethod</servlet-name>
+        <servlet-class>com.example.GetPostHandler</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>HandleGetMethod</servlet-name>
+        <servlet-name>HandleGetPostMethod</servlet-name>
         <url-pattern>/get/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HandlePostMethod</servlet-name>
+        <servlet-name>HandleGetPostMethod</servlet-name>
         <url-pattern>/post</url-pattern>
     </servlet-mapping>
 

@@ -13,6 +13,10 @@
         <servlet-name>HandleGetPostMethod</servlet-name>
         <servlet-class>com.example.GetPostHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HandleCookie</servlet-name>
+        <servlet-class>com.example.CookieSetServlet</servlet-class>
+    </servlet>
     
     <servlet-mapping>
         <servlet-name>HandleGetPostMethod</servlet-name>
@@ -20,7 +24,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HandleGetPostMethod</servlet-name>
-        <url-pattern>/post</url-pattern>
+        <url-pattern>/post/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HandleCookie</servlet-name>
+        <url-pattern>/cookie/</url-pattern>
     </servlet-mapping>
 
     <jsp-config>

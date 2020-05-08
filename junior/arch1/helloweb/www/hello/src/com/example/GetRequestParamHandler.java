@@ -3,7 +3,7 @@ package com.example;
 import java.util.Map;
 import java.util.TreeMap;
 
-class GetRequestParamHandler {
+public class GetRequestParamHandler {
     private Map<String, String> readyMap;
 
     GetRequestParamHandler() {

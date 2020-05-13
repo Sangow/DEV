@@ -1,0 +1,73 @@
+body, form, input, select, label, textarea, div {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    padding: 1em;
+    font: normal 14px Helvetica, Arial, sans-serif;
+}
+
+form {
+    display: inline-block;
+    padding: 1em;
+    border-radius: .4em;
+    background-color: #cce2eb;
+}
+
+label, .label, .submit {
+    display: block;
+    margin-top: 1em;
+}
+label > input[type=text], label > select, label > textarea {
+    margin-top: .2em;
+}
+label:first-child {
+    margin-top: 0;
+}
+label.radio {
+    margin-top: .2em;
+}
+input[type=radio],
+input[type=checkbox] {
+    margin-right: .2em;
+    width: 16px;
+    height: 16px;
+    border: none;
+}
+input[type=checkbox] {
+    vertical-align: middle;
+}
+
+select,
+textarea,
+input[type=text] {
+    width: 100%;
+    line-height: 1.4em;
+}
+textarea,
+input[type=text] {
+    border: 1px solid #879397;
+    border-radius: .4em;
+}
+input[type=text] {
+    padding: .4em;
+    height: 2em;
+}
+textarea {
+    padding: .4em;
+    height: 6em;
+}
+.submit > label {
+    display: inline-block;
+    float: left;
+    margin: .2em 0;
+}
+.submit > button {
+    float: right;
+    margin: .2em 0 0 1em;
+}
+.submit {
+    clear: both;
+}

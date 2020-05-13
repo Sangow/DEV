@@ -7,3 +7,5 @@
 *.out
 # Ignore (generated) *.class files
 *.class
+#Ignore SFTP configs
+sftp-config.json

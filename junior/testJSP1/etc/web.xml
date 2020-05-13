@@ -1,0 +1,25 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+    <servlet>
+        <servlet-name>DoTheHobbyPage</servlet-name>
+        <servlet-class>foo.Hobby</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DoTheHobbyPage</servlet-name>
+        <url-pattern>/HobbyPage.do</url-pattern>
+    </servlet-mapping>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <scripting-invalid>
+                true
+            </scripting-invalid>
+        </jsp-property-group>
+    </jsp-config>
+
+</web-app>

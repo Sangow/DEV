@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+                             http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" 
+         version="2.5">
+ 
+    <display-name>Hello app</display-name>
+    <description>Welcome to Hello Application</description>
+     
+    <servlet>
+        <servlet-name>HandleGetPostMethod</servlet-name>
+        <servlet-class>com.example.GetPostHandler</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HandleCookie</servlet-name>
+        <servlet-class>com.example.CookieSetServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>HandleGetPostMethod</servlet-name>
+        <url-pattern>/get/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HandleGetPostMethod</servlet-name>
+        <url-pattern>/post/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HandleCookie</servlet-name>
+        <url-pattern>/cookie/</url-pattern>
+    </servlet-mapping>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
+</web-app>

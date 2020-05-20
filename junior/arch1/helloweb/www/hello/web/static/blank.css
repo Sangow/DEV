@@ -1,0 +1,46 @@
+#logo {
+    background-color: #f1a95c;
+    font-family: "Gill Sans";
+    font-weight: 400;
+    padding: 15px;
+    background-image: none;
+}
+
+div.page {
+    margin-top: 3em;
+}
+
+body {
+    width: 960px;
+    margin: 0 auto;
+}
+
+/*h1, h2 {margin: 0;}*/
+
+h1 {
+    font-size: 2em;
+    font-family: Helvetica;
+    background-image: linear-gradient(to left, #ebe6e2, #e7e1df, #e1dcdd, #dbd8d9, #d5d4d5, #d7d6d7, #d8d8d8, #dadada, #e3e3e3, #ececec, #f6f6f6, #ffffff);
+    /*margin-top: 1.4em;*/
+}
+
+h2 {
+    font-size: 1.4em;
+    font-family: Helvetica;
+}
+
+p {
+    text-indent: 1.4em;
+    line-height: 1.4em;
+    /*font-size: 1.4em;*/
+    font-family: Helvetica;
+}
+
+blockquote {
+    font-style: italic;
+    font-family: Georgia;
+    border-left: 1px dotted #cecece;
+    padding-left: 1em;
+    margin-left: 2em;
+    word-spacing: 2px;
+}

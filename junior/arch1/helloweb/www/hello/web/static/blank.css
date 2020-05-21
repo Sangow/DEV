@@ -6,16 +6,13 @@
     background-image: none;
 }
 
-div.page {
-    margin-top: 3em;
-}
+h1, h2 , p {margin: 0;}
 
 body {
-    width: 960px;
-    margin: 0 auto;
+    max-width: 960px;
+    margin: auto;
+    padding: 0 10px;
 }
-
-h1, h2 , p {margin: 0;}
 
 h1 {
     font-size: 2em;
@@ -24,15 +21,120 @@ h1 {
 }
 
 h2 {
+    margin-top: 1.4em;
     font-family: Helvetica;
 }
 
 p {
     font-family: Helvetica;
+    text-indent: 1.4em;
+    line-height: 1.4em;
 }
 
 blockquote {
     font-style: italic;
     font-family: Georgia;
     border-left: 1px dotted #cecece;
+}
+
+ol li {
+    font-family: Helvetica;
+    line-height: 1.4em;
+}
+
+figure {
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    width: 250px;
+    display: inline-block;
+}
+
+figcaption {
+    border-radius: 5px;
+    background-color: #F1A95C;
+    text-align: center;
+    font-style: italic;
+    font-family: Helvetica;
+    font-size: 1em;
+    padding: 10px;
+    margin-top: 10px;
+    opacity: 0.2;
+}
+
+figcaption:hover {
+    opacity: 0.7;
+}
+
+img {
+    max-width: 250px;
+    max-height: 253px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: "Helvetica";
+    table-layout: fixed;
+}
+
+th, td {
+    border: 1px solid #cecece;
+    padding: 10px 0;
+}
+
+tr:nth-child(odd) { background-color: #f0f0ff; }
+
+tr:nth-child(even) { background-color: #e5e5ff; }
+
+table>thead>tr>th, table>tfoot>tr>th {
+    background-color: white;
+}
+
+tbody > tr:hover {
+    background-color: #9BFF9B;
+}
+
+section > code {
+    color: #9BFF9B;
+    background-color: #4D4D4D;
+    white-space: pre;
+    overflow: hidden;
+    display: block;
+    padding: 5px;
+    line-height: 1.4em;
+    font-size: 1em;
+}
+
+section > p code {
+    color: #325095;
+    font-size: 1.4em;
+    font-family: monospace;
+}
+
+ul li {
+    font-family: Helvetica;
+}
+
+footer {
+    background-color: #f1a95c;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    font-size: 1em;
+    font-family: "Helvetica";
+}
+
+footer > div {
+    display: table-cell;
+    padding: 25px 15px;
+}
+
+#extra {
+    text-align: right;
+}
+
+#copyright {
 }

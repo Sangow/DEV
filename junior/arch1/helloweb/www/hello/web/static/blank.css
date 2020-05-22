@@ -1,88 +1,117 @@
-#logo {
-    background-color: #f1a95c;
-    font-family: "Gill Sans";
-    font-weight: 400;
-    padding: 15px;
-    background-image: none;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-h1, h2 , p {margin: 0;}
+header {
+  background-color: #f1a95c;
+  font-family: "Gill Sans";
+  padding: 15px;
+}
+
+#logo {
+  background-image: none;
+  font-weight: 400;
+  margin-top: 0;
+}
 
 body {
-    max-width: 960px;
-    margin: auto;
-    padding: 0 10px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
 h1 {
-    font-size: 2em;
-    font-family: Helvetica;
-    background-image: linear-gradient(to left, #ebe6e2, #e7e1df, #e1dcdd, #dbd8d9, #d5d4d5, #d7d6d7, #d8d8d8, #dadada, #e3e3e3, #ececec, #f6f6f6, #ffffff);
+  font-size: 2em;
+  font-family: Helvetica;
+  background-image: linear-gradient(to left, #ebe6e2, #e7e1df, #e1dcdd, #dbd8d9, #d5d4d5, #d7d6d7, #d8d8d8, #dadada, #e3e3e3, #ececec, #f6f6f6, #ffffff);
+
+  margin-top: 50px;
 }
 
 h2 {
-    margin-top: 1.4em;
-    font-family: Helvetica;
+  font-size: 1.4em;
+  font-family: Helvetica;
+
+  margin-top: 30px;
 }
 
 p {
-    font-family: Helvetica;
-    text-indent: 1.4em;
-    line-height: 1.4em;
+  font-family: Helvetica;
+  text-indent: 1.4em;
+  line-height: 1.4em;
+
+  margin-top: 10px;
 }
 
 blockquote {
-    font-style: italic;
-    font-family: Georgia;
-    border-left: 1px dotted #cecece;
+  font-style: italic;
+  font-family: Georgia;
+  border-left: 1px dotted #cecece;
+  line-height: 1.4em;
+
+  padding: 5px 0 5px 20px;
+  margin-left: 35px;
+  margin-top: 10px;
 }
 
 ol li {
-    font-family: Helvetica;
-    line-height: 1.4em;
+  font-family: Helvetica;
+  line-height: 1.4em;
+
+  margin-left: 50px;
+  margin-top: 10px;
 }
 
 figure {
-    border: 1px solid #cecece;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 5px;
-    width: 250px;
-    display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  display: inline-block;
+  width: 250px;
+  
+  padding: 5px;
+  margin: 10px;
+}
+
+figure.first {
+  margin-left: 4em;
 }
 
 figcaption {
-    border-radius: 5px;
-    background-color: #F1A95C;
-    text-align: center;
-    font-style: italic;
-    font-family: Helvetica;
-    font-size: 1em;
-    padding: 10px;
-    margin-top: 10px;
-    opacity: 0.2;
+  border-radius: 5px;
+  background-color: #F1A95C;
+  text-align: center;
+  font-style: italic;
+  font-family: Helvetica;
+  font-size: 1em;
+  opacity: 0.2;
+
+  padding: 10px;
+  margin-top: 10px;
 }
 
 figcaption:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 img {
-    max-width: 250px;
-    max-height: 253px;
+  max-width: 250px;
+  max-height: 253px;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-    font-family: "Helvetica";
-    table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: "Helvetica";
+  table-layout: fixed;
+
+  margin-top: 10px;
 }
 
 th, td {
-    border: 1px solid #cecece;
-    padding: 10px 0;
+  border: 1px solid #cecece;
+  padding: 10px 0;
 }
 
 tr:nth-child(odd) { background-color: #f0f0ff; }
@@ -90,51 +119,52 @@ tr:nth-child(odd) { background-color: #f0f0ff; }
 tr:nth-child(even) { background-color: #e5e5ff; }
 
 table>thead>tr>th, table>tfoot>tr>th {
-    background-color: white;
-}
-
-tbody > tr:hover {
-    background-color: #9BFF9B;
+  background-color: white;
 }
 
 section > code {
-    color: #9BFF9B;
-    background-color: #4D4D4D;
-    white-space: pre;
-    overflow: hidden;
-    display: block;
-    padding: 5px;
-    line-height: 1.4em;
-    font-size: 1em;
+  color: #9BFF9B;
+  background-color: #4D4D4D;
+  white-space: pre;
+  overflow: hidden;
+  display: block;
+  padding: 5px;
+  line-height: 1.7em;
+  font-size: 1em;
+
+  margin-top: 5px;
 }
 
 section > p code {
-    color: #325095;
-    font-size: 1.4em;
-    font-family: monospace;
+  color: #325095;
+  font-size: 1.2em;
+  font-family: monospace;
+
+  padding-right: 0;
 }
 
 ul li {
-    font-family: Helvetica;
+  font-family: Helvetica;
+
+  margin: 10px 0 0 40px;
 }
 
 footer {
-    background-color: #f1a95c;
-    width: 100%;
-    display: table;
-    table-layout: fixed;
-    font-size: 1em;
-    font-family: "Helvetica";
+  background-color: #f1a95c;
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  font-size: 1em;
+  font-family: "Helvetica";
+
+  margin-top: 50px;
 }
 
 footer > div {
-    display: table-cell;
-    padding: 25px 15px;
+  display: table-cell;
+  padding: 25px 15px;
 }
 
 #extra {
-    text-align: right;
-}
-
-#copyright {
+  text-align: right;
 }
